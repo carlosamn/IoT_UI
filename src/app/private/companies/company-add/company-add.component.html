@@ -1,0 +1,35 @@
+<div class="block-area" style="width:500px">
+    <div class="tile p-15" >
+        <!--/.page-header-->
+        <form id="addCompanyForm" #form="ngForm" class="form-horizontal" >
+
+                <div class="page-header position-relative">
+                        <h3>New Company</h3>
+                </div>
+                
+            
+                <div class="row">
+
+                <label class="control-label" ><a>Company Name</a></label>
+                <div class="controls">
+
+                    <input type="text" maxlength="20" class="form-control input-lg m-b-10" name="CompanyName" id="CompanyName" [(ngModel)]="company.name"  placeholder="Company Name" value="" />
+                </div>
+                    
+
+                    <div class="row">
+                            <div class="col-md-10" style="margin-bottom: 12px;">
+                                <button class="btn btn-sm" (click)="addCompany()" >
+                                    <i class="icon-ok bigger-110"></i>
+                                    Submit
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+       

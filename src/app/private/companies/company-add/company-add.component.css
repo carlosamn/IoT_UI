@@ -1,0 +1,17 @@
+.tile.p-15 {
+    min-height: 220px; margin-top: 10px;
+}
+.row{
+    width: 70%;
+}
+
+form .row .control-label a {
+    font-size: 17px;
+}
+
+form .row .control-label  {
+    margin-bottom:7px;
+}
+.row.control.form-control.input-lg.m-b-10 {
+    height: 20px;
+}

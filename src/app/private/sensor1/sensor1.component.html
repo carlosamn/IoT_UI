@@ -1,0 +1,84 @@
+
+<div class="row">
+    <div class="col-md-7">
+        <input type="hidden" id="highalarm" value="65535" />
+        <div class="tile">
+            <input type="hidden" id="output-timestamp" value="nooutput" />
+            <h2 class="tile-title" style="font-size: 17px; font-weight: bold;">Sensor1</h2>
+            <div class="tile-config dropdown">
+                
+                <ul class="dropdown-menu pull-right text-right">
+                    
+                </ul>
+            </div>
+
+            <div class="p-t-10 p-r-5 p-b-5">
+
+                <div id="sensorchart" style="height: 200px;"></div>
+
+            </div>
+
+        </div>
+        <div class="table-responsive overflow">
+
+            <table class="table tile" style="font-size: 17px;">
+                <tr>
+                    <th style="font-size: 17px; font-weight: bold; text-transform: uppercase;">Input Status</th>
+                    <th></th>
+
+
+                </tr>
+                
+                <tr>
+                    <td>IN1 :</td>
+                    <td>
+                        <input type="hidden" class="inputvalues" id='inputmeaningof00' value="0" />
+                        <input type="hidden" class="inputvalues" id='inputmeaningof10' value="1" />
+                        <span id='InputValue0' class="lbl"></span>Door Close</td>
+                </tr>
+                
+                <tr>
+                    <td>IN2 :</td>
+                    <td>
+                        <input type="hidden" class="inputvalues" id='inputmeaningof01' value="0" />
+                        <input type="hidden" class="inputvalues" id='inputmeaningof11' value="1" />
+                        <span id='InputValue1' class="lbl"></span>No Motion Detected</td>
+                </tr>
+                
+                
+                <tr>
+                    <td>Last Update :</td>
+                    <td><span id="AnalogTime" class="lbl"></span></td>
+                </tr>
+            </table>
+
+            <input type="button" class="btn btn-inverse" id="" value="Update" onclick="etrackpoll(1)" style="text-align: center; line-height: 18px;" />
+        </div>
+
+
+    </div>
+    <div class="col-md-5">
+
+        <div class="tile col-md-6 col-sm-12 col-xs-12 " style="height: 244px; width:100%;">
+            <div class="tile" style="font-size: 17px; vertical-align: middle; margin-left: 5px; text-align: left; margin-bottom: 0px; text-transform: uppercase;">
+                <label style="float: right; margin-right: 5px; font-size: initial;">
+                        <input type="checkbox" id="alarmsound" style="opacity:1"/>
+                        <span>Audible Alarm Enable</span></label>
+                Alarm Notifications
+            </div>
+            <div style="height: 180px; overflow: auto;">
+                <table class="table" id="alarmtable">
+                    <tbody id="body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tile">
+            <div id="BatteryVoltagecontainer"  ></div>
+        </div>
+        <div class="tile">
+            <div id="ChargeVoltagecontainer" ></div>
+        </div>
+    </div>
+</div>

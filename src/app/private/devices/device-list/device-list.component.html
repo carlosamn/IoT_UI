@@ -1,0 +1,42 @@
+
+<div class="etd-panel-header">
+    <div class="etd-panel-title font-20">LOCATIONS</div>
+    <!--
+        <div class="etd-panel-content">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover tile">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>IP ADDRESS</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of devices; let i = index">
+                    <td>{{ item.uid }}</td>
+                    <td>{{ item.location }}</td>
+                    <td>{{ item.ip }}</td>
+                    <td class="table-actions">
+                      <a href="javascript:void(0)" (click)="deleteDevice(item.uid, i)"  *ngIf="activeIndex != i">
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                      <a href="javascript:void(0)" [routerLink]="['../edit', item.uid]" *ngIf="activeIndex != i">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+
+        </div>
+         -->
+</div>
+<br/>
+<div class="panel-buttons">
+    <div class="col-md-6">
+        <a class="btn btn-default m-r-5" [routerLink]="['../add']" >Add new location </a>
+    </div>
+</div>
+
+<hr class="whiter m-t-10">

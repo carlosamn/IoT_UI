@@ -1,0 +1,144 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- -  ETD LOGIN FORM                         - -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - -->
+<div class="login-content" [ngClass]="{onWritting: UX.MOBILE.isWritting ==
+  true}" *ngIf="true">
+  <div class="login-wrapper">
+
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- ROW :: LOGO - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+    <img class="login-logo" src="{{logo}}" alt="ETD App - Company Logo">
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+  
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- ROW :: FORM - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+    <form class="login-form" #form="ngForm" (submit)="login()">
+
+
+
+      <!-- Title -->
+      <div class="login-form-title">
+        <h2>Login</h2>
+      </div>
+
+      <!-- Input :: Username -->
+      <div class="login-form-group">
+
+        <div class="input-container">
+          <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+          <input type="text" required placeholder="USERNAME"  autofocus="autofocus"
+          [(ngModel)]="credentials.username" [ngModelOptions]="{ standalone:
+          true }"
+            (focus)="UX.MOBILE.isWritting= true;"
+            (focusout)="UX.MOBILE.isWritting= false;">
+        </div>
+
+        <span>Username required!</span>
+
+      </div>
+
+      <!-- Input :: Password -->
+      <div class="login-form-group">
+
+        <div class="input-container">
+          <div class="icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+          <input type="password" required placeholder="PASSWORD" [(ngModel)]="credentials.password"
+          [ngModelOptions]="{ standalone: true }"
+            (focus)="UX.MOBILE.isWritting= true;"
+            (focusout)="UX.MOBILE.isWritting= false;">
+        </div>
+
+        <span>Password required!</span>
+
+      </div>
+
+      <!-- Input :: Remember  Me -->
+      <div class="login-form-group rememberMe">
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <span>Remember Me</span>
+      </div>
+
+      <!-- Input :: Submit -->
+      <div class="login-form-group">
+        <input type="submit" value="Sign In"
+          [disabled]="form.form.invalid" >
+      </div>
+
+      <!-- Link :: Forgot Password -->
+      <div class="login-form-group">
+        <a class="remember" href="#">Forgot Password?</a>
+      </div>
+
+      <!-- Warning :: Username failed -->
+      <div class="login-form-group">
+        <h4 style="color:darksalmon" *ngIf="error=='1'">
+          Username or password
+          failed!</h4>
+      </div>
+
+
+    </form>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+
+  </div>
+</div>
+<!-- - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+
+
+
+
+
+<form class="loginForm" #form="ngForm" (submit)="login()" *ngIf="false">
+  <div class="container" [ngClass]="{onWritting: UX.MOBILE.isWritting ==
+    false}">
+    <div id="logo">
+      <img src="{{logo}}" alt="">
+    </div>
+    <div class="login">
+      <h2 class="name">Login</h2>
+      <div class="login-form">
+        <div>
+          <input name="usernam" #usernam="ngModel" class="login-input"
+            type="text" placeholder="username" required
+            [(ngModel)]="credentials.username" [ngModelOptions]="{ standalone:
+            true }"
+            (focus)="UX.MOBILE.isWritting= true;"
+            (focusout)="UX.MOBILE.isWritting= false;"><br>
+        </div>
+        <span *ngIf="!usernam.valid && usernam.touched">Username required!</span>
+        <br>
+        <div>
+          <input name="pwd" #pwd="ngModel" class="login-input" type="password"
+            placeholder="password" required [(ngModel)]="credentials.password"
+            [ngModelOptions]="{ standalone: true }"
+            (focus)="UX.MOBILE.isWritting= true;"
+            (focusout)="UX.MOBILE.isWritting= false;">
+        </div>
+        <span *ngIf="!pwd.valid && pwd.touched">Username required!</span>
+        <br>
+      </div>
+      <div class="check">
+        <input type="checkbox"> Remember Me <br>
+      </div>
+
+      <input type="submit" class="button" value="Sign In"
+        [disabled]="form.form.invalid">
+      <a class="remember" href="#">Forgot Password?</a>
+    </div>
+
+    <div style=""><h4 style="color:darksalmon" *ngIf="error=='1'">Username or
+        password failed!</h4></div>
+  </div>
+
+</form>
+<!-- - - - - - - - - - - - - - - - - - - - - - - -->

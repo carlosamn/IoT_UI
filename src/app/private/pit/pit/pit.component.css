@@ -1,0 +1,88 @@
+.controls span{
+    float: left;
+    height: 200%;
+}
+.controls input{
+    float: left;
+    width: 80%;
+}
+.controls {
+    height: 1%;
+}
+
+.capture-status {
+	padding: 5px; 
+	border: 3px solid #040C1A; 
+	background:gold; 
+	font-weight:bold;
+	
+	margin: 0 auto;
+	color: #000;
+}
+
+.backdrop{ 
+
+	background-color:rgba(0,0,0,0.6);
+	
+	position:fixed;
+	
+	top:0;
+	
+	left:0;
+	
+	width:100%;
+	
+	height:100vh;
+	
+	}
+ 
+
+.modal-header {
+			background-image: linear-gradient(blue, lightblue)!important;
+			color:black;
+			height: 30px;
+	}
+.modal-header2 {
+			background-image: linear-gradient(red, lightblue)!important;
+			color:black;
+			height: 30px;
+}
+
+.modal-body{
+	background-image: linear-gradient(gray, lightgray);
+}
+.modal-footer{
+	background-image: linear-gradient(gray, lightgray);
+}  
+
+.modal-footer>button {
+	background-image: linear-gradient(gray, lightgray);
+}
+
+.table.tile tbody tr #td1{
+	font-weight: 500; font-size: 17px;
+}
+
+.table.tile tbody tr div{
+	padding:3px; background-color:black; 
+}
+.table.tile tbody tr div span{
+	padding:3px;
+}
+
+table.tile tbody #td3{
+	float: right;
+}
+
+.btn.btn-large.btn-inverse{
+	float: left;margin-bottom:50px
+}
+
+.btn.btn-large.btn-inverse.m-l-20{
+	float: right;margin-bottom:50px
+}
+
+table.tile tbody #tr1{
+	border-bottom: 7px solid #33679A;
+}
+

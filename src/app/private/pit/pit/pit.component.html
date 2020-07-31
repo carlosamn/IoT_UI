@@ -1,0 +1,159 @@
+<app-sensor-header></app-sensor-header>
+
+<div class="backdrop" [ngStyle]="{'display':displaymodal}"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displaymodal}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+            <div class="modal-header2">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                  <h3>Connection issues, try some time later!</h3><br>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">OK</button>
+             </div>
+                
+    </div>
+  </div>
+  </div>
+
+<div class="block-area">
+   
+<div class="col-md-8 row">
+      <!-- Main Chart -->
+      <!-- Activity -->
+      <div class="tile">
+          <div class="table-responsive overflow">
+              <table class="table tile">
+                  <thead>
+                      <tr>
+                          <th>Accumulation</th>
+                          <th></th>
+                        
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                      <tr>
+                          <td class="tdbold">Current day volume</td>
+                          <td id="td1" >
+                            <div ><span >{{DATA.accumulation.currentDayVol}}</span> </div>
+                      </td>
+                         </tr>                
+                      <tr>
+                          <td class="tdbold">Previous day volume</td>
+                          <td id="td1" >
+                            <div ><span >{{DATA.accumulation.previousDayVol}}</span> </div>
+                         </td>
+                            </tr>
+                         <tr>
+                           <td class="tdbold">Current day runtime</td>
+                           <td id="td1" >
+                            <div ><span >{{DATA.accumulation.currentDayRuntime}}</span> </div>
+                         </td>
+
+                      </tr>
+                      <tr id="tr1" >
+                           <td class="tdbold">Previous day runtime</td>
+                           <td id="td1" >
+                            <div><span >{{DATA.accumulation.previousDayRuntime}}</span> </div>
+                         </td>
+                      </tr>
+                      <tr>
+                          <td class="tdbold">Current Month volume</td>
+                          <td id="td1" >
+                            <div ><span >{{DATA.accumulation.currentMonthVol}}</span> </div>
+                         </td>
+                          </tr>
+                       <tr>
+                          <td class="tdbold">Previous Month volume</td>
+                          <td id="td1" >
+                            <div ><span >{{DATA.accumulation.previousMonthVol}}</span> </div>
+                         </td>
+                          </tr>
+                         <tr>
+                           <td class="tdbold">Current Month runtime</td>
+                           <td id="td1" >
+                            <div ><span >{{DATA.accumulation.currentMonthRuntime}}</span> </div>
+                         </td>
+                      </tr>                       
+                         <tr>
+                           <td class="tdbold">Previous Month runtime</td>
+                           <td id="td1" >
+                            <div ><span >{{DATA.accumulation.previousMonthRuntime}}</span> </div>
+                         </td>
+                      </tr>
+                      <tr>
+                          <td ><small>Last Update:</small></td>                       
+                          <td id="td3" >
+                              <label class="lastupdate">
+                                 {{DATA.lastUpdateTimestamp}}
+                              </label>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="tile">
+          <div class="table-responsive overflow">
+              <table class="table tile">
+                  <thead>
+                      <tr>
+                          <th>Factors</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>                      
+                       <tr>
+
+                          <td class="tdbold">Total Flow</td>
+                          <td id="td1" >
+                            <div><span >{{DATA.factors.totalFlow}}</span> </div>
+                         </td>
+                      </tr>
+                      <tr>
+                          <td class="tdbold">Density</td>
+                          <td id="td1" >
+                            <div ><span >{{DATA.factors.density}}</span> </div>
+                         </td>
+                      </tr>
+                      <tr>
+                          <td class="tdbold">Orifice Diameter</td>
+                          <td id="td1"  >
+                            <div ><span >{{DATA.factors.orificeDiameter}}</span> </div>
+                         </td>
+                      </tr>
+                      <tr>
+                          <td class="tdbold">Pipe Diameter</td>
+                          <td id="td1"  >
+                            <div ><span >{{DATA.factors.pipeDiameter}}</span> </div>
+                         </td>
+                      </tr>
+                      <tr>
+                          <td><small>Last Update:</small></td>
+                          <td id="td3" >
+                              <label class="lastupdate">
+                                {{DATA.lastUpdateTimestamp}}
+                              </label>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+       <button   class="btn btn-large btn-inverse"  id="efmgraph" (click)="update('13')">Update EFM</button>         
+       <button   class="btn btn-large btn-inverse m-l-20"  id="efmpoll" (click)="update('12')" >EFM Streaming</button>      
+      
+  </div>
+
+  <div class="modal fade" id="deviceBusy" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal-blur" style="background-color: black;">
+            <div class="modal-body">
+                <h4 class="text-center"><strong>Controller busy, Please wait an moment!</strong>
+                </h4>
+            </div>
+        </div>
+    </div>
+  </div>

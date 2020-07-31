@@ -1,0 +1,271 @@
+.ng-invalid.ng-touched:not(form) {
+  border: 1px solid red;
+}
+
+.test input {
+  border: 0;
+}
+
+.input[type="number"] {
+  width: 80px;
+}
+
+.lds-spinner {
+  color: official;
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-spinner div {
+  transform-origin: 32px 32px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 29px;
+  width: 5px;
+  height: 14px;
+  border-radius: 20%;
+  background: #fff;
+}
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
+  animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+input {
+  background-color: transparent;
+  border: solid 1px;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+  vertical-align: middle;
+  padding: 5px;
+  border: solid;
+  border-width: 1px;
+  border-color: rgb(160, 160, 255);
+  margin: 2px;
+  text-align: center;
+}
+
+select {
+  color: black;
+}
+
+.row-fluid {
+  display: inline-flex;
+}
+
+.dataTables_paginate paging_full_numbers {
+  float: right;
+}
+
+.tdAlign {
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  #sahil {
+    overflow-x: scroll !important;
+    border: solid;
+    border-color: rgba(255, 255, 255, 0.0980392);
+  }
+
+  #RightDiv {
+    float: none;
+    width: 100%;
+  }
+
+  #leftDiv {
+    width: 100%;
+  }
+
+  select {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 1000px) {
+  #sahil {
+    overflow-x: scroll !important;
+    border: solid;
+    border-color: rgba(255, 255, 255, 0.0980392);
+  }
+
+  #RightDiv {
+    float: none;
+    width: 100%;
+  }
+
+  #leftDiv {
+    margin-bottom: 80px;
+    width: 100%;
+  }
+
+  select {
+    max-width: 150px;
+  }
+}
+
+#menu-toggle {
+  margin-left: 0px;
+}
+
+label {
+  margin-left: 10px;
+}
+
+.span6 {
+  margin-left: 10px;
+}
+
+#users_paginate {
+  margin-left: 20px;
+}
+
+#users_paginate:hover {
+  cursor: pointer;
+}
+
+.first paginate_button paginate_button_disabled {
+  margin-left: 5px;
+}
+
+.previous paginate_button paginate_button_disabled {
+  margin-left: 5px;
+}
+
+#users_previous,
+#users_next,
+#users_last {
+  margin-left: 5px;
+}
+
+.paginate_active {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.row-fluid {
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+@media (min-width: 780px) {
+  #users_wrapper {
+    font-size: 15px;
+  }
+
+  #leftDiv {
+    float: left;
+  }
+}
+
+@media (min-width: 1001px) {
+  #RightDiv {
+    float: right;
+    width: 60%;
+  }
+
+  #leftDiv {
+    float: left;
+    width: 40%;
+  }
+}
+
+#example {
+  min-width: 550px;
+}
+
+.icheckbox_minimal {
+  float: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.td-center tbody {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+}
+.ainputs-table-title th,
+.ainputs-table-title td {
+  vertical-align: middle;
+  margin-left: auto;
+  text-align: center;
+  margin-right: auto;
+}

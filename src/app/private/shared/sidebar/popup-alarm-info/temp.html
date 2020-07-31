@@ -1,0 +1,28 @@
+
+     <!-- POPUP ROW'S BY EACH ALARM -->
+     <div class="alarm-popup-content-alarm"  *ngFor="let alarmInfo of getAlarmInfo(); let k = index">
+
+      <hr *ngIf="k > 0">
+
+       <!-- POPUP ROW'S BY EACH PARAMETERS OF ALARM -->
+      <div class="alarm-popup-content-alarm-parameter"  *ngFor="let key of alarmInfo.keys; let kKey = index ">
+          <span *ngIf="checkAlamarInfoKeyValue(alarmInfo.keys[kKey])">
+           <strong>{{ pipeAlarmInfoKey(alarmInfo.keys[kKey]) }}</strong> : {{ pipeAlarmInfoValue(alarmInfo.values[kKey]) }}
+          </span>
+      </div>
+
+      <br>
+
+      <div class="alarm-popup-content-alarm-parameter" >
+          <span>
+           <strong>Sensor Value </strong> : {{ popUpAlarms[k].alarmInfo.sensorValue }} {{ popUpAlarms[k].alarmInfo.sensorUnit }}
+          </span>
+      </div>
+
+      <div class="alarm-popup-content-alarm-parameter" >
+          <span>
+           <strong>Time </strong> : {{  formatTimeStamp(popUpAlarms[k].alarmInfo.packetTime) }}
+          </span>
+      </div>
+
+    </div>

@@ -1,0 +1,166 @@
+// -----------------------------------------//
+// QSO Main Dashboard
+// -----------------------------------------//
+.qso-maindashboard {
+  display: block;
+
+  width: 100%;
+  height: fit-content;
+
+  box-sizing: border-box;
+
+  padding: 0em;
+  margin: 0em;
+
+  .header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 1.25em;
+    display: inline-block;
+    vertical-align: middle;
+    .header-title {
+      display: inline-block;
+      font-size: 1.5em;
+      margin: 0px;
+      padding: 0em;
+      width: fit-content;
+    }
+    .header-checkbox {
+      width: fit-content;
+      display: inline-block;
+      margin: 0em 1em;
+    }
+    .header-switch {
+      font-size: 0.65em;
+      input {
+        visibility: hidden;
+      }
+    }
+    .row {
+      margin: 0px;
+      padding: 0px;
+    }
+    .col {
+      margin: 0px;
+      padding: 0px;
+
+      margin-left: 2em;
+      &:first-child {
+        margin-left: 0px;
+      }
+    }
+    .display-row-center-left();
+  }
+  .content {
+    .display-row-top();
+  }
+}
+// -----------------------------------------//
+
+.qso-header {
+  width: 100%;
+  display: block;
+
+  font-family: "open-sans-light", sans-serif;
+  font-size: 1.25em;
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  box-sizing: border-box;
+
+  padding: 0em;
+  margin: 0em;
+
+  color: black;
+  input {
+    text-transform: uppercase;
+  }
+}
+
+.qso-body {
+  width: 100%;
+  display: block;
+
+  font-family: "open-sans-light", sans-serif;
+  font-size: 1em;
+  font-weight: 800;
+
+  box-sizing: border-box;
+
+  padding: 0em 0em;
+
+  color: black;
+}
+
+.qso-container {
+  display: block;
+
+  width: calc(25% - 1em);
+  min-width: 0px;
+  height: fit-content;
+
+  box-sizing: border-box;
+
+  padding: 0em 0em;
+  margin: 0em 0.5em;
+
+  &:first-child {
+    margin-left: 0em;
+    .qso-body {
+      margin-left: 0em;
+    }
+  }
+  &:last-child {
+    margin-right: 0em;
+    qso-body {
+      margin-right: 0em;
+    }
+  }
+}
+
+.qso-maindashboard {
+  .fas {
+    color: white;
+    display: inline;
+  }
+  input[type="text"] {
+    display: inline;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+
+    box-sizing: border-box;
+    padding: 0em;
+    margin: 0em;
+
+    border: none;
+    outline: none;
+  }
+}
+
+.qso-loader {
+  width: 100%;
+  .flex-display(flex);
+  .flex-direction(row);
+  .flex-wrap(wrap);
+  .justify-content(center);
+  .align-content(center);
+  .align-items(center);
+  img {
+    display: block;
+    width: 25%;
+    max-width: 150px;
+    min-width: 50px;
+    margin: 25vh auto;
+  }
+}
+
+// -------------------- Responsive ---------------- //
+@media only screen and (max-width: 600px) {
+  .qso-container {
+    display: block;
+    width: 100%;
+    padding: 0em 0em;
+    margin: 0em auto !important;
+  }
+}

@@ -1,0 +1,41 @@
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!--   qso-Sidebar-Menu                                                                -->
+<!--   Author :                                                                                   -->
+<!--   Update :                                                                                   -->
+<!--                                                                                              -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<div class="qso-Sidebar-Nofitications" *ngIf="UI.visibility">
+
+  <div class="notification isComlink-All-Ok" *ngIf="DATA.comlink.length == 0">
+    <img class="notification-icon" src="assets/img/qso/comlink-status-ok.png" alt="Comlink Status OK">
+    <h5 class="notification-message">All Devices Online</h5>
+  </div>
+
+  <div class="notifications comlink" *ngIf="DATA.comlink.length > 0"
+    [style.overflow-y]="DATA.comlink.length > 4 ? 'scroll' : 'auto'">
+    <div class="notification comlink isComlink-Error" *ngFor="let comlink of DATA.comlink">
+      <img class="notification-icon" src="assets/img/qso/comlink-status-error.png" alt="Comlink Status Error">
+      <div class="notification-message">
+        <div class="notification-message-title">COMLINK NO SIGNAL</div>
+        <div class="notification-message-location-uid"
+          [style.font-size]="comlink.location.description.length > 11 ? '0.9em' : '1em'">
+          {{ comlink.location.description }} / {{ comlink.uid}}</div>
+        <div class="notification-message-timestamp" style="display: none">
+          <span class="header">Last packet :</span> {{ comlink.timestamp }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notifications alarms" *ngIf="DATA.alarms.length > 0">
+    <div class="notification alarm isAlarm-Error" *ngFor="let alarm of DATA.alarms">
+      <img class="notification-icon" src="assets/img/qso/alarm-status-ok.png" alt="Comlink Status Error">
+      <h5 class="notification-message">{{ alarm.message }}</h5>
+    </div>
+  </div>
+
+
+</div>
+<!-- --------------------------------------------------------------------------------------------- -->

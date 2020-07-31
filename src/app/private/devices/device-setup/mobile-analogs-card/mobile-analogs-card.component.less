@@ -1,0 +1,189 @@
+@import './button-switch.less';
+@import './flex-box-layout.less';
+
+/**
+*
+*
+*/
+// ----------------------------------- //
+// -- Class :: analog-input-card ----- //
+// ----------------------------------- //
+div.analog-input-card{
+
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+  padding: 0em 0em 0em 0.5em;
+  margin: 0px;
+  margin-bottom: 1em;
+
+  background-color: #dfd9ff61;
+  color: black;
+  border-radius: 0.5em;
+
+  &.disabled{
+    opacity: 0.65;
+  }
+
+  div.wrapper{
+    display: block;
+    width: 100%;
+
+    box-sizing: border-box;
+    padding:0em;
+    margin: 0em;
+
+    border: 1px solid rgba(0,0,0,0);
+
+    background-color: white;
+    border-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    border-top-left-radius: 0em;
+    border-bottom-left-radius: 0em;
+
+
+    .card-edit-showcase{
+        display: block;
+        width: 100%;
+
+        #flex-box-row-extremes-top();
+
+            border-bottom: 1px solid gray;
+    }
+
+    .card-edit-component{
+      display: block;
+      width: 100%;
+
+    }
+  }
+
+  div.card-left-side{
+        width: 5.5em;
+    height: 6.5em;
+
+    border-right: 1px solid gray;
+  }
+  div.card-right-side{
+   display: block;
+    padding: 0.25em;
+    box-sizing: border-box;
+    width: ~"calc(100% - 5em)";
+  }
+
+  div.card-uid{
+    display: block;
+   padding-top: 2px;
+    font-size: 1.35em;
+    font-weight: 900;
+    text-align: center;
+  min-height: 1.3em;
+    margin-bottom: 0.1em;
+  }
+  div.card-analog-enable{
+    display: block;
+    padding-top: 2px;
+    font-size: 1em;
+    font-weight: 300;
+    height:auto;
+    .enable-span{
+      padding-left: 0.5em;
+    }
+
+  }
+  div.card-location{
+   h2{
+     margin: 0px;
+    padding: 0px;
+    font-size: 1.75em;
+    color: black;
+   }
+   input{
+   margin: 0px;
+    padding: 0.25em;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 1.35em;
+    color: black;
+    max-width: 10.5em;;
+   }
+  }
+  div.card-project{
+    font-size: 1.15em;
+    text-align: start;
+  }
+
+   div.card-icons{
+     width: ~"calc(100% - 0em)";
+    font-size: 1em;
+    text-align: start;
+    #flex-box-row-extremes();
+  }
+
+  div.card-icon{
+    width: 25%;
+    height: auto;
+    padding: 0.5em;
+    box-sizing: border-box;
+    position: relative;
+    top: 1em;;
+    #flex-box-center-center();
+-webkit-flex-direction: column;
+-ms-flex-direction: column;
+flex-direction: column;
+
+    img{
+        position: relative;
+        top: -2em;
+        opacity: 0.25;
+    }
+
+    .icon-line{
+      width: 1em;
+      height: 1px;
+      background-color: black;
+         -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    }
+    .fas,.far,span{
+      font-size: 1.35em;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    }
+    .fa-exchange-alt{
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    }
+
+  }
+
+
+  .card-edit-title{
+    h4{
+      padding: 0.25em;
+      margin: 0 auto;
+      font-size: 1.1em;
+      display: inline-block;
+      font-weight: 900;
+      vertical-align: middle;
+    }
+    .fas{
+      padding: 0.25em;
+      font-size: 1.5em;
+      display: inline-block;
+       vertical-align: middle;
+    }
+  }
+
+
+}
+// ----------------------------------- //

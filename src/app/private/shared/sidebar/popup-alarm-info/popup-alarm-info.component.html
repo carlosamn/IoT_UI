@@ -1,0 +1,75 @@
+<!-- ----------------------------------------------- -->
+<!-- ----- ALARMS POPUP INFO ----------------------- -->
+<!-- ----------------------------------------------- -->
+<div class="alarm-popup" *ngIf="popUpAlarms.length > 0 && hover == true">
+
+  <!-- POPUP HEADER  -->
+  <div class="alarm-popup-header">
+
+  </div>
+
+  <!-- POPUP CONTENT -->
+  <div class="alarm-popup-content">
+
+    <!-- POPUP ROW'S BY EACH ALARM -->
+    <div class="alarm-popup-content-alarm" *ngFor="let alarms of popUpAlarms; let k = index">
+
+      <hr *ngIf="k > 0">
+
+      <div class="alarm-popup-content-alarm-parameter">
+        <span>
+          <strong>Project </strong> : {{ alarms?.project}}
+        </span>
+      </div>
+
+      <div class="alarm-popup-content-alarm-parameter">
+        <span>
+          <strong>Device </strong> : {{ alarms?.uid}}
+        </span>
+      </div>
+
+
+      <div class="alarm-popup-content-alarm-parameter">
+        <span>
+          <strong> Channel : {{ alarms.channel.id}} </strong>
+        </span>
+      </div>
+
+      <div class="alarm-popup-content-alarm-parameter">
+        <span>
+          <strong>Message </strong> : {{ alarms?.message}}
+        </span>
+      </div>
+
+      <div class="alarm-popup-content-alarm-parameter">
+        <span>
+          <strong>Sensor Value </strong> : {{ alarms?.channel.value}} {{ alarms?.channel.units}}
+        </span>
+
+      </div>
+
+      <div class="alarm-popup-content-alarm-parameter">
+        <span>
+          <strong>Time </strong> : {{ formatTimeStamp(alarms?.timestamp) }}
+        </span>
+      </div>
+      <br>
+    </div>
+
+
+
+  </div>
+
+</div>
+
+<!--
+{ "id": "5c180fc44855097a0c24dff0_ainput_2",
+"location": { "id": "5c180fc44855097a0c24dff0", "description": "DevLocation2" },
+"project": "LabTest",
+"uid": "902",
+"timestamp": "2019-03-18T15:09:25",
+"message": "High Alarm",
+"type": "ainput",
+"channel": { "id": 2, "name": "Sensor 2", "value": "9266.65" } }
+
+-->

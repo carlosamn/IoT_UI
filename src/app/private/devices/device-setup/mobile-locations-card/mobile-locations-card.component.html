@@ -1,0 +1,72 @@
+<div class="location-card">
+
+  <div class="card-header">
+
+    <input type="checkbox">
+
+    <div class="title">
+
+      <div class="title-location">
+        <strong>Location</strong> :
+        <span [hidden]="UI.isEdit">{{ locationDescription }}</span>
+        <input [hidden]="!UI.isEdit" type="text" [(ngModel)]="DATA.locationDescription">
+
+      </div>
+
+      <div class="title-uid">
+        <strong>UID</strong> :
+        <span [hidden]="UI.isEdit">{{ uid}}</span>
+        <input [hidden]="!UI.isEdit" type="text" [(ngModel)]="DATA.uid">
+      </div>
+
+    </div>
+
+    <i class="fas fa-angle-up" (click)="UI.isOpen = !UI.isOpen" [ngClass]="!UI.isOpen ? 'opened' : 'closed'"></i>
+
+  </div>
+
+  <div class="card-content" [hidden]="!UI.isOpen">
+
+    <div class="info-block">
+      <div class="block-header"></div>
+      <div class="block-content"></div>
+      <div>
+        <strong>Active Project</strong> : {{ project }}
+      </div>
+      <div><strong>Version</strong> : {{ version }}</div>
+      <div style="padding-bottom: 1em;"><strong>Status</strong> : {{ status }} </div>
+      <hr>
+    </div>
+
+
+
+
+
+    <div class="log-block" style="padding-bottom: 1em;">
+      <div class="log-block-header">
+        <div class="col-log-interval">Current Log</div>
+        <div class="col-log-start">Start Loggin</div>
+      </div>
+      <div class="log-block-content" style="padding-bottom: 1em;">
+        <div class="col-log-interval"> {{ logInterval}} </div>
+        <div class="col-log-start"> {{ logStart }} </div>
+      </div>
+      <hr>
+    </div>
+
+
+    <div class="ip-block">
+      <div><strong>IP</strong> : {{ ipNumber }} </div>
+      <div><strong>SERVER IP</strong> : {{ ipServer }}</div>
+    </div>
+
+    <div class="edit-block">
+      <i class="far fa-save" *ngIf="UI.isEdit" (click)="doSaveData()"></i>
+      <i class="far fa-edit" *ngIf="!UI.isEdit" (click)="onEditData()"></i>
+    </div>
+
+
+  </div>
+
+
+</div>

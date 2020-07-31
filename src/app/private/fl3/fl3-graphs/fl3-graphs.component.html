@@ -1,0 +1,211 @@
+<!-- <button (click)="html2CanvasTest()">Test html to canvas</button>
+ -->
+<div class="mainContainer" style="min-height:1500px;">
+  <div class="row">
+    <div class="col-sm-3" *ngIf="fl3Records.length">
+      <!--div class="col-sm-3"-->
+      <h5>
+        <b>{{ fl3Settings?.captureMode?.modeValue == 0 ? 'Auto': fl3Settings?.captureMode?.modeValue == 1 ? 'Manual': 'Listen' }}
+          Capture Mode</b>
+      </h5>
+      <p>{{ timer }}</p>
+      <p [hidden]="fl3Settings?.captureMode?.modeValue == 1">Shots remaining: {{ wavdata.shotNumber }}</p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>Shot start time: {{ shotStartTime | date: 'yyy-MM-dd hh:mm:ss a' }}</p>
+      <p>Filter Applied: {{ wavdata.filterApplied }}</p>
+    </div>
+    <div class="col-sm-3">
+      <div class="row mb-10">
+        <div class="capture-status"> {{ captureStatus }}</div>
+      </div>
+      <div class="row pd-8">
+        <div class="col-sm-6 text-left">
+          <button class="btn btn-black" (click)="capture('start')"
+            [disabled]="captureStatus == 'Capturing' || captureStatus == 'Transfering' || selectedLocation?.uid == '' || selectedLocation?.uid == 'NA'">Start
+            Capture</button>
+        </div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-black" (click)="capture('stop')"
+            [disabled]="(!captureStatus || captureStatus == 'Done' || selectedLocation?.uid == '' || selectedLocation?.uid == 'NA') && fl3Settings?.captureMode?.modeValue !=0">Stop
+            Capture</button>
+        </div>
+      </div>
+      <div class="row pd-8">
+        <div class="col-sm-6 text-left">
+          <button [disabled]="selectedLocation?.uid == '' || selectedLocation?.uid == 'NA'" class="btn btn-black">Check
+            Status</button>
+        </div>
+        <div class="col-sm-6 text-right">
+          <button [disabled]="selectedLocation?.uid == '' || selectedLocation?.uid == 'NA'" class="btn btn-black">Time
+            Status</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 text-right" *ngIf="fl3Records.length">
+      <div class="record-outputs row fluid-level">
+        <span [ngClass]="(wavdata.baseline?.fluidLevel?.toString().length > 8) ? 'font-23': 'font-25'">Fluid Level:
+          {{ wavdata.baseline?.fluidLevel | number : '1.2-2' }}
+          {{ fl3Settings?.measurementUnit === 1 ? 'm': 'ft' }}</span>
+      </div>
+      <div class="record-outputs row">
+        <div class="col-md-6">
+          <span class="fluid-level-text">Acoustic Factor:</span>
+          <br />
+          ({{ acousticFactor }})
+        </div>
+        <div class="col-md-6 text-center">
+          <span class="fluid-level-text size-21">{{ acousticVelocity }}
+            {{ fl3Settings?.measurementUnit === 1 ? 'm/s': 'ft/s' }}</span>
+        </div>
+      </div>
+      <div class="record-outputs row">
+        <div class="col-md-6">
+          <span class="fluid-level-text">Casing Pressure:</span>
+        </div>
+        <div class="col-md-6 text-center">
+          <span class="fluid-level-text size-21">{{ wavdata.casingPressure }}
+            {{ fl3Settings?.measurementUnit === 1 ? 'kPa': 'psi' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="tablespace text-right">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+          <tr>
+            <td>
+              <table cellspacing="0" cellpadding="1" border="1" width="100%" id="fl3Records-header">
+                <tr>
+                  <th>Record <button (click)="runDeletion()" style="display: none">D</button></th>
+                  <th>Fluid Level</th>
+                  <th>Casing Pressure</th>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="table-container">
+                <table cellspacing="0" cellpadding="1" border="1" width="100%" id="fl3records-body">
+                  <tbody>
+                    <tr *ngFor="let item of fl3Records; let i = index;" (click)="getWavData(item.recordId, i, true)"
+                      [ngClass]="{'highlighted-row':selectedIndex===i ,'highlighted-row-currentreport': item.selectedForReport }">
+                      <td>{{ (item.recordId | shotStart) | date: 'yyy-MM-dd hh:mm:ss a'}}</td>
+                      <td>{{ item.baseline?.fluidLevel | number : '1.2-2'}}
+                        {{ fl3Settings?.measurementUnit === 1 ? 'm': 'ft' }}</td>
+                      <td>{{ item.casingPressure }}</td>
+                    </tr>
+                    <tr *ngFor="let item of fl3EmptyRows">
+                      <td>{{ item.column1 }}</td>
+                      <td>{{ item.column2 }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br />
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="load-record tex-left">
+        <a style="margin-left:6%;" data-toggle="modal" href="#loadWav" class="">Load</a>
+        <a data-toggle="modal" href="" class="" style="margin-left:5%;"
+          (click)="addToReport()">{{ fl3Records[selectedIndex]?.selectedForReport ? 'Remove from report': 'Add to report' }}</a>
+        <a data-toggle="modal" href="" class="" style="margin-left:5%;" (click)="unselectReports()">Unselect All</a>
+        <a data-toggle="modal" href="" class="" style="margin-left:5%;" (click)="deleteFL3()">Delete</a>
+        <!--	<a data-toggle="modal" class="" href="" style="margin-left:5%;">Delete record</a>-->
+      </div>
+    </div>
+  </div>
+
+  <h4 *ngIf="(!fl3Records || !fl3Records.length) && UX.fl3NoRecordsEnable">No records found, try <a data-toggle="modal"
+      href="#loadWav" style="font-weight: bold;">Uploading</a> a new record</h4>
+
+  <div #baselineGraph id="baselineGraph"></div>
+
+  <div [hidden]="!(collarVisibility && UX.isCollarAnalysis)" class="row">
+    <div class="col-md-12">
+      <br />
+      <h5>Collar Analysis:</h5>
+      <div class="col-md-3">Calipers:</div>
+      <div class="col-md-3">Avg Joint Per Sec:</div>
+      <div class="col-md-3">Joint To Liquid:</div>
+      <div class="col-md-3">Acoustic Factor:</div>
+    </div>
+    <div class="col-md-12">
+      <div class="col-md-3">{{ collarParams.calipers | number : '1.4-4' }} mS</div>
+      <div class="col-md-3">{{ collarParams.jointsPerSec | number: '1.4-4' }} Jts/sec</div>
+      <div class="col-md-3">{{ collarParams.jointsToLiquid | number: '1.3-3' }} Jts</div>
+      <div class="col-md-3">{{ collarParams.acousticFactor | number : '1.2-2' }}
+        {{ fl3Settings?.measurementUnit === 1 ? 'm/s': 'ft/s' }}</div>
+    </div>
+    <br />
+    <br />
+    <div class="col-md-12">
+      <div class="col-md-4">
+        <button class="btn-info" (click)="spanAdjustment(-0.0001)">-</button>
+        Span Adj
+        <button class="btn-info" (click)="spanAdjustment(0.0001)">+</button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <!--  && !UX.isCollarAnalysis -->
+  <div #collarGraph id="collarGraph" [hidden]="!(collarVisibility && UX.isCollarAnalysis)"></div>
+
+
+  <div class="modal fade" id="loadWav" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="modal-black">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Load wav file</h4>
+        </div>
+        <div class="modal-body">
+          <input type="file" #wav />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm" (click)="uploadWavFile()">Load</button>
+          <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <swal #swal [options]="swalWindowOptions"></swal>
+  <swal #errors [options]="swalErrors"></swal>
+
+
+
+
+
+  <div class="flotant-container" id="flotant-container">
+    <div class="row">
+      <div class="col-md-6 tile-container" *ngFor="let sensor of sensors">
+        <div *ngIf="sensor.enable">
+          <div [ngClass]="activedSensors> 1 ? 'tile mb-2 w-120': 'tile mb-2 w-120'">
+            <div class="data sensors-data">
+              <strong>
+                <h3 style="margin-top: 1px; margin-bottom: 1px;">
+                  {{ sensor.value ? sensor.value: 'N/A' }}<strong><small>{{ sensor.unit }}</small></strong></h3>
+              </strong>
+              <p style="margin-bottom: 2px;">{{ sensor.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="floating-date" id="floating-date">
+    <p><strong>Last Update:</strong></p>
+    <p><strong>{{ lastUpdate | date: 'yyyy-MM-dd hh:mm:ss' }}</strong></p>
+  </div>
+  <div class="floating-arrow" (click)="openOrCloseFlotant();">
+    {{ arrowText }}
+  </div>
+</div>

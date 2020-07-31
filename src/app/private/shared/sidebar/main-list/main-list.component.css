@@ -1,0 +1,333 @@
+
+ .row::after,.row::before{
+   content:none;
+ }
+.modal{
+  z-index: 10000;
+}
+
+.notifications{
+
+  padding: 0.25em;
+  width: 2em;
+  height: 2em;
+  background-color: crimson;
+  color: white;
+  border-radius: 1em;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: 900;
+position: relative;
+  top: -1em;
+  left: -1em;
+}
+
+
+.notifications-icons .notifications{
+  top: -1em;
+  left: -0.5em;
+  background-color: white;
+  color: crimson;
+}
+
+.devices-list{
+  margin: 0px;
+  padding: 0px;
+}
+.device-list-item{
+  display: block;
+  width: calc(100%);
+  height: auto;
+
+  box-sizing: border;
+
+  border:1px solid rgba(255,255,255,0.5);
+
+  padding: 0.5em;
+  margin: 0.5em 0em;
+  margin-top: 0em;
+
+  border-radius: 0.5em;
+}
+.device-list-item .row{
+  display: block;
+  margin: 0px;
+}
+.device-list-item .device-name{
+  display: inline-block;
+  font-weight: 900;
+  float: left;
+}
+.device-list-item .device-uid{
+  display: inline-block;
+  font-weight: 900;
+  float: right;
+
+}
+.device-alarm-icon{
+  display: inline-block;
+   padding: 0em 0.5em;
+   width: fit-content;
+   text-align: center;
+}
+.device-comlink-icon{
+  display: inline-block;
+  padding: 0em 0.5em;
+  width: fit-content;
+  text-align: center;
+}
+
+.device-list-item hr{
+  background-color: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+  margin: 0.2em 0em;
+}
+
+
+.device-list-item .row.content{
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row-reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+    width: 100%;
+  }
+
+  .modal .btn, .elfinder-dialog .btn, .dark .btn {
+    border: 1px solid rgba(255, 255, 255, 0.31);
+    margin-top: 0px;
+    padding: 0.51em;
+    border-radius: none;
+    border-radius: 0.5em;
+}
+
+ .device-list-item.active .row.content{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+.active .device-alarm-icon{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  width: 100%;
+}
+.active .device-comlink-icon{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+
+
+
+.locations-list{
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+
+}
+
+.location-card{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background-image: linear-gradient(to right top,#153c6b,#1b74b7);
+    border: 2px solid #103b5f;
+    border-radius: 3px;
+    margin-bottom: 1.5em;
+}
+
+
+
+.location-card .card-header{
+  text-align: left;
+  background-color: #103b5f;
+  width: 100%;
+  padding: .5em;
+  box-sizing: border-box;
+}
+
+
+.location-card .card-header .title{
+  width: calc(100% - 5em);
+  display: inline-block;
+  vertical-align: top;
+}
+.location-card .card-header .status{
+  width: fit-content;
+    display: inline-block;
+  vertical-align: top;
+  margin: 0 auto;
+  text-align: center;
+}
+.location-card .card-header .status span{
+  font-size: 0.8em;
+    text-align: center;
+}
+.location-card .card-header .status img{
+  width: 2em;
+  margin: 0 auto;
+  display: block;
+}
+.location-card  .card-row{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.15em 1em;
+  /*
+  background-color: rgba(255,100,100,0.5);
+  color: red;
+  */
+}
+
+.card-alarm-sensor{
+  display:block;
+  position: relative;
+}
+
+.card-row .sensor-value{
+  font-size: 2em;
+  font-weight: 900;
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0px;
+  padding: 0px 0px;
+  padding-bottom: 2px;
+}
+.card-row .sensor-units{
+  font-size: 1.5em;
+  font-weight: 900;
+   display: inline-block;
+  vertical-align: bottom;
+   margin: 0px;
+  padding: 10px 0px;
+    padding: 10px 0px;
+  padding-bottom: 5px;
+}
+
+.card-row .sensor-message{
+  font-size: 1.15em;
+   display: inline-block;
+  vertical-align: middle;
+   margin: 0px;
+  padding: 0px;
+}
+
+
+
+.card-row .sensor-timestamp{
+  font-size: 1.15em;
+
+   display: block;
+
+   margin: 0px;
+  padding: 0px;
+
+    margin-left: auto;
+    width: fit-content;
+}
+
+ .sensor-channel{
+
+  font-size: 1.15em;
+  width: fit-content;
+  position: fixed;
+    right: 2em;
+}
+
+
+
+
+
+app-notification-icon{
+  display: block;
+  width: 100%;
+}
+
+
+
+.modal-desktop{
+  display: none;
+}
+.modal-mobile{
+  display: block;
+}
+.label-desktop{
+  display: none;
+}
+@media (min-width: 700px) {
+  .modal-desktop{
+    display: block;
+  }
+  .modal-mobile{
+    display: none;
+  }
+  .label-desktop{
+    display: none;
+
+  }
+
+}

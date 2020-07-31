@@ -1,0 +1,240 @@
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!--   QSO Controller Component                                                                   -->
+<!--   Author :                                                                                   -->
+<!--   Update :                                                                                   -->
+<!--                                                                                              -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<div class="qsoController-sensor">
+  <div class="sensor-wrapper">
+
+
+
+
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!-- -- Sensor :: Header ------------------------------------------------------------------- -->
+    <!-- --------------------------------------------------------------------------------------- -->
+    <div class="sensor-header" [ngClass]="UI.collapsedClass">
+
+      <!--- ------ Sensor :: Header => Title -------------- -->
+      <div class="sensor-header-title">
+
+        <div class="sensor-header-title-location qso-color-text"
+          [ngStyle]="{ 'color': ( UI.comlink === true ? 'red' : 'black') }">
+          <strong>UWI:</strong>
+          {{ qsoControllerSensor.location.description }}
+        </div>
+
+        <div class="sensor-header-title-company"> {{ qsoControllerSensor.company }} </div>
+        <br>
+        <span *ngIf="qsoControllerSensor.isRetransmit" style="font-weight: 900"
+          [ngStyle]="{ 'color': ( qsoControllerSensor.isRetransmit === true ? 'red' : 'black') }">is Retransmit :
+          {{ qsoControllerSensor.isRetransmit }} </span>
+
+      </div>
+
+      <!--- ------ Sensor :: Header => Dropdown-Button ----- -->
+      <div class="sensor-header-dropdown-button" (click)="onToogleCollapseSensor()">
+        <i class="fas fa-angle-up"></i>
+      </div>
+
+    </div>
+    <!-- --------------------------------------------------------------------------------------- -->
+
+
+
+    <div class="sensor-channels qso-color-tones" style="display: block">
+
+
+      <!-- --------------------------------------------------------------------------------------- -->
+      <!-- -- Sensor :: Channel 0 ---------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------- -->
+
+      <div class="sensor-channel" [ngStyle]="{'color': UI.color.light}">
+
+
+        <div class="sensor-channel-measure qso-color-text color-middle" *ngIf="qsoControllerSensor.channels[0].enable">
+          <div class="sensor-channel-measure-value"> {{ qsoControllerSensor.channels[0].value  | SensorLimit}} </div>
+          <div class="sensor-channel-measure-units"> {{  qsoControllerSensor.channels[0].units }} </div>
+        </div>
+
+        <div class="sensor-channel-measure qso-color-text color-middle" *ngIf="!qsoControllerSensor.channels[0].enable">
+          <div class="sensor-channel-measure-value"> N/A </div>
+        </div>
+
+        <div class="sensor-channel-limit-high" *ngIf="UI.collapsedClass == 'collapsed'">
+          <div *ngIf="qsoControllerSensor.channels[0].enable">
+            <div class="sensor-channel-limit-high-value"> H :
+              {{  qsoControllerSensor.channels[0].alarms.high.limit | SensorLimit}}
+            </div>
+            <div class="sensor-channel-limit-high-units">
+              {{  qsoControllerSensor.channels[0].units}}
+            </div>
+          </div>
+          <div *ngIf="!qsoControllerSensor.channels[0].enable">
+            <div class="sensor-channel-limit-high-value"> H : N/A
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-channel-limit-low" *ngIf="UI.collapsedClass == 'collapsed'">
+
+          <div *ngIf="qsoControllerSensor.channels[0].enable">
+            <div class="sensor-channel-limit-low-value">L :
+              {{  qsoControllerSensor.channels[0].alarms.low.limit | SensorLimit}}
+            </div>
+            <div class="sensor-channel-limit-low-units">
+              {{  qsoControllerSensor.channels[0].units }}
+            </div>
+          </div>
+          <div *ngIf="!qsoControllerSensor.channels[0].enable">
+            <div class="sensor-channel-limit-low-value"> L : N/A
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sensor-channel-name qso-color-text">
+          {{  qsoControllerSensor.channels[0].name ? qsoControllerSensor.channels[0].name : '-' }}
+        </div>
+
+      </div>
+
+      <!-- --------------------------------------------------------------------------------------- -->
+
+
+
+      <!-- --------------------------------------------------------------------------------------- -->
+      <!-- -- Sensor :: Channel 1 ---------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------- -->
+
+
+      <div class="sensor-channel" [ngStyle]="{'color': UI.color.middle}">
+
+        <div class="sensor-channel-measure qso-color-text color-middle" *ngIf="qsoControllerSensor.channels[1].enable">
+          <div class="sensor-channel-measure-value"> {{ qsoControllerSensor.channels[1].value  | SensorLimit}} </div>
+          <div class="sensor-channel-measure-units"> {{  qsoControllerSensor.channels[1].units }} </div>
+        </div>
+
+        <div class="sensor-channel-measure qso-color-text color-middle" *ngIf="!qsoControllerSensor.channels[1].enable">
+          <div class="sensor-channel-measure-value"> N/A </div>
+        </div>
+
+
+        <div class="sensor-channel-limit-high" *ngIf="UI.collapsedClass == 'collapsed'">
+          <div *ngIf="qsoControllerSensor.channels[1].enable">
+            <div class="sensor-channel-limit-high-value"> H :
+              {{  qsoControllerSensor.channels[1].alarms.high.limit | SensorLimit}}
+            </div>
+            <div class="sensor-channel-limit-high-units">
+              {{  qsoControllerSensor.channels[1].units}}
+            </div>
+          </div>
+          <div *ngIf="!qsoControllerSensor.channels[1].enable">
+            <div class="sensor-channel-limit-high-value"> H : N/A
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-channel-limit-low" *ngIf="UI.collapsedClass == 'collapsed'">
+
+          <div *ngIf="qsoControllerSensor.channels[1].enable">
+            <div class="sensor-channel-limit-low-value">L :
+              {{  qsoControllerSensor.channels[1].alarms.low.limit | SensorLimit}}
+            </div>
+            <div class="sensor-channel-limit-low-units">
+              {{  qsoControllerSensor.channels[1].units }}
+            </div>
+          </div>
+          <div *ngIf="!qsoControllerSensor.channels[1].enable">
+            <div class="sensor-channel-limit-low-value"> L : N/A
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sensor-channel-name qso-color-text">
+          {{  qsoControllerSensor.channels[1].name ? qsoControllerSensor.channels[1].name : '-' }}
+        </div>
+
+      </div>
+
+      <!-- --------------------------------------------------------------------------------------- -->
+
+
+
+
+      <!-- --------------------------------------------------------------------------------------- -->
+      <!-- -- Sensor :: Channel 2 ---------------------------------------------------------------- -->
+      <!-- --------------------------------------------------------------------------------------- -->
+
+
+      <div class="sensor-channel" [ngStyle]="{'color': UI.color.complete}">
+
+        <div class="sensor-channel-measure qso-color-text color-middle" *ngIf="qsoControllerSensor.channels[2].enable">
+          <div class="sensor-channel-measure-value"> {{ qsoControllerSensor.channels[2].value  | SensorLimit}} </div>
+          <div class="sensor-channel-measure-units"> {{  qsoControllerSensor.channels[2].units }} </div>
+        </div>
+
+        <div class="sensor-channel-measure qso-color-text color-middle" *ngIf="!qsoControllerSensor.channels[2].enable">
+          <div class="sensor-channel-measure-value"> N/A </div>
+        </div>
+
+        <div class="sensor-channel-limit-high" *ngIf="UI.collapsedClass == 'collapsed'">
+          <div *ngIf="qsoControllerSensor.channels[2].enable">
+            <div class="sensor-channel-limit-high-value"> H :
+              {{  qsoControllerSensor.channels[2].alarms.high.limit | SensorLimit}}
+            </div>
+            <div class="sensor-channel-limit-high-units">
+              {{  qsoControllerSensor.channels[2].units}}
+            </div>
+          </div>
+          <div *ngIf="!qsoControllerSensor.channels[2].enable">
+            <div classj="sensor-channel-limit-high-value"> H : N/A
+            </div>
+          </div>
+        </div>
+
+        <div class="sensor-channel-limit-low" *ngIf="UI.collapsedClass == 'collapsed'">
+
+          <div *ngIf="qsoControllerSensor.channels[2].enable">
+            <div class="sensor-channel-limit-low-value">L :
+              {{  qsoControllerSensor.channels[2].alarms.low.limit | SensorLimit}}
+            </div>
+            <div class="sensor-channel-limit-low-units">
+              {{  qsoControllerSensor.channels[2].units }}
+            </div>
+          </div>
+          <div *ngIf="!qsoControllerSensor.channels[2].enable">
+            <div class="sensor-channel-limit-low-value"> L : N/A
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sensor-channel-name qso-color-text">
+          {{  qsoControllerSensor.channels[2].name ? qsoControllerSensor.channels[2].name : '-' }}
+        </div>
+
+      </div>
+
+
+      <!-- --------------------------------------------------------------------------------------- -->
+
+    </div>
+
+
+    <!-- --------------------------------------------------------------------------------------- -->
+    <!-- -- Sensor :: Footer ------------------------------------------------------------------- -->
+    <!-- --------------------------------------------------------------------------------------- -->
+    <div class="sensor-footer">
+      Time : {{ qsoControllerSensor.timestamp }}
+    </div>
+    <!-- --------------------------------------------------------------------------------------- -->
+
+
+
+  </div>
+</div>
+<!-- --------------------------------------------------------------------------------------------- -->

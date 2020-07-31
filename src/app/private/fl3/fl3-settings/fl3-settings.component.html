@@ -1,0 +1,373 @@
+<div class="fl3-settings">
+	<div class="tab-container tile">
+	    <ul class="nav tab nav-tabs">
+	        <li class="active">
+	        	<a class="p-17" href="javascript:void(0);" data-toggle="tab" data-target="#fl3-well-data">WELL DATA </a>
+	        </li>
+	        <li class="">
+	        	<a class="p-17" href="javascript:void(0);" data-toggle="tab" data-target="#fl3-mode">MODE</a>
+	        </li>
+	        <li class="">
+	        	<a class="p-17" href="javascript:void(0);" data-toggle="tab" data-target="#fl3-technical">TECHNICAL</a>
+	        </li>
+	    </ul>
+
+	    <div class="tab-content">
+	        <div class="tab-pane active" id="fl3-well-data">
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Units of Measurement</h3>
+				    </div>
+				    <div class="tile p-15">
+						<label>
+							<input type="radio" [value]=0 name="measurement" [(ngModel)]="fl3Settings.measurementUnit">
+							<span>Imperial</span>
+						</label>
+						<label>
+							<input type="radio" [value]=1 name="measurement" [(ngModel)]="fl3Settings.measurementUnit">
+							<span>Metric</span>
+						</label>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Well Data</h3>
+				    </div>
+				    <div class="tile padding-15 no-padding-bottom">
+						<div class="row">
+							<div class="col-md-10">Pump Depth {{ fl3Settings.measurementUnit === 1 ? '(m)': '(ft)' }}</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" value="0" [(ngModel)]="fl3Settings.wellData.pumpDepth">
+							</div>
+							<div class="col-md-10">Well Depth {{ fl3Settings.measurementUnit === 1 ? '(m)': '(ft)' }}</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" value="0" [(ngModel)]="fl3Settings.wellData.wellDepth">
+              </div>
+
+							<div class="col-md-10">Distance Between Collars {{ fl3Settings.measurementUnit === 1 ? '(m)': '(ft)' }}</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" value="0" [(ngModel)]="fl3Settings.wellData.distBetweenCollars">
+              </div>
+
+              <div class="col-md-10">Alarm Depth {{ fl3Settings.measurementUnit === 1 ? '(m)': '(ft)' }}</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" value="0" [(ngModel)]="fl3Settings.wellData.alarmDepth">
+              </div>
+
+              <div class="col-md-10">ESD Alarm Depth {{ fl3Settings.measurementUnit === 1 ? '(m)': '(ft)' }}</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" value="0" [(ngModel)]="fl3Settings.wellData.esdAlarmDepth">
+              </div>
+
+						</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Collar Analysis</h3>
+				    </div>
+				    <div class="tile padding-15 no-padding-bottom">
+						<div class="row">
+							<div class="col-md-10">Delay time to start collar detection (seconds from start of recording)</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.collarAnalysis.collarStartDetection">
+							</div>
+							<div class="col-md-10">Number of Filter Dominant Frecuencies</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.collarAnalysis.filterFreq">
+							</div>
+							<div class="col-md-10">Number of cycles per collar</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.collarAnalysis.collarCycles">
+							</div>
+							<div class="col-md-10">Minimum Detectable Period</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.collarAnalysis.minDetectablePeriod">
+							</div>
+							<div class="col-md-10">Maximum Detectable Period</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.collarAnalysis.maxDetectablePeriod">
+							</div>
+						</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Acoustic Velocity</h3>
+				    </div>
+				    <div class="tile padding-15 no-padding-bottom">
+						<div class="row">
+							<div class="col-md-10">
+								<label>
+									<input type="radio" name="accousticV" [checked]="fl3Settings.acousticVelocity.manualMode == 1" (click)="setOptionValue('manual');">
+									<span>Manual Acoustic Velocity Mode {{ fl3Settings.measurementUnit === 1 ? '(m/s)': '(ft/s)' }}</span>
+								</label>
+							</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.acousticVelocity.manualVelocity">
+							</div>
+							<div class="col-md-10">
+								<label>
+									<input type="radio" value=1 name="accousticV" [checked]="fl3Settings.acousticVelocity.autoMode == 1" (click)="setOptionValue('auto');">
+									<span>Automatic Acoustic Velocity Mode {{ fl3Settings.measurementUnit === 1 ? '(m/s)': '(ft/s)' }}</span>
+								</label>
+							</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.acousticVelocity.autoVelocity">
+							</div>
+							<div class="col-md-9 text-right">
+								<span>Max permitted value</span>
+							</div>
+							<div class="col-md-1">
+								<input type="number" class="form-control" value="0">
+							</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text">
+							</div>
+							<div class="col-md-9 text-right">
+								<span>Min permitted value</span>
+							</div>
+							<div class="col-md-1">
+								<input type="number" class="form-control" value="0">
+							</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text">
+							</div>
+						</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Baseline Graph</h3>
+				    </div>
+				    <div class="tile padding-15 no-padding-bottom">
+						<div class="row">
+							<div class="col-md-10">Delay time to start zero time detection</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.baselineGraph.zeroTimeDetection">
+							</div>
+							<div class="col-md-10">Zero peak detection level</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.baselineGraph.zeroDetectionLevel" min="16000" max="32678">
+							</div>
+							<div class="col-md-10">Delay time to start kick detection (Sec)</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" [(ngModel)]="fl3Settings.baselineGraph.kickTimeDetection">
+							</div>
+						</div>
+				    </div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<button class="btn btn-info half-width" (click)="updateSettings('wellData')">
+							<i class="fas fa-check"></i>
+							Save All
+						</button>
+					</div>
+				</div>
+	        </div>
+	        <div class="tab-pane" id="fl3-mode">
+	        	<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Capture Mode</h3>
+				    </div>
+				    <div class="tile p-15">
+						<label>
+							<input type="radio" name="capturemode" [value]="0" [(ngModel)]="fl3Settings.captureMode.modeValue">
+							<span>Auto Capture Mode</span>
+						</label>
+						<label>
+							<input type="radio" name="capturemode" [value]="1" [(ngModel)]="fl3Settings.captureMode.modeValue">
+							<span>Manual Capture Mode</span>
+						</label>
+						<label>
+							<input type="radio" name="capturemode" [value]="2" [(ngModel)]="fl3Settings.captureMode.modeValue">
+							<span>Listen Mode</span>
+						</label>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Automatic Mode</h3>
+				    </div>
+				    <div class="tile padding-15 no-padding-bottom">
+						<div class="row">
+							<div class="col-md-10">Number of Shots</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.autoMode.numOfShots">
+							</div>
+							<div class="col-md-10">Shot Interval</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.autoMode.shotInterval">
+							</div>
+							<div class="col-md-4">Shot Duration</div>
+							<div class="col-md-3 text-center">
+								<input type="checkbox" [(ngModel)]="fl3Settings.autoMode.captureTime">
+				                <span>Calculated Time</span>
+							</div>
+							<div class="col-md-2 col-md-push-3">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.autoMode.shotDuration">
+							</div>
+						</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Manual Mode</h3>
+				    </div>
+				    <div class="tile padding-15 no-padding-bottom">
+						<div class="row">
+							<div class="col-md-4">Shot Duration</div>
+							<div class="col-md-3 text-center">
+								<input type="checkbox" [(ngModel)]="fl3Settings.manualMode.captureTime">
+				                <span>Calculated Time</span>
+							</div>
+							<div class="col-md-2 col-md-push-3">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.manualMode.shotDuration">
+							</div>
+						</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Listen Mode</h3>
+				    </div>
+				    <div class="tile padding-15 no-padding-bottom">
+						<div class="row">
+							<div class="col-md-10">Shot duration</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="text" [(ngModel)]="fl3Settings.listenMode.shotDuration">
+							</div>
+						</div>
+				    </div>
+				</div>
+	        	<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Default Graph Mode</h3>
+				    </div>
+				    <div class="tile p-15">
+						<label>
+							<input type="radio" [value]="0" name="defaultgraphtype" [(ngModel)]="fl3Settings.defaultGraphMode">
+							<span>Acoustic Velocity</span>
+						</label>
+						<label>
+							<input type="radio" value="1" name="defaultgraphtype" [(ngModel)]="fl3Settings.defaultGraphMode">
+							<span>Well View</span>
+						</label>
+				    </div>
+				</div>
+	        	<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Default Filters Applied</h3>
+				    </div>
+				    <div class="tile p-15">
+						<label>
+							<input type="radio" value="acoustic-unchecked" [value]="0" name="defaultfilters" [(ngModel)]="fl3Settings.defaultFiltersApplied">
+							<span>Baseline 1</span>
+						</label>
+						<label>
+							<input type="radio" value="acoustic-checked" [value]="1" name="defaultfilters" [(ngModel)]="fl3Settings.defaultFiltersApplied">
+							<span>Baseline 2</span>
+						</label>
+				    </div>
+				</div>
+	        	<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Collar Graph</h3>
+				    </div>
+				    <div class="tile p-15">
+						<label>
+							<input type="checkbox" [(ngModel)]="fl3Settings.collarGraph">
+							<span>Draw collar automatically</span>
+						</label>
+				    </div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+						<button class="btn btn-info full-width" (click)="load('mode')">
+							<i class="fas fa-check"></i>
+							Load All
+						</button>
+					</div>
+					<div class="col-md-3">
+						<button class="btn btn-info full-width" (click)="updateSettings('mode')">
+							<i class="fas fa-check"></i>
+							Save All
+						</button>
+					</div>
+				</div>
+	        </div>
+	        <div class="tab-pane" id="fl3-technical">
+	        	<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Mic Settings</h3>
+				    </div>
+				    <div class="tile padding-15 pb-6">
+						<div class="row mb-6">
+							<div class="col-md-10">Mic Input Scale</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.miscSettings.inputScale" min="1" max="100">
+							</div>
+						</div>
+						<div class="row mb-6">
+							<div class="col-md-10">Sampling Rate</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.miscSettings.samplingRate">
+							</div>
+						</div>
+						<div class="row mb-6">
+							<div class="col-md-10">Resolution</div>
+							<div class="col-md-2">
+								<input class="form-control input-sm m-b-10" type="number" [(ngModel)]="fl3Settings.miscSettings.resolution">
+							</div>
+						</div>
+				    </div>
+	        	</div>
+				<div class="row">
+					<div class="col-md-1">
+						<button class="btn btn-info full-width" (click)="load('micSettings')">
+							<i class="fas fa-check"></i>
+							Load All
+						</button>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-info full-width" (click)="updateSettings('misc')">
+							<i class="fas fa-check"></i>
+							Save
+						</button>
+					</div>
+				</div>
+	        	<div class="form-group">
+				    <div class="position-relative">
+				        <h3>Search Zero With</h3>
+				    </div>
+				    <div class="tile p-15 pb-6">
+						<label>
+							<input type="radio" [value]="0" name="search-zero" [(ngModel)]="fl3Settings.searchZeroWith">
+							<span>Raw Data</span>
+						</label>
+						<label>
+							<input type="radio" [value]="1" name="search-zero" [(ngModel)]="fl3Settings.searchZeroWith">
+							<span>Filtered Data</span>
+						</label>
+				    </div>
+	        	</div>
+				<div class="row">
+					<div class="col-md-1">
+						<button class="btn btn-info full-width">
+							<i class="fas fa-check"></i>
+							Load
+						</button>
+					</div>
+					<div class="col-md-1">
+						<button class="btn btn-info full-width" (click)="updateSettings('raw')">
+							<i class="fas fa-check"></i>
+							Save
+						</button>
+					</div>
+				</div>
+	        </div>
+	    </div>
+	</div>
+</div>
+<swal #notifications [options]="notificationOptions"></swal>

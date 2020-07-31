@@ -1,0 +1,808 @@
+<div class="block-area" id="basic">
+  <div class="tile p-15" style="min-height: 420px; margin-top: 30px;">
+    <div class="col-md-15">
+      <div class="page-header position-relative">
+        <h1>Project Details 2</h1>
+      </div>
+
+      <div class="Table" id="leftDiv">
+        <form id="addProjectForm" class="form-horizontal"
+          (ngSubmit)="setLogInterval()">
+          <div class="row">
+            <div class="col-md-3 m-b-15">
+              <label class="control-label">Set Log Interval</label>
+              <input type="text" [laMask]="{mask: '99:99:99', outputMask: true}"
+                [ngModel]="loginterval[0]?.interval"
+                (ngModelChange)="loginterval[0].interval=$event"
+                [ngModelOptions]="{standalone: true}" placeholder="00:00:00"
+                maxlength="8" required>
+            </div>
+          </div>
+          <div class="row">
+            <label class="control-label">Start Time (Local 24hr Time)</label>
+          </div>
+          <div class="row">
+            <div class="col-md-3 m-b-15">
+              <input type="text" [laMask]="{mask: '99:99', outputMask: true}"
+                [ngModel]="loginterval[0]?.start"
+                (ngModelChange)="loginterval[0].start=$event"
+                [ngModelOptions]="{standalone: true}" placeholder="00:00"
+                maxlength="5" pattern="99:99" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4" style="margin-top: 14px;">
+              <button class="btn btn-inverse" type="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+
+        <br>
+
+        <button class="btn btn-inverse" (click)="startLogging()">Start Logging</button>
+        <button class="btn btn-inverse" (click)="stopLogging()">Stop Logging</button>
+        <div *ngIf="sendingStartCommand" class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert"
+            aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <p>Sending Start Command to the Controller!</p>
+        </div>
+
+        <div *ngIf="sendingStopCommand" class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert"
+            aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <p>Sending Stop Command to the Controller!</p>
+        </div>
+
+        <div *ngIf="controllerSelectedList" class="alert alert-danger"
+          style="margin-top: 8px; padding: 5px; font-size: 12px;">
+          <button type="button" class="close" data-dismiss="alert"
+            aria-label="Close" (click)="invertControllerSelection()"><span
+              aria-hidden="true">&times;</span></button>
+          <p>Select at least one controller from the list!</p>
+        </div>
+
+      </div>
+
+      <!-- <div class="Table" id="RightDiv">
+              <form class="form-horizontal" (ngSubmit)="setFtp()">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="control-label" for="serverip">FTP Server IP</label>
+                    <input type="text" class="form-control input-sm m-b-10" [(ngModel)]="ftp.serverip" placeholder="IP" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="control-label" for="username">FTP UserName</label>
+                    <input type="text" class="form-control input-sm m-b-10" [(ngModel)]="ftp.username" placeholder="UserName" [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="control-label" for="password">FTP Password</label>
+                    <input type="text" class="form-control input-sm m-b-10" [(ngModel)]="ftp.password" placeholder="Password" [ngModelOptions]="{standalone: true}">
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                      <label class="control-label" for="directory">FTP  Directory</label>
+                      <input type="text" class="form-control input-sm m-b-10" [(ngModel)]="ftp.directory" placeholder="FTP  Directory" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="col-md-4">
+                      <label class="control-label" for="filename">FTP File Name</label>
+                      <input type="text" class="form-control input-sm m-b-10" [(ngModel)]="ftp.filename" placeholder="File Name" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="col-md-4">
+                      <label class="control-label" for="firmwareupd">Firmware Update</label><br />
+                      <div class="col-md-1">
+                        <input type="radio" name="type"  value="1">
+                      </div>
+                      <div class="col-md-4">Required</div>
+                      <div class="col-md-1">
+                        <input type="radio" name="type" checked="checked" value="0">
+                      </div>
+                      <div class="col-md-6">Not Required</div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 10px;">
+                      <button class="btn btn-inverse" type="submit">Send FTP</button>
+                    </div>
+                    <hr>
+                </div>
+
+              </form>
+
+              <div class="row">
+                <div class="col-md-10" style="margin-top: 10px;">
+                  <div class="col-md-5">
+                    <label>New server IP</label>
+                    <input type="text" class="form-control input-sm m-b-5" id="ServerIP" maxlength="15" style="margin-left: -9px;" />
+                  </div>
+                  <div class="col-md-2"></div>
+                  <button class="btn btn-inverse" onclick="SendIP()" style="margin-top: 20px;">Send IP</button>
+                </div>
+              </div>
+          </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="col-md-13" style="margin-top: 30px;">
+
+  <div class="tile" style="min-height: 240px; min-width: 200px; overflow-x:
+    auto;">
+
+    <h3 class="tile-title" style="font-size:18px">Status of Controllers</h3>
+    <br/>
+
+      <!-- Status of Controllers -->
+      <div class="block-area" id="defaultStyle">
+        <table class="table">
+          <tr>
+            <td>Display <input type="text" [(ngModel)]="pagination" size="2">
+              records</td>
+            <td>Search <input type="text" size="20" [(ngModel)]="filter"></td>
+            <td style="vertical-align: middle;">
+              <input type="radio" name="showctrl"
+                (change)="showAllControllers()">&nbsp;Show All
+              Controllers&nbsp;&nbsp;&nbsp;
+              <input type="radio" name="showctrl" checked="checked"
+                (change)="showControllersCurrentProject()">&nbsp;Show
+              Controllers in Current Project
+            </td>
+          </tr>
+        </table>
+
+        <table class="table tile">
+          <thead>
+            <tr>
+              <th style="vertical-align: middle;"><input type="checkbox"
+                  name="selectAll"
+                  (change)="selectAllControllersByCheckbox($event)"></th>
+              <th style="vertical-align: middle; max-width: 131px; margin-left:
+                auto; margin-right: auto; text-align: center;">UID</th>
+              <th style="vertical-align: middle; max-width: 131px; margin-left:
+                auto; margin-right: auto; text-align: center;">VERSION</th>
+              <th style="vertical-align: middle; margin-left: auto;
+                margin-right: auto; text-align: center;">IP#</th>
+              <th style="vertical-align: middle; margin-left: auto;
+                margin-right: auto; text-align: center;">ACTIVE PROJECT</th>
+              <th style="vertical-align: middle; margin-left: auto;
+                margin-right: auto; text-align: center;">DEVICE DESCRIPTION</th>
+              <th style="vertical-align: middle; margin-left: auto; max-width:
+                88px; margin-right: auto; text-align: center;">CURRENT LOG
+                INTERVAL (HH:MM:SS)</th>
+              <th style="vertical-align: middle; margin-left: auto; max-width:
+                88px; margin-right: auto; text-align: center;">APPLIED LOG
+                INTERVAL (HH:MM:SS)</th>
+              <th style="vertical-align: middle; margin-left: auto;
+                margin-right: auto; text-align: center;">STATUS</th>
+              <th></th>
+              <th style="max-width: 80px;vertical-align: middle; margin-left:
+                auto; margin-right: auto; text-align: center;">START LOGGING
+                (HH:MM:SS)</th>
+              <th style="vertical-align: middle; margin-left: auto;
+                margin-right: auto; text-align: center;">SERVER IP</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let info of controllers | filter: filter | paginate: {
+              itemsPerPage: pagination, currentPage: currentPage };">
+              <td><input type="checkbox" [checked]="selectAllControllers"
+                  (change)="getControllerSelected($event, info?.uid)"></td>
+              <td>{{ info?.uid }}</td>
+              <td>{{ info?.version }}</td>
+              <td>{{ info?.ip }}</td>
+              <td>
+                <select name="projectId"
+                  (change)="updateControllerProject(info.uid,
+                  $event.target.value)">
+                  <option *ngFor="let project of projects" value="{{ project.id
+                    }}" [selected]="project.id === info?.projectId">{{
+                    project?.id }}</option>
+                </select>
+              </td>
+              <td>{{ info?.name }}</td>
+              <td style="text-align: center;">{{ info?.loginterval }}</td>
+              <td style="text-align: center;">{{ info?.appliedLog | date:
+                'yyy-MM-dd hh:mm:ss a' }}</td>
+              <td></td>
+              <td><button class="btn btn-xs btn-inverse">Resend Interval</button></td>
+              <td style="text-align: center;">{{ info?.startlogging }}</td>
+              <td></td>
+              <td><button class="btn btn-xs btn-inverse">Get Info</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="currentPage= $event"></pagination-controls>
+      </div>
+
+    </div>
+
+    <div style="z-index: 9; margin-top: 37px; margin-bottom: 10px;">
+      <div>
+        <label class="control-label">Please Choose Device</label>
+        <div>
+          <select id="ControllerId" [(ngModel)]="controller"
+            (ngModelChange)="controllerChanged()">
+            <option value="">- - - - </option>
+            <option *ngFor="let info of controllers;" [value]="info.uid">{{
+              info.uid }} - {{ info.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile" style="min-height: 240px; min-width: 200px; overflow-x:
+      auto;">
+
+      <h3 class="tile-title" style="font-size:18px">Analog Inputs</h3>
+
+      <br/>
+        <!-- Analog Inputs -->
+        <div class="block-area" id="defaultStyle">
+          <form #f="ngForm" (ngSubmit)="setupAnalogInput()">
+
+            <table class="tile table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th style="min-width: 50px;vertical-align: middle;margin-left:
+                    auto; margin-right: auto;">NAME</th>
+                  <th style="max-width: 67px;vertical-align: middle;margin-left:
+                    auto;text-align: center; margin-right: auto;">SHOW IN MAP</th>
+                  <th style="max-width: 64px;vertical-align: middle;margin-left:
+                    auto;text-align: center; margin-right: auto;">ENABLE/
+                    DISABLE</th>
+                  <th style="vertical-align: middle; text-align: center;">COMM
+                    STATUS</th>
+                  <th style="max-width: 100px;vertical-align: middle;
+                    text-align: center;">LAST ACK TIMESTAMP</th>
+                  <th style="width:4%;text-align:center;vertical-align:
+                    middle;margin-left: auto; margin-right: auto;">UNITS</th>
+                  <th style="min-width: 50px;vertical-align: middle;margin-left:
+                    auto; margin-right: auto;"></th>
+                  <th style="min-width: 30px;text-align:center;vertical-align:
+                    middle;margin-left: auto; margin-right: auto;">ANALOG</th>
+                  <th style="min-width: 30px;text-align:center;vertical-align:
+                    middle;margin-left: auto; margin-right: auto;">PHYSICAL</th>
+                  <th style="min-width: 30px;text-align:center;vertical-align:
+                    middle;margin-left: auto; margin-right: auto;">ALARM</th>
+                  <th style="max-width: 55px;vertical-align: middle;margin-left:
+                    auto; margin-right: auto;">ENABLE ALARM</th>
+                  <th style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto;">TEXT MESSAGE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let input of ainputs; let i= index">
+                  <td style="vertical-align: middle; text-align: center;">
+                    {{ i + 1 }}
+                  </td>
+                  <td style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto;">
+                    <input placeholder="Sensor {{ i + 1 }}"
+                      [(ngModel)]="input.name" [ngModelOptions]="{standalone:
+                      true}" maxlength="20">
+                  </td>
+                  <td style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto; text-align: center;">
+                    <input type="checkbox" class="tdAlign"
+                      [(ngModel)]="input.showinmap"
+                      [ngModelOptions]="{standalone: true}">
+                  </td>
+                  <td style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto; text-align: center;">
+                    <input type="checkbox" class="tdAlign"
+                      [(ngModel)]="input.enable" [ngModelOptions]="{standalone:
+                      true}">
+                  </td>
+                  <td style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto;">
+                    <div align="center">
+                      <div style="vertical-align: middle;margin-left: auto;
+                        margin-right: auto; text-align: center;"
+                        *ngIf="input?.ack.receivedAt !== '' &&
+                        input?.ack.receivedAt !== null; else elseBlock"><img
+                          src="./../../assets/img/checked.png"></div>
+                      <ng-template #elseBlock><img
+                          src="./../../assets/img/error.png"></ng-template>
+                    </div>
+                  </td>
+                  <td style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto;">
+                    {{ input?.ack.receivedAt | date: 'yyy-MM-dd hh:mm:ss a' }}
+                  </td>
+                  <td style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto;">
+                    <input type="text" size="3" [(ngModel)]="input.unit"
+                      [ngModelOptions]="{standalone: true}" maxlength="3">
+                  </td>
+                  <td>
+                    <tr>
+                      <td>Highest</td><br><br>
+                    </tr>
+                    <tr>
+                      <td>Lowest</td>
+                    </tr>
+                  </td>
+                  <td>
+                    <tr>
+                      <td><input type="number" [(ngModel)]="input.analog_h"
+                          maxlength="5" size="5" [ngModelOptions]="{standalone:
+                          true}" style="max-width: 70px;"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="number" [(ngModel)]="input.analog_l"
+                          maxlength="7" size="5" [ngModelOptions]="{standalone:
+                          true}" style="max-width: 70px;"></td>
+                    </tr>
+                  </td>
+                  <td>
+                    <tr>
+                      <td><input type="number" value="0.00"
+                          [(ngModel)]="input.physical_h" maxlength="5" size="5"
+                          [ngModelOptions]="{standalone: true}"
+                          style="max-width: 70px;"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="number" value="0.00"
+                          [(ngModel)]="input.physical_l" maxlength="5" size="5"
+                          [ngModelOptions]="{standalone: true}"
+                          style="max-width: 70px;"></td>
+                    </tr>
+                  </td>
+                  <td>
+                    <tr>
+                      <td><input type="number" value="65535.00"
+                          [(ngModel)]="input.alarm_h" maxlength="5" size="5"
+                          [ngModelOptions]="{standalone: true}"
+                          style="max-width: 70px;"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="number" value="0.00"
+                          [(ngModel)]="input.alarm_l" maxlength="5" size="5"
+                          [ngModelOptions]="{standalone: true}"
+                          style="max-width: 70px;"></td>
+                    </tr>
+                  </td>
+                  <td style="vertical-align: middle;margin-left: auto;
+                    margin-right: auto; text-align: center;">
+                    <tr>
+                      <td>
+                        <input type="checkbox" class="tdAlign"
+                          [(ngModel)]="input.enable_alarm_h"
+                          [ngModelOptions]="{standalone: true}"
+                          style="margin-left: 10px;">
+                      </td><br><br>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="checkbox" class="tdAlign"
+                          [(ngModel)]="input.enable_alarm_l"
+                          [ngModelOptions]="{standalone: true}"
+                          style="margin-left: 10px;">
+                      </td>
+                    </tr>
+                  </td>
+                  <td>
+                    <tr>
+                      <td><input type="text" value="High Alarm Warning"
+                          [(ngModel)]="input.text_h" size="20"
+                          [ngModelOptions]="{standalone: true}"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="text" value="Low Alarm Warning"
+                          [(ngModel)]="input.text_l" size="20"
+                          [ngModelOptions]="{standalone: true}"></td>
+                    </tr>
+                  </td>
+                  <!-- <td style="vertical-align: middle;">
+              <div *ngIf="sendingDataToController" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </td> -->
+                </tr>
+              </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-inverse btn-form">Save Analog
+              Inputs</button>
+
+          </form>
+
+          <!-- <div *ngIf="sendingDataToController" class="alert alert-info box-msg" role="alert">
+      <strong>Sending Analog Inputs to the Controller</strong>
+    </div> -->
+        </div>
+
+
+
+      </div>
+
+      <div class="tile" style="min-height: 240px; min-width: 200px; overflow-x:
+        auto;">
+
+        <h3 class="tile-title" style="font-size:18px">Digital Inputs</h3>
+
+        <br/>
+
+          <!-- Digital Inputs -->
+          <div class="block-area" id="defaultStyle">
+            <form #f="ngForm" (ngSubmit)="setupDigitalInput()">
+              <table class="tile table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th style="min-width: 50px;vertical-align:
+                      middle;margin-left: auto; margin-right: auto;">NAME</th>
+                    <th style="max-width: 67px;vertical-align:
+                      middle;margin-left: auto;text-align: center; margin-right:
+                      auto;">SHOW IN MAP</th>
+                    <th style="max-width: 64px;vertical-align:
+                      middle;margin-left: auto;text-align: center; margin-right:
+                      auto;">ENABLE/ DISABLE</th>
+                    <th style="vertical-align: middle; text-align: center;">COMM
+                      STATUS</th>
+                    <th style="max-width: 100px;vertical-align: middle;
+                      text-align: center;">LAST ACK TIMESTAMP</th>
+                    <th></th>
+                    <!-- <th></th> -->
+                    <th style="max-width: 60px; vertical-align: middle;
+                      text-align: center;">ENABLE ALARM</th>
+                    <th style="vertical-align: middle; text-align: center;">TEXT
+                      MESSAGE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let input of dinputs; let i= index">
+                    <td style="vertical-align: middle; text-align: center;">
+                      {{ i + 1 }}
+                    </td>
+                    <td style="vertical-align: middle;margin-left: auto;
+                      margin-right: auto;">
+                      <input type="text" placeholder="IN{{ i + 1 }}"
+                        [(ngModel)]="input.name" [ngModelOptions]="{standalone:
+                        true}">
+                    </td>
+                    <td style="vertical-align: middle;margin-left: auto;
+                      margin-right: auto; text-align: center;">
+                      <input type="checkbox" [(ngModel)]="input.showinmap"
+                        [ngModelOptions]="{standalone: true}">
+                    </td>
+                    <td style="vertical-align: middle;margin-left: auto;
+                      margin-right: auto; text-align: center;">
+                      <input type="checkbox" [(ngModel)]="input.enable"
+                        [ngModelOptions]="{standalone: true}">
+                    </td>
+                    <td style="vertical-align: middle;margin-left: auto;
+                      margin-right: auto;">
+                      <div align="center">
+                        <div style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto; text-align: center;"
+                          *ngIf="input?.ack.receivedAt !== '' &&
+                          input?.ack.receivedAt !== null; else elseBlock"><img
+                            src="./../../assets/img/checked.png"></div>
+                        <ng-template #elseBlock><img
+                            src="./../../assets/img/error.png"></ng-template>
+                      </div>
+                    </td>
+                    <td style="vertical-align: middle;margin-left: auto;
+                      margin-right: auto;">
+                      {{ input?.ack.receivedAt | date: 'yyy-MM-dd hh:mm:ss a' }}
+                    </td>
+                    <td>
+                      <tr>
+                        <td>0 Means</td><br><br>
+                      </tr>
+                      <tr>
+                        <td>1 Means</td>
+                      </tr>
+                    </td>
+                    <td>
+                      <tr>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto; text-align: center;">
+                          <input type="checkbox"
+                            [(ngModel)]="input.enable_alarm0"
+                            [ngModelOptions]="{standalone: true}"
+                            style="margin-left: 20px;">
+                        </td><br><br>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto; text-align: center;">
+                          <input type="checkbox"
+                            [(ngModel)]="input.enable_alarm1"
+                            [ngModelOptions]="{standalone: true}"
+                            style="margin-left: 20px;">
+                        </td>
+                      </tr>
+                    </td>
+                    <td>
+                      <tr>
+                        <td><input type="text" placeholder="Text Alarm 0"
+                            [(ngModel)]="input.text0"
+                            [ngModelOptions]="{standalone: true}"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" placeholder="Text Alarm 1"
+                            [(ngModel)]="input.text1"
+                            [ngModelOptions]="{standalone: true}"></td>
+                      </tr>
+                    </td>
+                    <!-- <td style="vertical-align: middle;">
+              <div *ngIf="sendingDinToController" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </td> -->
+                  </tr>
+                </tbody>
+              </table>
+
+              <button type="submit" class="btn btn-inverse btn-form">Save
+                Digital Inputs</button>
+
+            </form>
+          </div>
+        </div>
+
+        <div class="tile" style="min-height: 240px; min-width: 200px;
+          overflow-x: auto;">
+
+          <h3 class="tile-title" style="font-size:18px">Digital Outputs</h3>
+          <br/>
+
+            <!-- Digital Outputs -->
+            <div class="block-area" id="defaultStyle">
+              <form #f="ngForm" (ngSubmit)="setupDigitalOutput()">
+                <table class="tile table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th style="min-width: 50px;vertical-align:
+                        middle;margin-left: auto; margin-right: auto;">NAME</th>
+                      <th style="vertical-align: middle; text-align: center;">COMM
+                        STATUS</th>
+                      <th style="max-width: 100px;vertical-align: middle;
+                        text-align: center;">LAST ACK TIMESTAMP</th>
+                      <th style="vertical-align: middle; text-align: center;">0
+                        MEANS</th>
+                      <th style="vertical-align: middle; text-align: center;">1
+                        MEANS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let output of doutputs.channels1; let i= index">
+                      <td style="vertical-align: middle; text-align: center;">
+                        {{ output.channelId }}
+                      </td>
+                      <td style="vertical-align: middle;margin-left: auto;
+                        margin-right: auto;">
+                        <input type="text" placeholder="OUT{{ i + 1 }}"
+                          [(ngModel)]="output.name"
+                          [ngModelOptions]="{standalone: true}">
+                      </td>
+                      <td style="vertical-align: middle;margin-left: auto;
+                        margin-right: auto;">
+                        <div align="center">
+                          <div style="vertical-align: middle;margin-left: auto;
+                            margin-right: auto; text-align: center;"
+                            *ngIf="doutputs?.channels1Ack.receivedAt !== '' &&
+                            doutputs?.channels1Ack.receivedAt !== null; else
+                            elseBlock"><img
+                              src="./../../assets/img/checked.png"></div>
+                          <ng-template #elseBlock><img
+                              src="./../../assets/img/error.png"></ng-template>
+                        </div>
+                      </td>
+                      <td style="vertical-align: middle;margin-left: auto;
+                        margin-right: auto;">
+                        {{ doutputs?.channels1Ack.receivedAt | date: 'yyy-MM-dd
+                        hh:mm:ss a' }}
+                      </td>
+                      <td style="vertical-align: middle;margin-left: auto;
+                        margin-right: auto;">
+                        <input type="text" placeholder="0"
+                          [(ngModel)]="output.mean0"
+                          [ngModelOptions]="{standalone: true}">
+                      </td>
+                      <td style="vertical-align: middle;margin-left: auto;
+                        margin-right: auto;">
+                        <input type="text" placeholder="1"
+                          [(ngModel)]="output.mean1"
+                          [ngModelOptions]="{standalone: true}">
+                      </td>
+                      <!-- <td>
+              <div *ngIf="sendingDoutToController" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </td> -->
+                    </tr>
+                  </tbody>
+                </table>
+
+                <button type="submit" class="btn btn-inverse btn-form">Save
+                  Digital Outputs</button>
+
+              </form>
+            </div>
+          </div>
+
+          <div class="tile" style="min-height: 240px; min-width: 200px;
+            overflow-x: auto;">
+
+            <h3 class="tile-title" style="font-size:18px">BATTERY VOLTAGE &
+              SOLAR VOLTAGE</h3>
+
+            <br/>
+
+              <!-- Controller Health -->
+              <div class="block-area" id="defaultStyle">
+                <form #f="ngForm" (ngSubmit)="setupVoltage()">
+                  <table class="tile table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th style="max-width: 80px;"></th>
+                        <th style="max-width: 40px; vertical-align: middle;
+                          text-align: center;">ENABLE ALARM</th>
+                        <th style="max-width: 80px;vertical-align: middle;
+                          text-align: center;">LOW VOLTAGE ALARM VALUE</th>
+                        <th style="max-width: 120px;vertical-align: middle;
+                          text-align: center;"> COMM STATUS</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let voltage of voltages;">
+                      <tr>
+                        <td style="vertical-align: middle; text-align: center;">Battery
+                          Voltage</td>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto; text-align: center;">
+                          <input type="checkbox"
+                            [(ngModel)]="voltage.low_battery_alarm_enable"
+                            [ngModelOptions]="{standalone: true}">
+                        </td>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto; text-align: center;">
+                          <input type="text"
+                            [(ngModel)]="voltage.low_battery_alarm"
+                            [ngModelOptions]="{standalone: true}">
+                        </td>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto;">
+                          <div align="center">
+                            <div style="vertical-align: middle;margin-left:
+                              auto; margin-right: auto; text-align: center;"
+                              *ngIf="voltage?.ack.receivedAt !== '' &&
+                              voltage?.ack.receivedAt !== null; else elseBlock"><img
+                                src="./../../assets/img/checked.png"></div>
+                            <ng-template #elseBlock><img
+                                src="./../../assets/img/error.png"></ng-template>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="vertical-align: middle; text-align: center;">Solar
+                          Voltage</td>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto; text-align: center;">
+                          <input type="checkbox"
+                            [(ngModel)]="voltage.low_solar_alarm_enable"
+                            [ngModelOptions]="{standalone: true}">
+                        </td>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto; text-align: center;">
+                          <input type="text"
+                            [(ngModel)]="voltage.low_solar_alarm"
+                            [ngModelOptions]="{standalone: true}">
+                        </td>
+                        <td style="vertical-align: middle;margin-left: auto;
+                          margin-right: auto;">
+                          <div align="center">
+                            <div style="vertical-align: middle;margin-left:
+                              auto; margin-right: auto; text-align: center;"
+                              *ngIf="voltage?.ack.receivedAt !== ''; else
+                              elseBlock"><img
+                                src="./../../assets/img/checked.png"></div>
+                            <ng-template #elseBlock><img
+                                src="./../../assets/img/error.png"></ng-template>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <button type="submit" class="btn btn-inverse btn-form">Save
+                    Voltage</button>
+
+                </form>
+
+              </div>
+            </div>
+
+            <div class="tile" style="min-height: 240px; min-width: 200px;
+              overflow-x: auto;">
+
+              <h3 class="tile-title" style="font-size:18px">USER ALARM LIST</h3>
+              <br/>
+
+                <!-- User Alarm -->
+                <div class="block-area" id="defaultStyle">
+                  <table class="tile table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th style="vertical-align: middle; text-align: center;"><input
+                            type="checkbox"></th>
+                        <th style="vertical-align: middle; text-align: center;">FIRST
+                          NAME</th>
+                        <th style="vertical-align: middle; text-align: center;">LAST
+                          NAME</th>
+                        <th style="vertical-align: middle; text-align: center;">MOBILE</th>
+                        <th style="vertical-align: middle; text-align: center;">EMAIL
+                          ID</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <button class="btn btn-inverse btn-form">Save</button>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+              aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content" style="background-color: white">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                      aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table" style="border: solid 1px; border-color:
+                      #0064b3;">
+                      <thead style="background-color: #0064b3;">
+                        <th></th>
+                        <th style="text-align: center;">Controllers</th>
+                        <th style="text-align: center;">Alarms</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let controller of controllers">
+                          <td style="text-align: center;"><input type="radio"
+                              name="controller" [value]="controller.uid"></td>
+                          <td style="color: black; text-align: center;">{{
+                            controller.uid }} - {{ controller.name }}</td>
+                          <td style="color: black; text-align: center;">!</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                      data-dismiss="modal">Select</button>
+                    <button type="button" class="btn btn-default"
+                      data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="sendSetup" tabindex="-1" role="dialog"
+              aria-hidden="true" style="margin-top: 20px;">
+              <div class="modal-dialog">
+                <div class="modal-content" id="modal-blur"
+                  style="background-color: black;">
+                  <div class="modal-body">
+                    <h4 class="text-center"><strong>Sending Settings to the
+                        Controller...</strong></h4>
+                  </div>
+                </div>
+              </div>
+            </div>

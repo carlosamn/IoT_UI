@@ -1,0 +1,122 @@
+<div class="fl3_options" *ngIf="isVisible">
+
+
+    <div class="fl3_options-option">
+      <div class="fl3_options-label">Alarm Depth:</div>
+      <div class="fl3_options-value">{{fl3Settings.wellData?.alarmDepth}} {{ fl3Settings.measurementUnit === 1 ? 'm': 'ft' }} </div>
+      <div class="fl3_options-alarm" *ngIf="getAlarmsForAlarmDepth().length">
+          <img src="./../../assets/img/warning.png">
+      </div>
+    </div>
+
+
+
+
+    <div class="fl3_options-option" >
+        <div class="fl3_options-label">ESD Alarm Depth:</div>
+        <div class="fl3_options-value">{{fl3Settings.wellData?.esdAlarmDepth}} {{ fl3Settings.measurementUnit === 1 ? 'm': 'ft' }} </div>
+        <div class="fl3_options-alarm" *ngIf="getAlarmsForESDAlarmDepth().length">
+            <img src="./../../assets/img/error.png">
+        </div>
+
+    </div>
+
+
+    <hr style="margin: 15% 0%;float: none;" class="whiter" >
+
+
+
+
+
+
+    <div style="margin-top: 10px" class="s-widget m-b-25 flex-center">
+        <h5>
+            <b>{{ fl3Settings.captureMode?.modeValue == 0 ? 'Auto': fl3Settings.captureMode?.modeValue == 1 ? 'Manual': 'Listen' }} Capture Mode</b>
+        </h5>
+    </div>
+    <div class="graph_sidebar" >
+        <div *ngIf="fl3Settings.captureMode?.modeValue == 0">
+            <p style="padding-left: 30px;"><b>Number of shots: </b>{{ fl3Settings.autoMode?.numOfShots }}</p>
+            <p style="padding-left: 30px;"><b>Shots Duration: </b>{{ fl3Settings.autoMode?.shotDuration }}</p>
+            <p style="padding-left: 30px;"><b>Shots Interval: </b>{{ fl3Settings.autoMode?.shotInterval }}</p>
+            <p style="padding-left: 30px;"><b>Default Filter : </b>{{ fl3Settings.defaultFiltersApplied === 0 ? 'Baseline 1': 'Baseline 2' }}</p>
+        </div>
+        <div *ngIf="fl3Settings.captureMode?.modeValue == 1">
+            <p style="padding-left: 30px;"><b>Shot duration: </b>{{ fl3Settings.manualMode?.shotDuration }}</p>
+        </div>
+        <div *ngIf="fl3Settings.captureMode?.modeValue == 2">
+            <p style="padding-left: 30px;"><b>Shot duration: </b>{{ fl3Settings.listenMode?.shotDuration }}</p>
+        </div>
+        <br/>
+        <hr style="margin-bottom: 15% ;" class="whiter" >
+        <div style="padding-left: 30px;" class="radio_buttom">
+            <h5>
+                <strong>Filter options</strong>
+            </h5>
+            <!--
+                1.- Se asignan por defecto los valores de fl3settings, al cambiar con click, se definen los otros
+                Filtros. (setFilterType);
+                2.- redraw
+            -->
+            <input  type="radio" name="filters" [value]=0  [ngModel]="fl3Settings.defaultFiltersApplied" (click)="setFilterType('baseline')"> Baseline Filter 1<br>
+            <input  type="radio" name="filters" [value]=1  [ngModel]="fl3Settings.defaultFiltersApplied" (click)="setFilterType('baseline2')"> Baseline Filter 2<br/><br/>
+            <button class="btn btn-info" (click)="redraw('baselineDraw')" style="margin-left: 0px;">Redraw Graph</button>
+
+        </div>
+        <hr style="margin-top: 15%; margin-bottom: 20px;" class="whiter" >
+
+
+
+
+        <div style="padding-left: 30px" class="radio_buttom" >
+            <h5>
+                <strong>Other Filters</strong>
+            </h5>
+            <input  type="checkbox" name="filters"[(ngModel)]="isCollarAnalysis" (change)="setCollarAnalysisShowState(isCollarAnalysis)"> Collar Analysis<br><br>
+            <button class="btn btn-info" (click)="redraw('collarDraw')" style="margin-left: 0px;">Redraw Collar</button>
+        </div>
+
+
+
+        <hr style="margin-top: 15%; margin-bottom: 20px;" class="whiter" >
+        <div>
+            <div class="buttoms" style="padding-left: 15px;padding-right: 10px;" >
+                    <div style="color:white;">
+                      <span style="float:left;margin-right: 10%;"> Valve Control :</span>
+                      <span style="float:left;margin-right: 5%;">
+                        <img style="width:20px;height: 20px;" src={{valveIcon}}>
+                        <span style="margin-left:5px;" >{{valveStatus}}</span>
+                      </span>
+                    </div>
+                    <div style="float:left;">
+                    <button style="float:left;color:white; " class="pushStart--flat" (click)="sendOutput(1)" [disabled]="selectedLocation?.uid == ''"></button>
+                    <br><br><br>
+                    <span style="margin-left:35%;">ON<span style="margin-left:15%;float:left;margin-top:20%;">(Flowing)</span>
+                  </span>
+                    </div>
+                    <div style="float:right;">
+                    <button style="float:right;" class="push--flat" (click)="sendOutput(2)" [disabled]="selectedLocation?.uid == ''"></button>
+                    <br><br><br><span style="margin-left:30%;">OFF<span style="margin-left:10%; float: left;margin-top:20%;">(Shut-in)</span></span>
+                    </div>
+            </div>
+                <hr style="margin-top: 15%; margin-bottom: 20px;" class="whiter" >
+                <div class="buttoms" style="padding-left: 15px;padding-right: 10px;" >
+                        <div style="color:white;">
+                          <span style="float:left;margin-right: 10%;">VFD Control :</span>
+                          <span style="float:left;margin-right: 5%;">
+                            <img style="width:20px;height: 20px;" src={{vfdIcon}}>
+                            <span style="margin-left:5px;" >{{vfdStatus}}</span>
+                          </span>
+                        </div>
+                        <div style="float:left;">
+                        <button style="float:left;color:white; " class="pushStart--flat" (click)="sendOutput(3)" [disabled]="selectedLocation?.uid == ''"></button><br><br><br><span style="margin-left:20px;">ON</span>
+                        </div>
+                        <div style="float:right;">
+                        <button style="float:right;" class="push--flat" (click)="sendOutput(4)" [disabled]="selectedLocation?.uid == ''"></button><br><br><br><span style="margin-left:20px;">OFF</span>
+                        </div>
+                </div>
+
+                </div>
+    </div>
+    <br/>
+</div>

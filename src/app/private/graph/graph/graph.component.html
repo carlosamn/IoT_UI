@@ -1,0 +1,129 @@
+
+<div class=" col-md-4 col-sm-6 " style="border-right: 1px #cdcdcd ridge">
+  <div class="col-md-12 m-b-2 ">
+      <h5 style="margin: auto">Select Date Range:</h5>
+      <p style="font-size: smaller; margin-bottom: 2px;">
+          From Date (UTC Date)
+      </p>
+      <div class="input-icon datetime-pick date-only">
+        <input class="datepicker form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder=" start date"  type="text" >
+          <span class="add-on">
+              <i class="sa-plus"></i>
+          </span>
+      </div>
+  </div>
+  <div class="col-md-12 m-b-2">
+      <p style="font-size: smaller; margin-bottom: 2px;">
+          To Date (UTC Date)
+      </p>
+      <div class="input-icon datetime-pick date-only">
+        <input class="datepicker form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder="To" type="text" >
+          <span class="add-on">
+              <i class="sa-plus"></i>
+          </span>
+      </div>
+      <p style="font-size: small; margin-bottom: 2px;">Max Date span 10 days</p>
+  </div>
+  <div class="col-md-12 col-sm-12 m-b-15" style="margin-bottom: 15px; margin-top: 20px; text-align: center">
+      <button type="button" class="btn btn-inverse" onclick="" id="updategraph">Update Graph</button>
+  </div>
+</div>                                          
+<div style="padding-left: 3px" class=" col-md-8 col-sm-12">
+
+  <div class="col-md-6 nopadding">
+      <div class="col-md-12 m-b-15 unerline ">
+          <input type="radio" name="rd-sensortype" id="rd-standard" class="" checked />
+          <label class="control-label" for="pressuresensor">Standard Graph</label>
+      </div>
+      <div class="col-md-12 m-b-15 m-l-20 nopadding " >
+              <select id="sensor1x" class="selectbox form-control input-sm m-b-10" style="display:inline-block;width:100px;">
+                  <option value="1">x1 </option>
+                   <option value="10">x10 </option>
+                   <option value="100">x100 </option>
+              </select>
+              <input type="checkbox" name="ckgraph" id="sensor1chk" data-name="Sensor1" data-unit="kpa" class="checkg1" checked />
+              <label class="control-label clrred ckgrup1" for="differential" style="text-decoration: solid;display:inline">Sensor1</label>
+           </div>  
+           <div class="col-md-12 m-b-15 m-l-20 nopadding " >
+                  <select id="sensor1x" class="selectbox form-control input-sm m-b-10" style="display:inline-block;width:100px;">
+                      
+                       <option value="10">x10</option>
+                       <option value="100">x100 </option>
+                  </select>
+                  <input type="checkbox" name="ckgraph" id="sensor1chk" data-name="Sensor1" data-unit="kpa" class="checkg1" checked />
+                  <label class="control-label clrred ckgrup1" for="differential" style="text-decoration: solid;display:inline">Sensor2</label>
+               </div> 
+               <div class="col-md-12 m-b-15 m-l-20 nopadding " style="">
+                      <select id="sensor1x" class="selectbox form-control input-sm m-b-10" style="display:inline-block;width:100px;">
+                         
+                           <option value="100">x100 </option>
+                      </select>
+                      <input type="checkbox" name="ckgraph" id="sensor1chk" data-name="Sensor1" data-unit="kpa" class="checkg1" checked />
+                      <label class="control-label clrred ckgrup1" for="differential" style="text-decoration: solid;display:inline">Sensor3</label>
+                   </div> 
+                   <div class="col-md-12 m-b-15 m-l-20 nopadding " style="">
+                          <select id="sensor1x" class="selectbox form-control input-sm m-b-10" style="display:inline-block;width:100px;">
+                          
+                               <option value="100">x1000 </option>
+                          </select>
+                          <input type="checkbox" name="ckgraph" id="sensor1chk" data-name="Sensor1" data-unit="kpa" class="checkg1" checked />
+                          <label class="control-label clrred ckgrup1" for="differential" style="text-decoration: solid;display:inline">Sensor4</label>
+                       </div> 
+         
+        </div>   
+   <div class="col-md-6 nopadding">
+      <div class="col-md-12 m-b-15 unerline ">
+          <input type="radio" name="rd-sensortype" id="rd-health" class=""/>
+          <label class="control-label" >Controller health</label>
+      </div>                                                                     
+      <div class="col-md-12 m-b-15 m-l-20 nopadding ">
+          <input type="checkbox" name="chgraph" id="Resourse1chk" class="checkg2" checked />
+          <label class="control-label clrred ckgrup1"  style="text-decoration: solid">Battery Voltage</label>
+      </div>
+      <div class="col-md-12 m-b-15 m-l-20 nopadding  ">
+          <input type="checkbox" name="chgraph" id="Resourse2chk" class="checkg2" checked />
+          <label class="control-label clrblue ckgrup1"  style="text-decoration: solid">Signal Strength</label>
+      </div>
+      <div class="col-md-12 m-b-15 m-l-20 nopadding ">
+          <input type="checkbox" name="chgraph" id="Resourse3chk" class="checkg2" checked />
+          <label class="control-label clrgreen ckgrup1" style="text-decoration: solid">CPU Temperature</label>
+      </div>
+       <div class="col-md-12 m-b-15 m-l-20 nopadding ">
+          <input type="checkbox" name="chgraph" id="Resourse4chk" class="checkg" Disabled />
+          <label class="control-label ckgrup1" style="text-decoration: solid;color:white" Disabled>NA</label>
+      </div> 
+  </div>
+       </div>
+
+
+
+
+<div class="col-md-12 col-sm-12 nopadding " style="min-height:500px;">
+<div class="tile nopadding">
+
+<div class="p-t-10 p-r-5 p-b-5 nopadding " style="overflow-x: auto;">
+  
+  <div class="nopadding" id="dailyproductiongraph" style="height: 450px;">
+
+    <div style="width:65%; float: left; margin-left:10%;margin-top:2%;">
+        <highcharts-chart 
+          [Highcharts]="Highcharts"
+          [options]="optFromInput"
+          [(update)]="updateFromInput"
+    
+          style="width: 100%; height: 350px; display: block;"
+        ></highcharts-chart>
+      </div>
+          
+   
+
+
+  </div>
+  <div id="graphalert" class="alert alert-block" hidden>
+      <a class="close" data-dismiss="alert">×</a>
+      <h4 class="alert-heading">Warning!</h4>
+      No data within requested time frame!!
+  </div>
+</div>                            
+</div>
+</div> 

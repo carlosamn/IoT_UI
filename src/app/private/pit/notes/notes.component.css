@@ -1,0 +1,67 @@
+.backdrop{ 
+
+    background-color:rgba(0,0,0,0.6);
+    
+    position:fixed;
+    
+    top:0;
+    
+    left:0;
+    
+    width:100%;
+    
+    height:100vh;
+    
+    }
+   
+
+.modal-header {
+        background-image: linear-gradient(blue, lightblue)!important;
+        color:black;
+        height: 30px;
+    }
+.modal-header2 {
+        background-image: linear-gradient(red, lightblue)!important;
+        color:black;
+        height: 30px;
+}
+
+.modal-body{
+    background-image: linear-gradient(gray, lightgray);
+}
+.modal-footer{
+    background-image: linear-gradient(gray, lightgray);
+}  
+
+.modal-footer>button {
+    background-image: linear-gradient(gray, lightgray);
+}
+
+.table-wrapper {  
+    height: 300px !important;
+    overflow-y: scroll;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+.table-wrapper::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.table-wrapper::-webkit-scrollbar-thumb {
+	background-color: rgba(0,0,0,0.35);
+  outline: 1px solid slategrey;
+}
+
+.col-md-8{
+    width:90%;
+} 
+.table.row-border.hover.tile tbody tr td .block-title{
+    color: tan; font-weight: bold; text-align: right; background-color: black;
+}
+
+.btn.btn-md.m-r-3{
+    margin:10px
+}

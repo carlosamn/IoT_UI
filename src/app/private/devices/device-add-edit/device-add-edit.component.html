@@ -1,0 +1,90 @@
+
+<div class="tile p-15 ">
+    <div class="form-group">
+        <div class="page-header position-relative">
+            <h3>{{ isEdit ? 'Update': 'New' }} Location</h3>
+        </div>
+        <div class="row">
+	        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-7">
+                    <label class="control-label bold">Description</label>
+                    <div class="controls">
+                        <input class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder="Device Location" type="text" [(ngModel)]="device.location">
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-7">
+                  <label class="control-label bold">Id</label>
+                  <div class="controls">
+                      <input class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder="ID" type="text" [(ngModel)]="device.uid" pattern="\d*">
+                  </div>
+
+              </div>
+          </div>
+
+
+            <div class="row">
+                <div class="col-md-7">
+                        <label class="control-label bold">Company</label>
+                    <select name="" id="" class="form-control" [(ngModel)]="device.companyId">
+                        <option *ngFor="let company of companies" [ngValue]="company.id">{{ company.id }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                        <label class="control-label bold">Projects</label>
+                    <select name="" id="" class="form-control" [(ngModel)]="device.projectId">
+                        <option *ngFor="let project of projects" [ngValue]="project.id">{{ project.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-4">
+                    <span>Legacy</span>
+                <input type="checkbox" [(ngModel)]="device.isLegacy">
+              </div>
+
+            </div>
+		        <br/>
+	        </div>
+          <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-7">
+                    <label class="control-label bold">Dashboard Pages</label>
+                </div>
+            </div>
+            <div class="row" *ngFor="let item of dashboardPages">
+              <div class="col-md-4">
+                <input type="checkbox" [(ngModel)]="item.active">
+                  <span>{{ item.page | titlecase }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="row">
+          <div class="col-md-7">
+            <button class="btn btn-info" (click)="createOrUpdate()">
+              <i class="fas fa-check"></i>
+              {{ isEdit ? 'Update': 'Create' }}
+            </button>
+
+            <button class="btn btn-info" *ngIf="!isEdit" (click)="resetDeviceData()">
+              <i class="fas fa-sync-alt"></i>
+              Reset
+            </button>
+          </div>
+        </div>
+
+    </div>
+
+</div>

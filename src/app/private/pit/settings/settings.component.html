@@ -1,0 +1,519 @@
+<app-sensor-header></app-sensor-header>
+<div class="block-area">
+
+  <div class="col-md-8">
+    <div class="tile">
+      <div class="">
+
+        <table class="table tile" id="Table1">
+
+          <tbody>
+            <div class="tbody">
+            </div>
+            <tr>
+              <td id="td0">ON Time</td>
+
+              <td id="td1">
+                <input placeholder="000:00:00" maxlength="9" mask="000:00:00" id="inputText" type="text" step="2"
+                  class="input-sm form-control inputmasks" [(ngModel)]="time.onTime"
+                  (blur)="show(time.onTime,'onTime')" />
+                <!--(ngModelChange)="testOnTime=$event" -->
+              </td>
+
+            </tr>
+            <tr>
+              <td id="td0">Off Time</td>
+
+              <td id="td1">
+                <input placeholder="000:00:00" maxlength="9" mask="000:00:00" (blur)="show(time.offTime,'offTime')"
+                  id="inputText" type="text" class="input-sm form-control inputmasks" [(ngModel)]="time.offTime" />
+              </td>
+
+            </tr>
+            <tr>
+              <td id="td0">Afterflow Time</td>
+
+              <td id="td1">
+                <input placeholder="000:00:00" maxlength="9" mask="000:00:00" (blur)="show(time.afTime,'afTime')"
+                  id="inputText" type="text" class="input-sm form-control inputmasks" [(ngModel)]="time.afTime" />
+              </td>
+
+            </tr>
+            <tr>
+              <td id="td0">Recovery Time</td>
+
+              <td id="td1">
+                <input placeholder="000:00:00" maxlength="9" mask="000:00:00" (blur)="show(time.recTime,'recTime')"
+                  id="inputText" type="text" class="input-sm form-control inputmasks" [(ngModel)]="time.recTime" /></td>
+            </tr>
+            <tr>
+              <td id="td0">Early arrival Time</td>
+              <td id="td1">
+                <input placeholder="000:00:00" maxlength="9" mask="000:00:00"
+                  (blur)="show(time.earlyArrivalTime,'earlyArrivalTime')" id="inputText" type="text"
+                  class="input-sm form-control inputmasks" [(ngModel)]="time.earlyArrivalTime" /></td>
+            </tr>
+            <tr id="tr0">
+
+              <td id="td0">Early Arrival Counts Allowed</td>
+
+
+              <td id="td2">
+                <input id="inputText" type="text" class="input-sm form-control" id="sseaCounter" mask="0000"
+                  maxlength="4" [(ngModel)]="data.earlyArrivalCounter" /></td>
+            </tr>
+
+            <tr>
+              <td id="td0">Optimization </td>
+              <td id="td2">
+                <input (click)="disable(enableOptimizationMode.value,'enableOptimizationMode')"
+                  class="optimizeonly input-sm form-control" type="button"
+                  [(ngModel)]="enableOptimizationMode.active" />
+
+              </td>
+            </tr>
+            <tr>
+
+              <td id="td0"><a id="wellDepth"><span>Well depth(m)</span> </a></td>
+
+
+              <td id="td2">
+                <input [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  (keyup)="welldepth(data.wellDepth)" type="text" class="optimizeonly input-sm form-control "
+                  maxlength="4" mask="0000" [(ngModel)]="data.wellDepth" />
+              </td>
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Optimum Run Time</span> </a></td>
+
+              <td id="td2">
+                <input readonly id="inputText" id="SSoptRunTimeVal"
+                  class="optimizeonly input-sm form-control inputmasks" type="text" [(ngModel)]="optimunRunTime" /></td>
+            </tr>
+
+            <tr>
+
+              <td id="td0"><a><span>Fast Time</span> </a></td>
+              <td id="td2">
+                <input placeholder="00:00:00" (blur)="show(time.fastTime,'fastTime')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  id="inputText" class="optimizeonly input-sm form-control inputmasks" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.fastTime" /></td>
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Slow Time</span> </a></td>
+              <td id="td2">
+                <input placeholder="00:00:00" (blur)="show(time.slowTime,'slowTime')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  id="inputText" class="optimizeonly input-sm form-control inputmasks" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.slowTime" /></td>
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Fast Time Adjust</span> </a><span id="span2">+AFT </span></td>
+              <td id="td1">
+                <input placeholder="00:00:00" (blur)="show(time.fastTimeAdjAft,'fastTimeAdjAft')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  id="inputText" class="optimizeonly input-sm form-control inputmasks" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.fastTimeAdjAft" />
+
+              </td>
+
+            </tr>
+            <tr>
+              <td id="td0"><a></a><span id="span2">-Off</span></td>
+              <td id="td1">
+                <input placeholder="00:00:00" (blur)="show(time.fastTimeAdjOff,'fastTimeAdjOff')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  class="optimizeonly input-sm form-control inputmasks" id="inputText" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.fastTimeAdjOff" />
+
+              </td>
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Slow Time Adjust</span> </a><span id="span2">-AFT </span></td>
+              <td id="td1">
+                <input placeholder="00:00:00" (keyup)="show(time.slowTimeAdjAft,'slowTimeAdjAft')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  class="optimizeonly input-sm form-control inputmasks" id="inputText" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.slowTimeAdjAft" />
+
+              </td>
+            </tr>
+            <tr>
+              <td id="td0"><a><span></span></a><span id="span2">+Off </span></td>
+              <td id="td1">
+                <input placeholder="00:00:00" (blur)="show(time.slowTimeAdjOff,'slowTimeAdjOff')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  class="optimizeonly input-sm form-control inputmasks" id="inputText" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.slowTimeAdjOff" />
+
+              </td>
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Minimum off Time</span> </a></td>
+              <td id="td1">
+                <input placeholder="00:00:00" (blur)="show(time.minOffTime,'minOffTime')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  class="optimizeonly input-sm form-control inputmasks" id="inputText" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.minOffTime" /></td>
+
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Maximum off Time</span> </a></td>
+              <td id="td2">
+                <input placeholder="00:00:00" (blur)="show(time.maxOffTime,'maxOffTime')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  id="inputText" class="optimizeonly input-sm form-control inputmasks" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.maxOffTime" /></td>
+
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Minimum afterflow</span> </a></td>
+              <td id="td2">
+                <input placeholder="00:00:00" (blur)="show(time.minAfTime,'minAfTime')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  id="inputText" class="optimizeonly input-sm form-control inputmasks" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.minAfTime" /></td>
+            </tr>
+            <tr>
+
+              <td id="td0"><a><span>Maximum afterflow</span> </a></td>
+              <td id="td2">
+                <input placeholder="00:00:00" (blur)="show(time.maxAfterFlow,'maxAfterFlow')"
+                  [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  id="inputText" class="optimizeonly input-sm form-control inputmasks" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.maxAfterFlow" /></td>
+            </tr>
+            <tr>
+              <td id="td0"><a id="a2"><span>No Arrival Settings</span> </a></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td id="td0"><a><span># of Consecutive No Arrivals</span> </a></td>
+              <td id="td3">
+                <input [readonly]="enableOptimizationMode.bool=='0'" [disabled]="enableOptimizationMode.bool=='0'"
+                  id="ssNoConsecutivee" type="text" class="optimizeonly input-sm form-control" mask="000" maxlength="3"
+                  [(ngModel)]="data.noOfConsecutiveNoArrivals" (blur)=noOfConsecutiveNoArrivals(data.noOfConsecutiveNoArrivals) /></td>
+            </tr>
+            <tr>
+              <td id="td0"><a id="a2"><span>Recovery Mode Settings</span> </a></td>
+              <td id="td3">
+
+                <input (click)="disable(enableRecModeSettings.value,'enableRecModeSettings')"
+                  class="optimizeonly input-sm form-control" [disabled]="enableOptimizationMode.bool=='0'" id="Div6cbox"
+                  type="button" [(ngModel)]="enableRecModeSettings.active" />
+              </td>
+            </tr>
+            <tr>
+              <td id="td0"><a><span>Recovery Time #2</span> </a></td>
+              <td id="td4">
+                <input placeholder="00:00:00" (blur)="show(time.recTime2,'recTime2')"
+                  [disabled]="enableRecModeSettings.bool=='0' ||  enableOptimizationMode.bool=='0'" id="time22"
+                  class="inputmasks optimizeonly input-sm form-control" id="inputText" maxlength="9" mask="000:00:00" type="text"
+                  [(ngModel)]="time.recTime2" /></td>
+            </tr>
+            <tr>
+              <td id="td0"><a id="a2"><span>Afterflow Time Settings</span> </a></td>
+              <td id="td3">
+
+                <input (click)="disable(enableAfTimeSettings.value,'enableAfTimeSettings')"
+                  class="optimizeonly input-sm form-control" [readonly]="enableOptimizationMode.bool=='0'"
+                  [disabled]="enableOptimizationMode.bool=='Disabled'" id="Div6cbox" type="button"
+                  [(ngModel)]="enableAfTimeSettings.active" />
+              </td>
+            </tr>
+
+            <tr id="Ratio22">
+
+              <td><a><span>Afterflow Time Adjust on No Arrival</span> </a></td>
+              <div>
+                <td><span id="span3">
+                    <input [disabled]="enableOptimizationMode.bool=='0' || enableAfTimeSettings.bool=='0'" name="rdo22"
+                      [value]=1 class="rdo22" type="radio" [(ngModel)]="data.afTimeAdjRatio"
+                      checked />&nbsp;25%&nbsp;</span>
+                  <span id="span3">
+                    <input [disabled]="enableOptimizationMode.bool=='0' || enableAfTimeSettings.bool=='0'" name="rdo22"
+                    [value]=2 class="rdo22" type="radio" [(ngModel)]="data.afTimeAdjRatio" />&nbsp;50%&nbsp;</span>
+                  <span id="span3">
+                    <input [disabled]="enableOptimizationMode.bool=='0' || enableAfTimeSettings.bool=='0'" name="rdo22"
+                    [value]=3 class="rdo22" type="radio" [(ngModel)]="data.afTimeAdjRatio" />&nbsp;75%&nbsp;</span>
+                  <span id="span3">
+                    <input [disabled]="enableOptimizationMode.bool=='0' || enableAfTimeSettings.bool=='0'" name="rdo22"
+                    [value]=4 class="rdo22" type="radio" [(ngModel)]="data.afTimeAdjRatio" />&nbsp;Return to
+                    Min&nbsp;</span></td>
+              </div>
+            </tr>
+
+            <tr>
+              <td id="td0"><a id="a2"><span>Flow Line High Pressure Stabilization Mode</span> </a></td>
+              <td id="td5">
+
+                <input (click)="disable(enablestablePressMode.value,'enablestablePressMode')" id="Div6cbox"
+                  class="optimizeonly input-sm form-control" type="button" [(ngModel)]="enablestablePressMode.active" />
+              </td>
+            </tr>
+            <tr id="tr3">
+              <td id="td0"><a><span>Stabilized Pressure Time: </span> </a></td>
+              <td id="td5">
+                <input id="stabilized" placeholder="00:00:00"
+                  (blur)="showStPresureTime(time.stablePressureTime)"
+                  [disabled]="enablestablePressMode.bool=='0'" id="Text5" class="inputmasks  input-sm form-control"
+                  id="inputText" maxlength="5" mask="00:00" type="text" [(ngModel)]="time.stablePressureTime" /></td>
+            </tr>
+            <tr>
+              <td id="td0"><a id="a2"><span>Flow Optimization Mode</span> </a></td>
+              <td id="td5">
+
+                <input (click)="disable(enableFlowOptMode.value,'enableFlowOptMode')" id="Div6cbox"
+                  class="optimizeonly input-sm form-control" type="button" [(ngModel)]="enableFlowOptMode.active" />
+              </td>
+            </tr>
+            <tr>
+              <td id="td0"><a><span>Set Point E3M3: </span> </a></td>
+              <td id="td5">
+                <input [disabled]="enableFlowOptMode.bool=='0'" type="text" id="Text6" maxlength="7" mask="000.000"
+                  class="optimizeonly input-sm form-control" [(ngModel)]="data.e3m3Point" (blur)=noOfConsecutiveNoArrivals(data.e3m3Point)/></td>
+            </tr>
+            <tr id="Ratio23">
+              <td id="td0"><a id="a2"><span>Tubing Type:</span> </a></td>
+
+              <td> <span id="span3">
+                  <input [disabled]="enableFlowOptMode.bool=='0'" name="rdo20" [value]=1 class="rdo23" type="radio"
+                    [(ngModel)]="data.tubingType" />&nbsp;60.3mm&nbsp;</span>
+                <span id="span3">
+                  <input [disabled]="enableFlowOptMode.bool=='0'" name="rdo20" [value]=2 class="rdo23" type="radio"
+                    checked [(ngModel)]="data.tubingType" />&nbsp;73mm&nbsp;</span></td>
+
+            </tr>
+
+            <tr>
+              <td id="td0"><a id="a2"><span>New Well Mode</span> </a></td>
+              <td id="noplunger">
+                <div id="Div10" class="chkEnabled make-switch">
+                  <!--  <input type="checkbox" disabled/>-->
+                </div>
+              </td>
+            </tr>
+
+            <tr id="tr0">
+              <td id="td0"><a id="a2"><span>Valve Type:</span> </a></td>
+
+              <td> <span id="span3">
+                  <input id="rdo7" name="rdo25" [value]=1 class="rdo25" [(ngModel)]="data.posDiffPressure"
+                    type="radio" />&nbsp;Proportional&nbsp;</span>
+                <span id="span3">
+                  <input id="rdo8" name="rdo25" [value]=2 class="rdo25" [(ngModel)]="data.posDiffPressure"
+                    type="radio" />&nbsp;Latch&nbsp;</span></td>
+            </tr>
+            <tr>
+              <td id="td0"><a id="a2"><span>Differential Pressure On Setting</span> </a></td>
+              <!-- <div id="Div8" class="make-switch" style="width: 45%;" style="float: right;margin-right:-90%">-->
+
+              <td id="td5">
+                <input (click)="disable(enablePressureOnSettings.value,'enablePressureOnSettings')"
+                  class="optimizeonly input-sm form-control" id="Div6cbox" type="button"
+                  [(ngModel)]="enablePressureOnSettings.active" />
+              </td>
+            </tr>
+            <tr>
+              <td id="td7">
+                <div>
+                  <input [disabled]="enablePressureOnSettings.bool=='0'" name="rdo21" [value]=1 class="rdo22"
+                    type="radio" [(ngModel)]="data.posMode" checked /><span> &nbsp;Tubing>Flow Line&nbsp;</span>
+                  <br>
+                  <input [disabled]="enablePressureOnSettings.bool=='0'" name="rdo21" [value]=2 class="rdo22"
+                    type="radio" [(ngModel)]="data.posMode" /><span> &nbsp;Tubing>Casing&nbsp;</span><br>
+                  <input [disabled]="enablePressureOnSettings.bool=='0'" name="rdo21" [value]=3 class="rdo22"
+                    type="radio" [(ngModel)]="data.posMode" /><span> &nbsp;Casing>Flow Line&nbsp;</span>
+                </div>
+              </td>
+            </tr>
+            <!-- </div>-->
+
+
+            <tr id="Ratio24">
+
+              <td>
+
+              </td>
+
+              <td>
+
+              </td>
+              <td>
+
+              </td>
+            </tr>
+            <tr id="tr3">
+              <td id="td0"><a><span>Differential Pressure</span> </a></td>
+              <td id="td5">
+                <input [readonly]="enablePressureOnSettings.bool=='0'" id="inputText" type="text" id="diffpres"
+                  maxlength="7" mask="0" (blur)="PressureUnit(data.pressureUnit)" class="optimizeonly input-sm form-control"
+                  [(ngModel)]="data.pressureUnit" /></td>
+            </tr>
+            <tr>
+              <td id="td0"><a id="a2"><span>Solenoid 2 Action</span> </a></td>
+            </tr>
+            <tr id="Ratio25">
+              <td> <span>On mode:</span>
+                <div>
+                  <input name="rdo17" [value]=true class="rdo22" type="radio" [(ngModel)]="data.isSolenoid2On" /><span>
+                    &nbsp;On&nbsp;</span><br>
+                  <input name="rdo17" [value]=false class="rdo22" type="radio" [(ngModel)]="data.isSolenoid2On" /><span>
+                    &nbsp;Off&nbsp;</span>
+                </div>
+              </td>
+              <td> <span>AFT mode:</span>
+                <div>
+                  <input name="rdo26" [value]=true class="rdo22" type="radio" [(ngModel)]="data.isSolenoid2Af" /><span>
+                    &nbsp;On &nbsp;</span><br>
+                  <input name="rdo26" [value]=false class="rdo22" type="radio" [(ngModel)]="data.isSolenoid2Af"
+                    checked /><span> &nbsp;Off&nbsp;</span>
+                </div>
+              </td>
+              <td> <span>Off mode:</span>
+                <div>
+                  <input name="rdo24" [value]=true class="rdo22" type="radio" [(ngModel)]="data.isSolenoid2Off" /><span>
+                    &nbsp;On&nbsp;</span><br>
+                  <input name="rdo24" [value]=false class="rdo22" type="radio" [(ngModel)]="data.isSolenoid2Off"
+                    checked /><span> &nbsp;Off&nbsp;</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Last Update:</label></td>
+              <td id="td8">
+                <label>
+
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+    <input type="hidden" id="settingip" value="" />
+    <button type="button" class="btn btn-large btn-inverse" id="settingbutton" value="" (click)="update()">Save</button>
+    <div class="col-md-12">
+      <div>
+        <div class="tile sensoralarm" id="sensoralarm">
+          <div id="sensoralarm">
+            <h2 class="tile-title"> Sensor Alarms</h2>
+            <div class="row-fluid1">
+              <table class="table table-striped table-bordered table-hover">
+                <thead id="Thead1">
+                  <tr>
+                  <tr>
+                    <th></th>
+                    <th class="tdbold">
+                      NAME
+                    </th>
+                    <th></th>
+                    <th id="th1" class="tdbold">
+                      ALARM
+                    </th>
+                    <th class="tdbold">
+                      Units
+                    </th>
+                    <th id="th2" class="tdbold">
+                      ENABLE ALARM
+                    </th>
+                    <th class="tdbold">
+                      Ack Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of AnalogInputs;let i=index;">
+
+                  <tr *ngIf="item.enable" id="tr">
+                    <td id="td9" rowspan="2">
+                      <input type="text" class="form-control input-sm m-b-10" id="seq1" name="seq" disabled
+                        autocomplete="off" [value]="i" /></td>
+                    <td id="td10" rowspan="2">
+                      <input type="text" maxlength="20" class="form-control input-sm m-b-10" id="inputname1" disabled
+                        autocomplete="off" [(ngModel)]="item.name" /></td>
+                    <td class="tdbold">High Pressure Alarm</td>
+                    <td id="td11">
+                      <input type="text" class="highin form-control input-sm m-b-10" maxlength="6" id="highalarm1"
+                        name="highin" autocomplete="off" [(ngModel)]="item.physical_h" /></td>
+                    <td>
+                      {{item.unit}}
+                    </td>
+                    <td><input type="checkbox" id="checklowin3" [(ngModel)]="item.enable_alarm_h" /></td>
+                    <td class="tdbold">
+                      Received
+                    </td>
+                  </tr>
+                  <tr *ngIf="item.enable" id="tr2">
+                    <td class="tdbold">Low Pressure Alarm</td>
+                    <td id="td12">
+                      <input type="text" class="highin form-control input-sm m-b-10" maxlength="6" id="lowalarm1"
+                        name="lowin" autocomplete="off" [(ngModel)]="item.physical_l" /></td>
+                    <td>
+                      {{item.unit}}
+                    </td>
+                    <td><input type="checkbox" id="checklowin3" [(ngModel)]="item.enable_alarm_l" /></td>
+                    <td class="tdbold">
+                      Received
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button (click)='saveAlarm()' class="btn btn-large btn-inverse m-r-3" type="button">
+            <i class="icon-ok bigger-110"></i>
+            Save Alarms
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="sendSetup" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal-blur" style="background-color: black;">
+            <div class="modal-body">
+                <h4 class="text-center"><strong>Sending Settings changes to the
+                    Controller</strong>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deviceBusy" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+  <div class="modal-dialog">
+      <div class="modal-content" id="modal-blur" style="background-color: black;">
+          <div class="modal-body">
+              <h4 class="text-center"><strong>Ops! Device is busy, please try again in 30 Seconds!</strong>
+              </h4>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="FailedCom" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal-blur" style="background-color: black;">
+            <div class="modal-body">
+                <h4 class="text-center"><strong>Communication Failed!. Parameters could not be saved to the controller!</strong>
+                </h4>
+            </div>
+        </div>
+    </div>
+  </div>
+

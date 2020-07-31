@@ -1,0 +1,395 @@
+// ------------------------------------------------------------ //
+// --  QSO Controller Components                             -- //
+// ------------------------------------------------------------ //
+// + Class :: .qsoController
+//
+// ------------------------------------------------------------ //
+
+
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- Import Libs & Resources ---------------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  @import (reference) './../lib/styles/_colors.less';
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- Variables & Params --------------------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  @size : 2px;
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- Methods & Funcs  ----------------------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  .dropdown-button(){
+    display: inline-block;
+    vertical-align: middle;
+    color: black;
+    cursor: pointer;
+    width: 1em;
+    float: right;
+  }
+
+  .dropdown-button-rotate(@deg){
+      -moz-transform: rotate(@deg);
+      -webkit-transform: rotate(@deg);
+      -o-transform: rotate(@deg);
+      -ms-transform: rotate(@deg);
+      transform: rotate(@deg);
+  }
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- SubComponent :: Wrapper ---------------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  .sensor-wrapper(){
+    .sensor-wrapper {
+
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      padding: 0.15em;
+      margin: 0em;
+
+    }
+  }
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- SubComponent :: Sensor-Header ---------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  .sensor-header(){
+    .sensor-header {
+
+
+      // ----------------------------------------- //
+      // -- Sensor Header Constructor() ---------- //
+      // ----------------------------------------- //
+
+        display: block;
+
+        width: 100%;
+        height: auto;
+
+        padding: 0.15em;
+        margin: 0.15em 0em;
+
+        border-bottom: 1px solid rgba(100,100,100,0.25);
+
+      // ----------------------------------------- //
+
+
+      // ----------------------------------------- //
+      // -- Sensor Header :: Title --------------- //
+      // ----------------------------------------- //
+        &-title{
+
+          display: inline-block;
+          vertical-align: middle;
+
+          width: auto;
+          max-width: ~"calc(100% - 2em)";
+
+          &-location{
+
+            display: inline-block;
+            width: fit-content;
+
+            font-size: 1em;
+            font-weight: 900;
+          }
+
+          &-company{
+
+            display: inline-block;
+            width: fit-content;
+
+          }
+        }
+      // ----------------------------------------- //
+
+
+
+      // ----------------------------------------- //
+      // -- Sensor Header :: Dropdown ------------ //
+      // ----------------------------------------- //
+
+        &-dropdown-button{
+          .dropdown-button();
+        }
+
+        &.normal .sensor-header-dropdown-button .fas{
+            .dropdown-button-rotate(90deg);
+        }
+
+        &.collapsed .sensor-header-dropdown-button .fas{
+            .dropdown-button-rotate(180deg);
+        }
+
+    // ----------------------------------------- //
+
+
+
+    }
+  }
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- SubComponent :: Sensor-Header ---------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+.sensor-channel(){
+  .sensor-channel {
+
+
+    // ------------------------------------------ //
+    // -- Sensor Channel Constructor() ---------- //
+    // ------------------------------------------ //
+
+      width: 30%;
+      display: inline-block;
+      //float: left;
+
+    // ------------------------------------------ //
+
+
+    // ------------------------------------------ //
+    // -- Sensor Channel Measure  --------------- //
+    // ------------------------------------------ //
+      &-measure{
+        &-value{
+
+          display: block;
+          text-align: center;
+
+          font-size: 1.1em;
+          font-weight: 900;
+
+          text-decoration: none;
+          cursor: pointer;
+
+
+
+        }
+        &-units{
+          display: none;
+        }
+      }
+    // ------------------------------------------ //
+
+
+
+    // ------------------------------------------ //
+    // -- Sensor Channel Alarms/Limits  --------- //
+    // ------------------------------------------ //
+      &-limit-high, &-limit-low{
+
+        width: auto;
+
+        display: block;
+        text-align: center;
+
+        font-size: 1em;
+
+        &-value{
+          width: auto;
+          display: inline-block;
+          text-align: center;
+        }
+
+        &-units{
+          width: auto;
+          display: inline-block;
+          text-align: center;
+        }
+      }
+
+    // ------------------------------------------ //
+
+
+
+    // ------------------------------------------ //
+    // -- Sensor Channel Name  ------------------ //
+    // ------------------------------------------ //
+      &-name{
+
+        width:100%;
+
+        display: block;
+        text-align: center;
+
+        margin: 0px 0px;
+
+        font-size: 1.05em;
+        font-weight: 600;
+      }
+    // ------------------------------------------ //
+
+
+
+
+    // ------------------------------------------ //
+    // -- Sensor Channel Tones ------------------ //
+    // ------------------------------------------ //
+    &.tone{
+      &-clear{
+        filter: brightness(150%);
+      }
+      &-normal{
+        filter: brightness(100%);
+      }
+      &-dark{
+        filter: brightness(50%);
+      }
+    }
+  // ------------------------------------------ //
+
+  .disable{
+    text-decoration: line-through !important;
+  }
+
+
+  }
+}
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- Class :: Constructor =>  .qsoController(); --------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  .qsoController-sensor{
+
+
+    // --------------------------------------------------- //
+    // -- Component :: Contructor ------------------------ //
+    // --------------------------------------------------- //
+      display: block;
+
+      width: 100%;
+      height: fit-content;
+
+      border: 1px solid rgba(50,50,50,0.25);
+      border-radius: 1px;
+
+      margin: 0em 0em;
+
+    // --------------------------------------------------- //
+
+
+    // --------------------------------------------------- //
+    // -- SubComponent :: qsoController-Wrapper ---------- //
+    // --------------------------------------------------- //
+      .sensor-wrapper();
+    // --------------------------------------------------- //
+
+
+    // --------------------------------------------------- //
+    // -- SubComponent :: Sensor-Header ------------------ //
+    // --------------------------------------------------- //
+       .sensor-header();
+    // --------------------------------------------------- //
+
+
+    // --------------------------------------------------- //
+    // -- SubComponent :: Sensor-Channels----------------- //
+    // --------------------------------------------------- //
+      .sensor-channels{
+
+        display: block;
+        width: 100%;
+
+        .sensor-channel();
+
+      }
+    // --------------------------------------------------- //
+
+
+
+
+
+  }
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+
+
+
+
+/**
+
+ <div class="sensor-channels" style="display: block">
+
+          <div class="sensor-channel" *ngFor="let qsoSensorChannel of qsoControllerSensor.channels; let kChannel = index" style="width: 33%;display: inline-block; float: left">
+
+            <div class="sensor-channel-measure">
+                <div class="sensor-channel-measure-value"> {{ qsoSensorChannel.value }} </div>
+                <div class="sensor-channel-measure-units"> {{ qsoSensorChannel.units }} </div>
+            </div>
+
+            <div class="sensor-channel-limit-high">
+                <div class="sensor-channel-limit-high-value">  {{ qsoSensorChannel.alarms.high.limit }}  </div>
+                <div class="sensor-channel-limit-high-units">  {{ qsoSensorChannel.units }}  </div>
+            </div>
+
+            <div class="sensor-channel-limit-low">
+                <div class="sensor-channel-limit-low-value">  {{ qsoSensorChannel.alarms.low.limit }}  </div>
+                <div class="sensor-channel-limit-low-units">  {{ qsoSensorChannel.units }}  </div>
+            </div>
+
+            <div class="sensor-channel-name">
+                {{ qsoSensorChannel.name }}
+            </div>
+
+          </div>
+
+      </div>
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+<div class="col-md-13">      
+  <div class="tile">
+       <div class="col-md-6 col-sm-12 ">
+           <h2 class="tile-title" style="font-size:24px;float:left;padding-bottom: 14px;margin-bottom: 10px;">eVideodata</h2>
+       </div>
+       <div class="tile-title" style="margin-bottom: 10px;"><label>Select folder: </label>
+          <select id="videofolder" class="select" onchange="saveftpfolder()">
+                <option selected id="00" value="">- - - - </option>
+              <option selected  value='cam1'>cam1</option><option  value='cam2'>cam2</option>
+          </select></div>
+           <div  class="col-md-6 col-sm-12" style="border-bottom: none;">
+                </div>
+            <div class="page-content" id="datalogs">
+              <div class="row-fluid1 col-md-12">
+              
+     <div class="span12 tile col-md-3" id="example" style="width: 80%">
+                  <!--PAGE CONTENT BEGINS-->
+                      <video controls
+                          src="http://35.182.172.115:3000/api/deviceStorages/hardcodedvideos/download/oilextraction.mp4"
+                          
+                          width="320" height="240">
+                      
+                      Sorry, your browser doesn't support embedded videos, 
+                      
+                  </video>
+                  <video controls
+                  src="http://35.182.172.115:3000/api/deviceStorages/hardcodedvideos/download/cam1.mp4"
+                  
+                  width="320" height="240">
+              
+              Sorry, your browser doesn't support embedded videos, 
+              
+          </video>
+          <video controls
+                  src="http://35.182.172.115:3000/api/deviceStorages/hardcodedvideos/download/Oasis.mp4"
+                  
+                  width="320" height="240">
+              
+              Sorry, your browser doesn't support embedded videos, 
+              
+          </video>
+                       
+                                 
+                  
+                   </div>
+                     
+                   <div class="col-md-12 col-sm-12 ">
+                  <a  class="btn btn-large btn-inverse" style="margin-bottom:20px;margin-top:20px;text-align:center;width:150px" onclick="campoll(26)">Camera Poll</a> 
+        
+                  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+   <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="exampleModalLabel"></h4>
+       </div>
+    <div class="modal-body">
+      <video id="fullvideo"  width="100%" height="100%" controls>
+                             <source id="modelsrc" src="" type="video/mp4">
+                          </video>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <a id="downbtn1" type="button" data-id="" class="btn btn-primary downbtn" data-href="" >Download Video</a>
+        <h5 id="downmirror" style="display:none">Your download will begin in a moment. If it doesn't, <a  type="button" class="btn btn-primary downbtn" href="" download>restart the download.</a></h5>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!--/.row-fluid-->
+</div>
+</div>
+</div>
+

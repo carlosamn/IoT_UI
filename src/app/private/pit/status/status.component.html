@@ -1,0 +1,456 @@
+<app-sensor-header></app-sensor-header>
+
+<div class="backdrop" [ngStyle]="{'display':displaymodal}"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displaymodal}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+            <div class="modal-header2">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                  <h3>Connection issues, try some time later!</h3><br>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">OK</button>
+             </div>
+                
+    </div>
+  </div>
+  </div>
+<!-- Main Widgets -->
+<div class="block-area" >
+    
+
+    <div class="col-md-8" ></div>
+        <!-- Main Chart -->
+        <!-- Activity -->
+
+
+ 
+        <div class="tile">
+
+<div class="">
+    <table class="table tile">
+      
+        <tbody>
+          
+            <tr>
+                <td style="font-weight: 600;">Plunger Cycles</td>
+                 
+                <td><a class="block-title" style="background-color: black; float: right"><span id="plungercycle">{{dataStatus.plungerCycles}}</span></a></td>
+
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">Plunger Counts</td>
+                 
+                <td><a class="block-title" style="background-color: black; float: right"><span id="plungercounts">{{dataStatus.plungerCounts}}</span></a></td>
+
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">Early Arrival Counts</td>
+                 
+                <td><a class="block-title" style="background-color: black; float: right"><span id="EACount">{{dataStatus.earlyArrivalCntr}}</span></a></td>
+
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">No Arrival Counter</td>
+                 
+                <td><a class="block-title" style="background-color: black; float: right"><span id="NoArrival">{{dataStatus.noArrivalCntr}}</span></a></td>
+
+            </tr>
+             
+            <tr>
+                 
+                <td style="margin-left:50%;"><button  (click)="clearTotals('11')" class="btn btn-md m-r-3" type="button"  style="margin-left:85%;">
+                    <i class="icon-ok bigger-110"></i>
+                    Clear Totals
+                </button></td>
+                <td>
+
+
+            </tr>
+            
+                <tr *ngFor="let sensor of sensorList; let i = index">
+
+                        <td *ngIf="sensor.enable" style="font-weight: 600;" id="tubingunit"><a><span id="NoArrival" style="margin-right:5px;">{{sensor.name}}</span> <span id="NoArrival">(<a>{{sensor.unit}}</a>)</span></a></td>
+                        <td *ngIf="sensor.enable" ><a class="block-title" style="float: right"><span id="casingpressure">{{sensorArray[i] ? sensorArray[i]: '0'}}</span></a></td>
+                </tr>
+            
+
+
+            <tr>
+                <td style="font-weight: 600;">Run Times</td>
+                <td><span>
+                <select class="form-control m-b-3" style="width:60%;max-height: 150px;float:right;" id="runtimes">
+                     <option *ngFor="let item of dataStatus.runTimeArray" >{{ item | secondsToTime }}</option>
+                </select></span>
+               
+               
+
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">Daily Production</td>
+                <td><span>
+                <select class="form-control m-b-3" style="width:60%;max-height: 150px;float:right;" id="runtimes">
+                     <option >{{dataStatus.dailyProduction}}</option>
+                </select></span>
+               
+               
+
+            </tr>
+          
+            <tr>
+                <td style="font-weight: 600;">Battery Voltage</td>
+                
+                <td><a class="block-title" style="background-color: black; float: right"><span id="batteryvoltage">{{dataStatus.batteryVoltage ? dataStatus.batteryVoltage: '0'}}</span></a></td>
+                
+            </tr>
+            <tr style=" border-bottom: 7px solid #33679A;">
+                <td style="font-weight: 600;">Signal Strength</td>
+                 
+                <td><a class="block-title" style="background-color: black; float: right"><span id="solarvoltage">{{dataStatus.signalStrength}}</span></a></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;">Optimization</td>
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <td><input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right"  [(ngModel)]="optimization" /></span></a></td>
+
+            </tr>
+            <tr>
+
+                <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Well depth(m)</span> </a></td>
+                
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right"  [(ngModel)]="dataStatus.wellDepth" /></span></a></td>
+
+            </tr>
+            <tr>
+
+                <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span id="">Optimum Run Time</span> </a></td>
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right"  [(ngModel)]="optimunRunTime" /></span></a></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Fast Time</span> </a></td>                                 
+                <td><a  style=" float: right"><span style="text-align: right" > 
+                <input readonly id="inputText"  class="optimizeonly input-sm form-control inputmasks" style="float: right;width:60%;" mask="000:00:00"  type="text" [(ngModel)]="dataStatus.fastTime" /></span></a></td>
+               
+            </tr>
+            <tr>
+                <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Slow Time</span> </a></td>                                 
+                <td><a  style=" float: right"><span style="text-align: right" mask="00:00:00" id="Statusslowtime">
+                <input readonly id="inputText"  class="optimizeonly input-sm form-control inputmasks" style="float: right;width:60%;" mask="000:00:00"  type="text" [(ngModel)]="dataStatus.slowTime" /></span></a></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Fast Time Adjust</span> </a></td>                                 
+                <td>+AFT<a  style=" float: right"><span style="text-align: right" id="fasttimeaft">
+                <input readonly id="inputText"  class="optimizeonly input-sm form-control inputmasks" style="float: right;width:60%;" mask="000:00:00"  type="text" [(ngModel)]="dataStatus.fastTimeAdjAddAFT" /></span></a></td>
+            </tr>
+            <tr>
+
+                 
+                <td></td>
+                <td>-Off<a  style=" float: right"><span style="text-align: right"  id="fasttimeoff">
+                <input readonly id="inputText"  class="optimizeonly input-sm form-control inputmasks" style="float: right;width:60%;" mask="000:00:00"  type="text" [(ngModel)]="dataStatus.fastTimeAdjMinusOFF" /></span></a></td>
+
+            </tr>
+            <tr>
+
+                <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Slow Time Adjust</span> </a></td>
+                 
+                <td>-AFT<a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input readonly id="inputText"  class="optimizeonly input-sm form-control inputmasks" style="float: right;width:60%;" mask="000:00:00"  type="text" [(ngModel)]="dataStatus.slowTimeAdjMinusAFT" /></span></a></td>
+
+            </tr>
+            <tr>
+                 
+
+                <td></td>
+                <td>+Off<a  style=" float: right"><span style="text-align: right"  id="slowtimeoff">
+                <input readonly id="inputText"  class="optimizeonly input-sm form-control inputmasks" style="float: right;width:60%;" mask="000:00:00"  type="text" [(ngModel)]="dataStatus.slowTimeAdjAddOFF" /></span></a></td>
+
+            </tr>
+              <tr>
+
+            <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Minimum off Time</span> </a></td>
+            <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+            <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" mask="000:00:00" [(ngModel)]="dataStatus.minimumOffTime" /></span></a></td>
+
+                
+
+        </tr>
+                    <tr>
+
+            <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Maximum off Time</span> </a></td>
+            
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                    <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" mask="000:00:00" [(ngModel)]="dataStatus.maximumOffTime" /></span></a></td>
+
+        </tr>
+            <tr >
+
+            <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Minimum afterflow</span> </a></td>
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                 <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" mask="000:00:00" [(ngModel)]="dataStatus.minimumAfterflow" /></span></a></td>
+        </tr>
+                 <tr>
+
+            <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Maximum afterflow</span> </a></td>
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" mask="000:00:00" [(ngModel)]="dataStatus.maximumAfterflow" /></span></a></td>
+        </tr>
+            <tr>
+                <td style="font-weight: 600;"><a style="float: left;"><span>No Arrival Settings</span> </a></td>
+                 
+                <td></td>
+            </tr>
+             <tr>
+                <td style="font-weight: 600;"><a style="float: left;margin-left: 30px;"><span># of Consecutive No Arrivals</span> </a></td>
+                 
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                    <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right"  [(ngModel)]="dataStatus.numOfConsecutiveNoArrivals" /></span></a></td>
+            </tr>
+             <tr>
+                <td style="font-weight: 600;"><a style="float: left;"><span>Recovery Mode Settings</span> </a></td>
+                 
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right"  [(ngModel)]="recModeSett" /></span></a></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 600;"><a style="float: left;margin-left: 30px;"><span>Recovery Time #2</span> </a></td>
+                 
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" mask="000:00:00" [(ngModel)]="dataStatus.recTimeNum2" /></span></a></td>
+            </tr>
+             <tr>
+                <td style="font-weight: 600;"><a style="float: left;"><span>Afterflow Time Settings</span> </a></td>
+                 
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                    <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right"  [(ngModel)]="afterFlowTs" /></span></a></td>
+            </tr>
+            <tr style=" border-bottom: 7px solid #33679A;">
+                
+                <td><a style="float: left;font-weight: 600;margin-left: 30px;"><span>Afterflow Time Adjust on No Arrival</span> </a></td>
+                <td style="min-width:50%">
+                    <span style="white-space:nowrap;"><input id="rdo1" name="rdo" class="" type="radio" [value]=1 [(ngModel)]="dataStatus.afTimeAdjRatio" disabled  />25%</span>
+                    <span style="margin-left:5px;white-space:nowrap;"><input id="rdo2" name="rdo" class="" type="radio" [value]=2 [(ngModel)]="dataStatus.afTimeAdjRatio" disabled />50%</span>
+                    <span style="margin-left: 5px;white-space:nowrap;"><input id="rdo3" name="rdo" class="" type="radio" [value]=3 [(ngModel)]="dataStatus.afTimeAdjRatio" disabled />75%</span>
+                    <span style="margin-left: 5px;white-space:nowrap;"><input id="rdo4" name="rdo" class="" type="radio" [value]=4 [(ngModel)]="dataStatus.afTimeAdjRatio" disabled />Return to min</span>
+                </td>
+                
+            </tr>
+             
+                      <tr>
+            <td style="font-weight: 600;"><a style="float: left;"><span>Flow Line High Pressure Stabilization Mode</span> </a></td>
+            <td><a style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" [(ngModel)]="diffrencialPresure"/></span></a></td>
+        </tr>
+        <tr style=" border-bottom: 7px solid #33679A;">
+            <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Stabilized Pressure Time: </span> </a></td>
+                
+                <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                    <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" mask="00:00" [(ngModel)]="dataStatus.stablizedPressureTime" /></span></a></td>
+        </tr>
+           <tr>
+            <td style="font-weight: 600;"><a style="float: left;"><span>Flow Optimization Mode</span> </a></td>
+            <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" [(ngModel)]="FlowOptimizationMode" /></span></a></td>
+        </tr>
+        <tr>
+            <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Set Point E3M3: </span> </a></td>
+
+            <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                    <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" [(ngModel)]="dataStatus.setPointE3M3" /></span></a></td>
+        </tr>
+          <tr id="Tr1" style=" border-bottom: 7px solid #33679A;">
+            <td style="font-weight: 600;"><a style="float: left;"><span>Tubing Type:</span> </a></td>
+            
+                <td><span style="white-space: nowrap;"></span>
+                <input  disabled name="rdo23" [value]=1  class="rdo22"  type="radio" [(ngModel)]="dataStatus.tubingType" /><span> &nbsp;60.3mm&nbsp;</span>
+                <span style="white-space: nowrap;"></span>
+                    <input  disabled name="rdo23" [value]=2 class="rdo22"  type="radio"  [(ngModel)]="dataStatus.tubingType"  checked/><span>&nbsp;73mm&nbsp;</span>
+                </td>   
+        </tr>
+          <tr>
+            <td style="font-weight: 600;"><a style="float: left;"><span>New Well Mode</span> </a></td>
+            <td id="noplunger">             
+                <div id="Div10" class="chkEnabled make-switch" style="width: 45%; float: right;">
+                  <!--  <input type="checkbox" disabled/>-->
+                </div>                            
+            </td>
+        </tr>
+             <tr style=" border-bottom: 7px solid #33679A;">
+            <td style="font-weight: 600;"><a style="float: left;"><span>Valve Type:</span> </a></td>
+            
+            <td>  <span style="white-space: nowrap;">
+                    <input id="rdo7" name="rdo24" [value]=1  class="rdo24" disabled [(ngModel)]="dataStatus.valveType" type="radio" />&nbsp;Proportional&nbsp;</span>
+                <span style="white-space: nowrap;">
+                    <input  id="rdo8"  name="rdo24" [value]=2 class="rdo24" disabled [(ngModel)]="dataStatus.valveType" type="radio" />&nbsp;Latch&nbsp;</span></td>   
+        </tr>
+                <tr>
+            <td style="font-weight: 600;"><a style="float: left;"><span>Differential Pressure On Setting</span> </a></td>
+            <td><a  style=" float: right"><span style="text-align: right"  id="slowtimeaft">
+                <input disabled id="inputText"  type="text" class="optimizeonly input-sm form-control inputmask" style="width:60%;float: right" [(ngModel)]="isPOSEnable" /></span></a></td>
+        </tr>
+
+        <tr>
+                <td style="float:left;">
+                        <div style="float:left;">
+                       <input disabled name="rdo21" [value]=1 class="rdo22" type="radio" [(ngModel)]="dataStatus.posMode"  checked /><span> &nbsp;Tubing>Flow Line&nbsp;</span> <br>
+                       <input disabled name="rdo21" [value]=2 class="rdo22" type="radio" [(ngModel)]="dataStatus.posMode"/><span> &nbsp;Tubing>Casing&nbsp;</span><br>
+                       <input disabled name="rdo21" [value]=3 class="rdo22" type="radio" [(ngModel)]="dataStatus.posMode"/><span> &nbsp;Casing>Flow Line&nbsp;</span>
+                        </div>
+                    </td>
+            </tr>
+
+
+            
+        <tr style=" border-bottom: 7px solid #33679A;">
+            <td style="font-weight: 600;"><a style="float: left; margin-left: 30px;"><span>Differential Pressure</span> </a></td>
+            
+              <td> <input disabled type="text" id="diffpre" maxlength="6"   class="optimizeonly input-sm form-control" style="width:60%;float: right" [(ngModel)]="dataStatus.posDiffPt" /></td>
+        </tr>                      
+          <tr>
+            <td style="font-weight: 600;"><a style="float: left;"><span>Solenoid 2 Action</span> </a></td>                           
+        </tr>  
+        
+        <tr id="Ratio25" style=" border-bottom: 7px solid #33679A;">
+                <td> <span style="margin-right: 10px;">On mode:</span>
+                    <div>
+                <input disabled name="rdo17"  [value]=true  class="rdo22" type="radio" [(ngModel)]="dataStatus.isSolenoid2On" /><span> &nbsp;On&nbsp;</span><br>
+                <input disabled name="rdo17"  [value]=false  class="rdo22" type="radio" [(ngModel)]="dataStatus.isSolenoid2On"/><span> &nbsp;Off&nbsp;</span>
+            </div>    
+               </td>
+                <td> <span style="margin-right: 10px;">AFT mode:</span>
+                    <div>
+                    <input disabled name="rdo27" [value]=true class="rdo22" type="radio" [(ngModel)]="dataStatus.isSolenoid2InAF" /><span> &nbsp;On &nbsp;</span><br>
+                    <input disabled name="rdo27" [value]=false class="rdo22" type="radio" [(ngModel)]="dataStatus.isSolenoid2InAF" checked /><span> &nbsp;Off&nbsp;</span>
+                    </div>
+                </td>
+                    <td> <span style="margin-right: 10px;">Off mode:</span>
+                        <div>
+                        <input disabled name="rdo28" [value]=true class="rdo22" type="radio" [(ngModel)]="dataStatus.isSolenoid2InOff" /><span> &nbsp;On&nbsp;</span><br>
+                        <input disabled name="rdo28" [value]=false class="rdo22" type="radio" [(ngModel)]="dataStatus.isSolenoid2InOff" checked /><span> &nbsp;Off&nbsp;</span>
+                    </div>
+                    </td>
+        </tr>
+        
+            <tr>
+                <td>
+                    <label>Last Update:</label></td>                                
+                <td style="float: right;">
+                    <label id="statustime">
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade model-md"  id="form-graph" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" style="margin-top:150px;  padding: 0px;">
+         <div class="modal-content" style="background-color: #123E62; padding: 0px;overflow:hidden ">
+             <div class="row">
+                   <button style="color: #fff; right: 50px; margin-right: 20px" class="close" type="button" onclick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+             </div>     
+                <div class="modal-body col-md-12 col-sm-12  " style="padding: 0px;">
+                     </div>
+               </div>
+</div>
+</div>
+         <div class="col-md-12"  style="padding:0px">
+            <div>
+                <div class="tile sensoralarm" id="sensoralarm" style="padding:0px">
+                    <div>
+                        <div class="col-md-12" style="padding: 0px">
+                            <div>
+                                <div class="tile sensoralarm" id="sensoralarm" style="padding: 0px">
+                                    <div style="height:initial; padding: 2px">
+                                   <h2 class="tile-title" style="font-size:14px">  Sensor Alarms</h2>
+                                   <div class="row-fluid1" style="overflow-x: auto">
+                                          <table class="table table-striped table-bordered table-hover" style="background-color: transparent; overflow-x: auto; margin-bottom: 0px">
+                                              <thead id="Thead1">
+                                                  <tr>
+                                                  <tr>
+                                                      <th></th>
+                                                      <th class="tdbold">
+                                                         NAME
+                                                      </th>
+                                                      <th></th>
+                                                      <th class="tdbold" style="max-width:120px !important;width: 120px !important;">
+                                                         ALARM
+                                                      </th>
+                                                      <th class="tdbold">
+                                                         Units
+                                                      </th>
+                                                      <th class="tdbold" style="width: 50px">ENABLE ALARM 
+                                                      </th>
+                                                      <th class="tdbold">
+                                                        Ack Status
+                                                      </th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody *ngFor="let item of AnalogInputs;let i=index;" >
+                                               
+                                                  <tr *ngIf="item.enable" id="tr">
+                                                      <td rowspan="2" style="vertical-align: middle;">
+                                                          <input type="text" class="form-control input-sm m-b-10" id="seq1" name="seq" style="min-width: 28px; max-width: 30px" disabled autocomplete="off" [value]="i"  /></td>
+                                                      <td rowspan="2" style="width: 18%;vertical-align:middle">
+                                                          <input type="text" maxlength="20" class="form-control input-sm m-b-10" id="inputname1" disabled autocomplete="off" style="width: 100%; max-width: 100%; min-width: 60px" [(ngModel)]="item.name" /></td>
+                                                      <td class="tdbold">High Pressure Alarm</td>
+                                                      <td style="max-width:120px !important" >
+                                                          <input type="text" class="highin form-control input-sm m-b-10" maxlength="6" id="highalarm1" name="highin" style="width: 100%; max-width: 100%; min-width: 60px" autocomplete="off" disabled [(ngModel)]="item.physical_h" /></td>
+                                                          <td>
+                                                          {{item.unit}}
+                                                            </td>
+                                                            <td><input type="checkbox" id="checklowin3" disabled [(ngModel)]="item.enable_alarm_h" /></td>
+                                                        <td class="tdbold">
+                                                            Received
+                                                        </td>
+                                                  </tr>
+                                                  <tr *ngIf="item.enable" id="tr2">
+                                                      <td class="tdbold">Low Pressure Alarm</td>
+                                                      <td >
+                                                          <input type="text" class="highin form-control input-sm m-b-10" maxlength="6" id="lowalarm1" name="lowin" style="width: 100%; max-width: 100%; min-width: 60px" autocomplete="off" disabled [(ngModel)]="item.physical_l" /></td>
+                                                          <td>
+                                                                  {{item.unit}}
+                                                            </td>
+                                                            <td><input disabled type="checkbox" id="checklowin3" [(ngModel)]="item.enable_alarm_l" /></td>
+                                                        <td class="tdbold">
+                                                            Received
+                                                        </td>
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                             
+                          </div>
+                      </div>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="sendClear" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="modal-blur" style="background-color: black;">
+                        <div class="modal-body">
+                            <h4 class="text-center"><strong>Clearing Totals..!</strong>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="deviceBusy" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+              <div class="modal-dialog">
+                  <div class="modal-content" id="modal-blur" style="background-color: black;">
+                      <div class="modal-body">
+                          <h4 class="text-center"><strong>Controller busy, Please wait an moment!</strong>
+                          </h4>
+                      </div>
+                  </div>
+              </div>
+            </div>

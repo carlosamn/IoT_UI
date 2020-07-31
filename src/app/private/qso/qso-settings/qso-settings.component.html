@@ -1,0 +1,29 @@
+<div class="qso-fracview">
+
+
+
+  <!-- -------------------------------------  -->
+  <!-- -- LAYOUT : COLUMN / QSO CONTAINER --  -->
+  <!-- -------------------------------------  -->
+  <div class="qso-containers">
+    <div class="qso-controllers-containers">
+      <div *ngFor="let qsoController of DATA.sensors | matchesCategory: UI.CURRENT_STAGE ; let k = index">
+        <app-qso-controller [qsoControllerSensor]="qsoController" [qsoIndex]="k">
+        </app-qso-controller>
+      </div>
+    </div>
+
+  </div>
+  <!-- -------------------------------------  -->
+
+
+  <!-- -------------------------------------  -->
+  <!-- -- LAYOUT : COLUMN / QSO chart     --  -->
+  <!-- -------------------------------------  -->
+  <div class="qso-chart">
+    <div #chartTag></div>
+  </div>
+  <!-- -------------------------------------  -->
+
+
+</div>

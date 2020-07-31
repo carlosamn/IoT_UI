@@ -1,0 +1,161 @@
+<div class="col-md-12">
+  <div class="tile" id="projects">
+    <h2 class="tile-title" style="text-align: center; font-size: 24px;"> Reports</h2>
+    <div class="page-content" id="datalogs">
+      <div class="row-fluid1">
+        <div class="span12" id="example">
+            <table class="table" style="margin-bottom: 0px;">
+                <tr>
+                  <td>Display <input type="text" [(ngModel)]="pagination" size="2"> records</td>
+                  <td>Search <input type="text" size="20" [(ngModel)]="filter"></td>
+                </tr>
+              </table>
+          
+          <table  class="table table-bordered table-hover tile">
+            <colgroup>
+              <col span="1" style="width: 35%;">
+              <col span="1" style="width: 35%;">
+              <col span="1" style="width: 10%;">
+              <col span="1" style="width: 10%;">
+              <col span="1" style="width: 10%;">
+            </colgroup>
+            <thead>
+              <tr>
+                <th style="text-align: center; font-size: 14px;">Project</th>
+                <th style="text-align: center; font-size: 14px;">Customer</th>
+                <th style="text-align: center; font-size: 14px;">StartDate</th>
+                <th style="text-align: center; font-size: 14px;">Active</th>
+                <th style="text-align: center; font-size: 14px;">Select</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of projects | filter: filter | paginate: { itemsPerPage: pagination, currentPage: p };">
+                  <td style="font-size: 14px;">{{ item.id }}</td>
+                  <td style="font-size: 14px;">{{ item.companyId }}</td>
+                  <td style="text-align: center; font-size: 14px;">{{ item.startDate | date: 'dd-MM-yyyy' }}</td>
+                  <td style="text-align: center; font-size: 14px;">{{ item.isActive ? 'Yes' : 'No' }}</td>
+                  <td style="text-align: center;">
+                    <button class="btn btn-default" (click)="showLocationsByProject(item.id)"><i class="fas fa-arrow-right"></i></button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="report" style="display: none;">
+    <div class="col-md-12 tile" id="controllers" style="margin: 0px; padding: 0px;">
+      <h2 class="tile-title" style="text-align: center; font-size: 16px;"> Select one or more locations</h2>
+      <div class="page-content" id="datalogs">
+        <div class="row-fluid1">
+          <div class="span12">
+            
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-hover tile" style="margin-bottom: 10px;">
+              <thead>
+                <tr>
+                  <th style="vertical-align: middle;"><input type="checkbox" name="selectAll" (change)="checkAllLocations($event)"></th>
+                  <th style="text-align: center; font-size: 14px;">Name</th>
+                  <th style="text-align: center; font-size: 14px;">Project Id</th>
+                  <th style="text-align: center; font-size: 14px;">Company Id</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of locations ">
+                    <td><input type="checkbox" [checked]="item.checked" (change)="item.checked = $event.target.checked"></td>
+                    <td style="font-size: 14px;">{{ item.description }}</td>
+                    <td style="font-size: 14px;">{{ item.projectId }}</td>
+                    <td style="font-size: 14px;">{{ item.companyId }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 tile" id="settings" style="margin: 0px; padding: 0px;">
+      <h2 class="tile-title" style="text-align: center; font-size: 16px;"> File Settings</h2>
+      <div class="page-content" id="datalogs">
+        <div class="row-fluid1">
+          <div class="col-md-3">
+            <h5 class="control-label bold">Start Date</h5>
+            <div class="controls">
+              <input class="form-control" type="date" id="startDate" [(ngModel)]="reportParams.startDate">
+            </div>  
+          </div>
+          <div class="col-md-3">
+            <h5 class="control-label bold">End Date</h5>
+            <div class="controls">
+              <input class="form-control" type="date" id="startDate" [(ngModel)]="reportParams.endDate">
+            </div> 
+          </div>
+          <div class="col-md-3" style="margin-top: 35px;">
+            <button type="submit" class="btn btn-default" (click)="createReport()" style="width: 80%"><i class="fas fa-check"></i> Create Files</button>
+          </div>
+          <div class="col-md-3">
+            <br/> 
+            <button (click)="backToProjects()"  class="btn btn-default">Back to Project list</button>
+          </div>
+<!--           <div class="col-md-3" style="margin-top: 35px;">
+            <button class="btn btn-default" (click)="printReport()" style="width: 80%">Generate Report</button>
+          </div> -->
+<!--           <div class="span12">
+              <table class="table" style="border: 0px;">
+                <tr>
+                  <td>Start Date</td>
+                  <td><input type="date" id="startDate" [(ngModel)]="reportParams.startDate"></td>
+                </tr>
+                <tr>
+                  <td>End Date</td>
+                  <td><input type="date" id="endDate" [(ngModel)]="reportParams.endDate"></td>
+                </tr>
+                <tr>
+                  <td>Select Interval</td>
+                  <td>
+                    <select name="" id="" style="color: black; margin-top: 5px;" [(ngModel)]="reportParams.interval">
+                      <option value="1" selected>1 Min</option>
+                      <option value="5">5 Min</option>
+                      <option value="10">10 Min</option>
+                      <option value="15">15 Min</option>
+                      <option value="30">30 Min</option>
+                      <option value="60">1 Hr</option>
+                      <option value="360">6 Hr</option>
+                      <option value="720">12 Hr</option>
+                      <option value="1440">1 Day</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><button type="submit" class="btn btn-default" (click)="createReport()"><i class="fas fa-check"></i> Create Files</button></td>
+                </tr>
+              </table>
+            <div style="text-align: center;">
+              <button class="btn btn-default" (click)="printReport()" style="margin-left: 30px;">Generate Report</button>
+            </div>
+            <div class="pull-right" style="text-align: right;">
+              <button class="btn btn-default" (click)="backToProjects()" style="margin-left: 30px;"><i class="fas fa-arrow-left"></i></button>
+            </div>
+            <br>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="report-data" style="display: none;">
+  <div class="page">
+    <div class="subpage">
+      <div style="vertical-align: middle;">
+        <img src="{{ logo }}">
+        <h2>FL3</h2>
+        <h3>Acoustic Fluid Level Report</h3>
+        <p>Field Testing</p>
+      </div>        
+    </div>    
+  </div>  
+</div>

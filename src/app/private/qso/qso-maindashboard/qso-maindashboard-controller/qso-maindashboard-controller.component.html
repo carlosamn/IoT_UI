@@ -1,0 +1,102 @@
+<!-- ------------------------------------------------------- -->
+<!--  QSO Main Dashboard - Controller                        -->
+<!-- ------------------------------------------------------- -->
+<div class="qso-controller" [ngClass]="{'collapse': ui.collapse}">
+
+
+  <div class="wrapper" >
+
+    <!-- Header :: LSD# and Company Name  -->
+    <div class="row header" (click)="ui.collapse= !ui.collapse" >
+
+      <div class="wrapper" [ngStyle]="ui.comlink && {'color': 'red'}">
+        <div class="lsd">UWI : {{DATA.SENSOR.location.description}}</div>
+        <div class="company">{{DATA.SENSOR.company}}</div>
+      </div>
+
+      <div class="wrapper">
+        <div class="collapse-arrow" *ngIf="ui.areAlarms">
+          <i class="fas fa-angle-up"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Content :: Sensors Columns  -->
+    <div class="row sensors">
+      <div class="col sensor" *ngFor="let channel of DATA.SENSOR.channels; let
+        k=index">
+        <div *ngIf="k<3">
+
+
+          <div class="row value" *ngIf="channel.enable">
+            <span class="arrow" *ngIf="channel?.trend> 0">
+              <i class="fas fa-arrow-up"></i>
+            </span>
+            <span class="arrow" *ngIf="channel?.trend <0">
+              <i class="fas fa-arrow-down"></i>
+            </span>
+            <span class="text" [ngClass]="{
+              'upper': channel?.value> channel?.alarms.high.limit &&
+              channel?.alarms.high.enable,
+              'lower': channel?.value <channel?.alarms.low.limit &&
+                channel?.alarms.low.enable
+                }" >
+
+                {{ channel?.value | number:'1.0-1'}}
+
+                <div class="units">{{channel?.units}}</div>
+              </span>
+          </div>
+
+          <div class="row value" *ngIf="!channel.enable">
+            N/A
+          </div>
+
+
+            <div class="row" *ngIf="!ui.collapse && channel.alarms.high.enable && channel.enable">
+              H : {{channel?.alarms.high.limit | SensorLimit}}
+              {{channel?.units}}
+            </div>
+
+            <div class="row" *ngIf="!ui.collapse && channel.alarms.low.enable && channel.enable">
+              L : {{channel?.alarms.low.limit | SensorLimit}} {{channel?.units}}
+            </div>
+
+
+
+            <div class="row" *ngIf="!ui.collapse && !channel.enable && channel.alarms.high.enable">
+                H : N/A
+              </div>
+
+              <div class="row" *ngIf="!ui.collapse && !channel.enable && channel.alarms.low.enable">
+                L : N/A
+              </div>
+
+
+
+            <div class="row" *ngIf="channel.enable">
+              <span [ngClass]="getColorClass()" style="font-weight: 900;">
+              {{channel?.name}}
+             </span>
+            </div>
+
+            <div class="row" *ngIf="!channel.enable">
+                <span [ngClass]="getColorClass()" style="font-weight: 900;">
+                    N/A
+                   </span>
+              </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!--Footer :: Timestamps  -->
+      <div class="row footer">
+        <div class="timestamp">
+          {{DATA.SENSOR.timestamp}}
+        </div>
+      </div>
+
+    </div>
+  </div>

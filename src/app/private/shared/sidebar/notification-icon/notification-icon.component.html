@@ -1,0 +1,50 @@
+<!-- ----------------------------------------------- -->
+<!-- ----- ALARMS/NOTIFICACION ICON ----------------- -->
+<!-- ----------------------------------------------- -->
+<div class="wrapper">
+
+
+  <div class="notifications-icons" (mouseenter)=" UX.HOVER = true " (mouseleave)=" UX.HOVER = false">
+
+    <div class="mobile-alarm-info-icon">
+
+
+      <img src="./../../assets/img/checked.png" style="border:
+      solid 0px; border-color:#0f2d55; background-color:
+      transparent" *ngIf="notificationAlarms.length == 0">
+      <img src="./../../assets/img/error.png" style="border:
+      solid 0px; border-color:#0f2d55; background-color:
+      transparent;position: relative;left: 1em;cursor: pointer;" *ngIf="notificationAlarms.length > 0">
+
+
+      <div class="notifications" *ngIf="notificationAlarms.length > 0">
+        {{notificationAlarms.length}}
+      </div>
+
+      <app-popup-alarm-info [popUpAlarms]="notificationAlarms" [hover]="UX.HOVER">
+      </app-popup-alarm-info>
+
+
+      <span class="label-mobile">ALARMS</span>
+    </div>
+
+    <div class="mobile-alarm-info-table" *ngIf="notificationAlarms.length > 0">
+
+      <div class="mobile-alarm-info-item" *ngFor="let item of notificationAlarms">
+
+
+        <h2> <strong> SENSOR : </strong>{{ item?.channel.name}} </h2>
+        <ul>
+          <li> <strong> VALUE : </strong> {{ item?.channel.value}} </li>
+          <li> <strong> MESSAGE : </strong> {{ item?.message  }} </li>
+          <li> <strong> TIME : </strong> {{ item?.timestamp }} </li>
+        </ul>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

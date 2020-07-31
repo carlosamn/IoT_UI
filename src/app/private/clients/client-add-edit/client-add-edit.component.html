@@ -1,0 +1,143 @@
+<div class="tile p-15 ">
+    <div class="form-group">
+        <div class="page-header position-relative">
+            <h3>New Client</h3>
+        </div>
+        <div class="row">
+	        <div class="col-md-6">
+				<div class="row">
+		            <div class="col-md-12">
+		            	<div class="col-md-6">
+			                <h5 class="control-label bold">Client Name</h5>
+			                <div class="controls">
+			                    <input  class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder="A simple client name" type="text" [(ngModel)]="client.id">
+							</div>			 
+							        		
+		            	</div>
+		            </div>
+		        </div>	        
+		        <br/>
+				<div class="row">
+		            <div class="col-md-12 mb-5">
+		                <h5 class="control-label bold">Available ETD dashboard pages for this company</h5>
+							<div class="row">
+								<!--<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.data">
+					                <span>Data</span>
+								</div>-->
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.map">
+					                <span>Map</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.custom">
+					                <span>Custom</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.video">
+					                <span>Video</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.pictures">
+					                <span>Pictures</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.ohd">
+					                <span>OHD</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.sensor1">
+					                <span>Sensor1</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.graph">
+					                <span>Graph</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.sensors">
+					                <span>Sensors</span>
+								</div>
+					        </div>
+		            </div>
+		            <hr>
+		            <div class="col-md-12 mb-5">
+		                <h5 class="control-label bold"> Dashboard</h5>
+
+							<div class="row">
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.fl3">
+					                <span>FL3 Graph, Settings, Reports</span>
+								</div>
+
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.qso">
+					                <span>QSO OWM</span>
+								</div>
+								<div class="col-md-4">
+									<input type="checkbox" [(ngModel)]="client.dashboards.pit">
+					                <span>PIT plunger lift</span>
+								</div>
+					        </div>
+					</div>	
+					
+					
+		        </div>	        
+		        <br/>  
+		        <div class="row">
+		            <div class="col-md-6">
+		                <h4 class="control-label bold">Subdomain Name</h4>
+		                <div class="controls">
+		                    <input class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder="Example: AMS" type="text"  [(ngModel)]="client.subDomainName">
+						</div>
+		            </div>
+		            <div class="col-md-6">
+		                <h4 class="control-label bold">Company Code</h4>
+		                <div class="controls">
+		                    <input class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder="Example: AM" type="text" [(ngModel)]="client.companyCode">
+						</div>
+		            </div>		            		        	
+		        </div>
+		        <div class="row">
+		            <div class="col-md-6">
+		                <h4 class="control-label bold">Company logo</h4>
+		                <div class="controls">
+		                    <input type="file" (change)="fileChanged($event, 'logo')" #companyLogo/>
+		                </div>
+		            </div>
+		            <div class="col-md-6">
+		                <h4 class="control-label bold">Company Banner</h4>
+		                <div class="controls">
+		                    <input type="file" (change)="fileChanged($event, 'banner')" #companyBanner/>
+		                </div>
+		            </div>
+		            <div class="col-md-6 flex-center p-10 m-h-100">
+		            	<img src="{{logoUrl}}" class="image-upload">
+		            </div>
+		            <div class="col-md-6 flex-center p-10 m-h-100">
+		            	<img src="{{bannerUrl}}" class="image-upload">
+		            </div>	            		        	
+		        </div>
+		        <br/>	        	               	
+	        </div>         	
+        </div>
+		<div class="row">
+			<div class="col-md-7">
+				<button *ngIf="!isUpdate" class="btn btn-info" (click)="addClient()">
+					<i class="fas fa-check"></i>
+					Submit
+				</button>
+				<button *ngIf="isUpdate" class="btn btn-info" (click)="updateClient(client)">
+					<i class="fas fa-check"></i>
+					Save
+				</button>
+
+				<button *ngIf="!isUpdate" class="btn btn-info" (click)="resetClientData()">
+					<i class="fas fa-sync-alt"></i>
+					Reset
+				</button>
+			</div>
+		</div> 
+                                  
+    </div>
+
+</div>

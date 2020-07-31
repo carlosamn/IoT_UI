@@ -1,0 +1,40 @@
+
+  async onStageSelect(stage_number) {
+    console.warn('onStageSlect');
+
+    this.qsoFracViewChart.series.map( serie => {
+      serie.setVisible(false);
+    });
+
+    this.UI.CURRENT_STAGE = stage_number;
+    this.UI.CONTROLLERS = Object.assign(this.DATA.sensors)
+      .filter( sensor => {
+        if ( sensor.layout.containerIndex === parseFloat(stage_number)) {
+          sensor.channels.map( channel => {
+
+            const sensor_location_id = sensor.location.id;
+            const sensor_channel_id = channel.id;
+            const sensor_id = sensor_location_id + ':' + sensor_channel_id;
+            const sensor_color = '#ff00bb';
+
+            this.setSerieVisibleById(sensor_id, sensor_color);
+
+          });
+          return sensor;
+        }
+    });
+
+
+  }
+
+
+    setSerieVisibleById(id, color) {
+      this.qsoFracViewChart.series.map( serie => {
+
+        if( serie['userOptions'].id == id) {
+
+          serie.setVisible(true);
+          //serie['color'] = color;
+        }
+      });
+    }

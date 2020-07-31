@@ -1,0 +1,68 @@
+<div class="qso-fracview">
+
+
+
+  <!-- -------------------------------------  -->
+  <!-- -- LAYOUT : COLUMN / QSO CONTAINER --  -->
+  <!-- -------------------------------------  -->
+  <div class="qso-containers">
+    <div class="qso-controllers-containers">
+      <div *ngFor="let qsoController of DATA.sensors | matchesCategory: UI.CURRENT_STAGE ; let k = index">
+        <app-qso-controller [qsoControllerSensor]="qsoController" [qsoIndex]="k">
+        </app-qso-controller>
+      </div>
+    </div>
+
+  </div>
+  <!-- -------------------------------------  -->
+
+
+  <!-- -------------------------------------  -->
+  <!-- -- LAYOUT : COLUMN / QSO chart     --  -->
+  <!-- -------------------------------------  -->
+  <div class="qso-chart">
+
+    <div class="qso-overview-buttons">
+
+      <!--
+      <span style="color:black">UI.RANGE_BUTTON :: {{ UI.RANGE_BUTTON }}</span>
+      -->
+
+      <div class="qso-overview-button" (click)="setGraphData(24*1)" [ngClass]="{'active': UI.RANGE_BUTTON === (24*1) }">
+        1d
+      </div>
+      <div class="qso-overview-button" (click)="setGraphData(24*3)" [ngClass]="{'active': UI.RANGE_BUTTON === (24*3) }">
+        3d
+      </div>
+      <div class="qso-overview-button" (click)="setGraphData(24*5)" [ngClass]="{'active': UI.RANGE_BUTTON === (24*5) }">
+        5d
+      </div>
+      <div class="qso-overview-button" (click)="setGraphData(24*7)" [ngClass]="{'active': UI.RANGE_BUTTON === (24*7) }">
+        1w
+      </div>
+      <div class="qso-overview-button" (click)="setGraphData(24*7*2)"
+        [ngClass]="{'active': UI.RANGE_BUTTON === (24*7*2) }">2w
+      </div>
+      <div class="qso-overview-button" (click)="setGraphData(24*7*4)"
+        [ngClass]="{'active': UI.RANGE_BUTTON === (24*7*4) }">1m
+      </div>
+      <div class="qso-overview-button" (click)="setGraphData(24*7*4*2)"
+        [ngClass]="{'active': UI.RANGE_BUTTON === (24*7*4*2) }">2m
+      </div>
+      <div class="qso-overview-button" (click)="setGraphData(24*7*4*6)"
+        [ngClass]="{'active': UI.RANGE_BUTTON === (24*7*4*6) }">6m
+      </div>
+
+
+    </div>
+
+    <div #chartTag></div>
+
+    <div class="black-wall" *ngIf="UI.isLoading"></div>
+
+
+  </div>
+  <!-- -------------------------------------  -->
+
+
+</div>

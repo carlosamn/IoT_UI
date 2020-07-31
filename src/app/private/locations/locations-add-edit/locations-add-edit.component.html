@@ -1,0 +1,159 @@
+
+
+<input style="visibility:hidden;" type="checkbox" name="description" id="LAT" [(ngModel)]="LATmap">
+
+<div class="tile p-15 ">
+<div class="form-group">
+
+
+        <div class="page-header position-relative">
+            <h3>{{ isEdit ? 'Update': 'New' }} Location</h3>
+        </div>
+
+
+        <div class="row">
+
+
+          <!-- ---- EDIT/NEW - COLUMN ------- -->
+            <div class="col-md-6">
+
+              <div class="row">
+
+
+                  <!-- -- INPUT :: DESCRIPTION -- -->
+                  <div class="col-md-7">
+                      <label class="control-label bold">Description</label>
+                      <div class="controls">
+
+
+                        <input #text1 matInput  *ngIf="radioId=='TEXT'" class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" maxlength="30" placeholder="Location description" type="text" [(ngModel)]="location.description"  (keyup)="validateTEXT()" (focus)="validateTEXT();"    >
+                        <div   style="color:#800000; font-weight: bold;" *ngIf="validatetext==true && radioId=='TEXT'">Type at least 8 Characters!</div>
+
+                        <input #lsd1 matInput *ngIf="radioId=='LSD'" class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" maxlength="18"  placeholder="xxx/xx-xx-xxx-xxWx" [dropSpecialCharacters]="false"  (keyup)="mask();"  mask="000/00-00-000-00A0" title="Make sure 'W' as penultime letter"  type="text" [(ngModel)]="location.description" (keyup)="validateLSD();"(focus)="validateLSD();">
+                        <div   style="color:#800000; font-weight: bold;" *ngIf="validatelsd==true && radioId=='LSD'">13 LSD numbers are Required!</div>
+
+                        <input #nts1 matInput  *ngIf="radioId=='NTS'"  class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" maxlength="18"  placeholder="xxxx-xxx/xx-x-xx" [dropSpecialCharacters]="false" mask="AAAA-AAA/AA-A-AAAA"  type="text" [(ngModel)]="location.description" (keyup)="validateNTS();"(focus)="validateNTS();">
+                        <div   style="color:#800000;font-weight: bold; " *ngIf="validatents==true && radioId=='NTS'">12 NTS Characters are Required!</div>
+                        <form class="form-inline" #form="ngForm"  ac>
+                        <div id="map">
+
+                                     <input  *ngIf="radioId=='LAT'" class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" [(ngModel)]="location.description" type="text" value="{{lat}} , {{long}}" name="notVisible" placeholder="latLong"><br>
+                                    <div style="width:20%;"><span>Latitude</span></div>
+                                    <input readonly class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" minlength="2" maxlength="14" name="lat" [(ngModel)]="lat"  [value]="lat"  ><br>
+                                    <div style="width:20%;"><span>Longitude</span></div>
+                                    <input readonly class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" minlength="2" maxlength="14" name="long" [(ngModel)]="long"  [value]="long"  >
+
+
+                                    <div style="width:20%;"><span>Type your Address</span></div>
+                                    <alert *ngIf="wrongaddress==true"></alert>
+                                    <input name="place"   class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" type="text" minlength="4" maxlength="40" [(ngModel)]="place"  >
+
+                                    <button  type="submit" (click)="c(place);" (click)="d();"  class="btn btn-primary" >Go</button>
+                                    <!--  <input type="button" value="Set Location" (click)="setGeolocation(lat,long);" class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" > -->
+                                     <div id="gmap" #gmap style="width:150%;height:500px;position:relative;"></div>
+                                    <!--<div id="Mapp"></div>-->
+
+                          </div>
+                       </form>
+                        <form>
+                        <input  type="radio" name="description" id="LSD" (click)="radioButton('LSD')" (change)="requiredlsd();" [(ngModel)]="lsd" [value]="lsd" ><span style="margin-left:5%;" >LSD Domain Land Survey System</span><br>
+                        <input type="radio" name="description" id="NTS" (click)="radioButton('NTS')" (change)="requirednts();" [(ngModel)]="nts" [value]="nts"><span style="margin-left:5%;">NTS System</span><br>
+                        <input  type="radio" name="description" id="TEXT" (click)="radioButton('TEXT')" (change)="requiredtext();"  [(ngModel)]="text" [value]="text"  ><span style="margin-left:5%;">Text Description</span><br>
+                        <input type="radio" name="description"   id="LAT"  (click)="radioButton('LAT')" [(ngModel)]="lati" [value]="lati"  ><span style="margin-left:5%;">Lat-Long Coordinates</span>
+                    </form>
+                      </div><br><br>
+                  </div>
+
+                   <!-- -- INPUT :: UID -- -->
+                   <div class="col-md-7">
+                      <label class="control-label bold">Device UID</label>
+                      <div class="controls">
+                          <input class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched"
+                                 placeholder="Device UID"
+                                 type="text" minlength="3" maxlength="10" mask="0000000000" required
+                                 [(ngModel)]="location.uid">
+                      </div>
+                  </div>
+
+                  <!-- -- INPUT :: PROJECTS -- -->
+                  <div class="col-md-7">
+                      <label class="control-label bold">Projects</label>
+                      <div class="controls">
+                          <select name="" id="" class="form-control" [(ngModel)]="location.projectId">
+                              <option *ngFor="let project of projects" [ngValue]="project.id">{{ project.id }}</option>
+                          </select>
+                      </div>
+                  </div>
+
+
+                  <!------ INPUT :: COMPANY ------>
+                  <div id="customerCompany" class="col-md-7">
+                      <label class="control-label bold">Customer Company</label>
+                      <select name="" id="" class="form-control" [(ngModel)]="location.companyId">
+                      <option *ngFor="let company of companies" [ngValue]="company.id">{{ company.id }}</option>
+                      </select>
+                  </div>
+
+
+                  <br>
+                  <br>
+
+                  <!-- -- INPUT :: LEGACY -- 
+                  <div class="col-md-7">
+                      <br>
+                      <span>Legacy</span>
+                  <input type="checkbox" [(ngModel)]="location.isLegacy">
+                </div>
+                -->
+
+
+              </div>
+
+            </div>
+          <!-- ------------------------------ -->
+
+
+          <!-- ---- DASHBOARDS - COLUMN ------- -->
+            <div class="col-md-6">
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <label class="control-label bold">Dashboard Pages</label>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let item of dashboardPages">
+                  <div class="col-md-4">
+                    <input type="checkbox" [(ngModel)]="item.active">
+                      <span>{{ item.page | titlecase }}</span>
+                  </div>
+                </div>
+
+            </div>
+          <!-- ------------------------------ -->
+
+
+
+
+        </div>
+
+
+        <div id="buttons" class="row">
+            <div class="col-md-7">
+              <button [disabled]="validatelsd==true || validatents==true || validatetext==true" class="btn btn-info" (click)="createOrUpdate()">
+                <i class="fas fa-check"></i>
+                {{ isEdit ? 'Update': 'Create' }}
+              </button>
+
+              <button class="btn btn-info" *ngIf="!isEdit" (click)="resetDeviceData()">
+                <i class="fas fa-sync-alt"></i>
+                Reset
+              </button>
+            </div>
+          </div>
+
+
+</div>
+</div>
+
+
+<swal #notifications [options]="notificationOptions"></swal>

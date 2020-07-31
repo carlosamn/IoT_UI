@@ -1,0 +1,73 @@
+
+<div class="col-md-12">
+  <div class="tile">
+     <div class="col-md-6 col-sm-12 ">
+         <h2 class="tile-title" style="font-size:24px;float:left;padding-bottom: 14px;margin-bottom: 10px;">Controller pictures</h2>
+     </div>
+      <div  class="col-md-6 col-sm-12" style="border-bottom: none;">
+                <div class="tile-title" style="margin-bottom: 10px;"><label>Select folder: </label>
+                  <select id="picfolder" class="select" onchange="saveftpfolder()">
+                        <option selected id="00" value="">- - - - </option>
+                      <option selected  value='cam1'>cam1</option><option  value='cam2'>cam2</option>
+                  </select>
+                </div>
+      </div>
+      <div class="page-content" id="datalogs">
+          <div class="row-fluid1 col-md-12" style="width: 100%;">
+              
+              <div class="span12 tile col-md-3" style="min-height:230px">
+                  <!-- PAGE CONTENT BEGINS-->
+                  <div class=" m-b-20"  style="background: transparent;border:none !important;">                    
+                          <img class="video" id="cam1_2016_07_13_06_00_56.png" width="100%" height="100%" src="http://35.182.172.115:3000/api/deviceStorages/pics/download/camara1.jpg" />                                                                   
+                      <label style="float: left">cam1_2016_07_13_06_00_56</label>
+                      <label style="float: right;">04-04-18 08:04PM</label>
+                  </div>
+                   </div>
+                  
+              <div class="span12 tile col-md-3" style="min-height:230px">
+                  <!-- PAGE CONTENT BEGINS-->
+                  <div class=" m-b-20"  style="background: transparent;border:none !important;">                    
+                          <img class="video" id="cam1_2016_07_13_15_00_56.png" width="100%" height="100%" src="http://35.182.172.115:3000/api/deviceStorages/pics/download/camara2.jpg" />                                                                   
+                      <label style="float: left">cam1_2016_07_13_15_00_56</label>
+                      <label style="float: right;">12-14-17 08:40PM</label>
+                  </div>
+                   </div>
+                  
+              <div class="span12 tile col-md-3" style="min-height:230px">
+                  <!-- PAGE CONTENT BEGINS-->
+                  <div class=" m-b-20"  style="background: transparent;border:none !important;">                    
+                          <img class="video" id="cam1_2016_07_15_15_00_56.png" width="100%" height="100%" src="http://35.182.172.115:3000/api/deviceStorages/pics/download/camara3.jpg" />                                                                   
+                      <label style="float: left">cam1_2016_07_15_15_00_56</label>
+                      <label style="float: right;">04-04-18 08:05PM</label>
+                  </div>
+                   </div>
+                   
+               <div class="col-md-12 col-sm-12 ">
+                  <a  class="btn btn-large btn-inverse" style="margin-bottom:20px;margin-top:20px;text-align:center;width:150px" onclick="campoll(25)">Camera Poll</a> 
+                 
+                  </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="overflow: auto;overflow-y:auto">
+<div class="modal-dialog modal-lg" role="document" >
+  <div class="modal-content" >
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="exampleModalLabel"></h4> 
+    </div>
+    <div class="modal-body">
+      <img id="modelsrc" src=""  width="100%" height="100%" />                                                       
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <a id="downbtn1" type="button" data-id="" class="btn btn-primary downbtn" data-href="">Download Image</a>
+        <h5 id="downmirror" style="display:none">Your download will begin in a moment. If it doesn't,<a  type="button" class="btn btn-primary downbtn" href="" download>restart the download.</a></h5>
+    </div>
+  </div>
+</div>
+</div>
+              <!--/.span-->
+          </div>
+          <!--/.row-fluid-->
+      </div>
+  </div>
+  <div class="visible-sm" style="height:200px;"></div>
+</div>

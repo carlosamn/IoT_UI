@@ -1,0 +1,14 @@
+/// ------------------------------- //
+// ALARMS COMLINK
+
+:ok
+
+event: data
+data: {"target":"5c488da89f69eb282a116734_undefined_undefined","data":{"alarmId":"5c488da89f69eb282a116734_undefined_undefined","alarmType":"COMSTATUS","uid":"270","projectId":"Demo Dashboard","location":"Legacy Controller","locationId":"5c488da89f69eb282a116734","alarmInfo":{"sendMail":false,"uid":"270","alarmType":"COMSTATUS","lastPacketTimestamp":"2019-3-7 16:41:54","checkTimestamp":"2019-03-10 05:00:13","subdomain":"http://telus.amsdev.ca"}},"type":"update"}
+
+
+// ------------------------------- //
+// WEBEVENTS COMLINK
+
+event: data
+data: {"target":"5c8543a10cd32204e325b975","data":{"class":"ALARM","type":"COMSTATUS_NEW","createdAt":"2019-03-10T17:04:33.555Z","uid":"15","projectId":"LabTest","location":"RealLocation15","locationId":"5c1e57ea463e1b60eeb6f7cb","eventData":{"sendMail":false,"uid":"15","alarmType":"COMSTATUS","lastPacketTimestamp":"2019-3-10 16:59:4","checkTimestamp":"2019-03-10 05:04:33","subdomain":"http://qso.amsdev.ca","alarmId":"5c1e57ea463e1b60eeb6f7cb_undefined_undefined"},"id":"5c8543a10cd32204e325b975"},"type":"create"}

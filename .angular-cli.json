@@ -1,0 +1,80 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "testlayout"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "server",
+      "assets": [
+        "assets",
+        "favicon.png"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "assets/css/bootstrap.css",
+        "assets/css/animate.css",
+        "assets/css/font-awesome.css",
+        "assets/css/form.css",
+        "assets/css/calendar.css",
+        "assets/css/style.css",
+        "assets/css/icons.css",
+        "assets/css/generics.css",
+        "assets/css/custom-datatables-etd.css",
+        "assets/css/jquery-ui.css",
+        "../node_modules/@ng-select/ng-select/themes/default.theme.css",
+        "../node_modules/ng2-dnd/bundles/style.css"
+      ],
+      "scripts": [
+        "assets/js/jquery.js",
+        "assets/js/calendar.js",
+        "assets/js/bootstrap.js",
+        "assets/js/functions.js",
+        "assets/js/jquery-ui.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.js",
+        "../node_modules/jspdf/dist/jspdf.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

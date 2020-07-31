@@ -1,0 +1,179 @@
+.block-area {
+    margin-left: 5%;
+    margin-top: 3%;
+    padding-top: 0;
+}
+
+.col-md-8{
+    width:90%;
+}
+
+.table.tile tbody tr #td1 input{
+    float: right;
+}
+
+.table.tile tbody tr #td2 input{
+    float: right;width:60%;
+}
+
+.table.tile tbody tr #td3 input{
+    float: right;width:60%;
+}
+
+.table.tile tbody tr #td4 input{
+    float: right;
+}
+
+.table.tile tbody .tbody{
+    font-weight: 600;height:30px;
+}
+
+.table.tile tbody tr #td0{
+    font-weight: 600;
+}
+
+.table.tile tbody tr #td0 #wellDepth{
+    float: left; margin-left: 30px;width:60%;
+}
+
+.table.tile tbody tr #td0 a{
+    float: left; margin-left: 30px;
+}
+.table.tile tbody tr #td0 #a2{
+    float: left;
+}
+.table.tile tbody tr #td0 #span2{
+    float: right;margin-left:70%
+}
+
+.table.tile tbody #tr0 {
+    border-bottom: 7px solid #33679A;
+}
+
+.table.tile tbody #Ratio22 {
+    border-bottom: 7px solid #33679A;
+}
+
+.table.tile tbody #Ratio22 td a {
+    float: left; font-weight: 600; margin-left: 30px;
+}
+
+.table.tile tbody #Ratio22 td #span3 {
+    white-space: nowrap;
+}
+.table.tile tbody #Ratio23  {
+    border-bottom: 7px solid #33679A;
+}
+
+.table.tile tbody #tr3  {
+    border-bottom: 7px solid #33679A;
+}
+
+.table.tile tbody #Ratio23 td #span3 {
+    white-space: nowrap;
+}
+
+.table.tile tbody #tr0 td #span3 {
+    white-space: nowrap;
+}
+.table.tile tbody tr #td5 input{
+    float: right;width:60%;
+}
+.table.tile tbody tr #td5 #stabilized{
+    float: right;
+}
+
+.table.tile tbody tr #noplunger #Div10  {
+    width: 45%; float: right;
+}
+
+.table.tile tbody tr #td7  {
+    float:left;
+}
+
+.table.tile tbody tr #td7 div  {
+    float:left;
+}
+
+.table.tile tbody #Ratio25  {
+    border-bottom: 7px solid #33679A;
+}
+
+.table.tile tbody #Ratio25 td span  {
+    margin-right: 10px;
+}
+.table.tile tbody tr #td8{
+    float: right;
+}
+
+.col-md-12{
+    padding: 0px;
+}
+
+.tile.sensoralarm{
+    padding: 0px;
+}
+.col-md-12 .tile.sensoralarm .sensoralarm{
+    height:initial; padding: 2px;
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .tile-title{
+    font-size:14px;
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1{
+    overflow-x: auto
+}
+
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table {
+    background-color: transparent; overflow-x: auto; margin-bottom: 0px;
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table thead #th1 {
+    max-width:120px !important;width: 120px !important;
+}
+
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table thead #th2 {
+    width: 50px;
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table tbody tr #td9  {
+    vertical-align: middle;
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table tbody tr #td10  {
+    width: 18%;vertical-align:middle
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table tbody tr #td11  {
+    max-width:120px !important
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table tbody tr #td9 input  {
+    min-width: 28px; max-width: 30px
+}
+
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table tbody tr #td10 input  {
+    width: 100%; max-width: 100%; min-width: 60px
+}
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table tbody tr #td11 input  {
+    width: 100%; max-width: 100%; min-width: 60px
+}
+
+.col-md-12 .tile.sensoralarm .sensoralarm .row-fluid1 table tbody #tr2 #td12 input  {
+    width: 100%; max-width: 100%; min-width: 60px
+}
+.btn.btn-large.btn-inverse.m-r-3{
+    margin: 10px;
+}
+
+td #inputText  {
+    width: 60%;
+}
+td #optimization{
+    width: 60%;
+}
+
+
+@media only screen and (max-width: 500px){
+  td #inputText {
+    width:100%!important;
+    }
+    td #optimization{
+        width:100%!important;
+    }
+  }
+ 

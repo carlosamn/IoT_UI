@@ -1,0 +1,170 @@
+#fl3records-body>tbody>tr>td {
+	border: unset !important;
+	padding: 3px !important;
+	text-align: center;
+}
+
+#fl3records-body>tbody>tr>td:nth-child(1) {
+	width: 60% !important;
+}
+
+#fl3records-body>tbody {
+	background: #fff; 
+}
+
+#fl3records-body>tbody>tr {
+	border: unset;
+	cursor: pointer;
+	color: #000;
+}
+
+#fl3records-body>tbody>tr:hover {
+	background: #78a2d7;
+	color: #fff;
+}
+
+#fl3Records-header>tbody>tr {
+	background: #fff !important;
+	border-bottom: unset !important;
+	color: #000 !important;
+	padding: 2px !important
+}
+
+#fl3Records-header>tbody>tr>th {
+	text-align: center;
+	padding: 3px !important;
+	border: unset !important
+}
+
+#fl3Records-header>tbody>tr>th:nth-child(1) {
+	width: 60% !important;
+}
+
+.table-container {
+	width: 100%; 
+	max-height: 137px; 
+	overflow:auto;
+}
+
+.tablespace>table>tbody {
+	border: 3px solid #172d54;
+}
+
+.chart-header {
+	background: rgba(15, 40, 36, 0.13);
+	text-align: center;
+}
+
+.fluid-level {
+    color: #3c3779;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.font-35 {
+	font-size: 35px;
+}
+
+.font-30 {
+	font-size: 30px;
+}
+
+.font-26 {
+	font-size: 26px;
+}
+
+.font-25 {
+	font-size: 25px;
+}
+
+.font-23 {
+	font-size: 23px;
+}
+
+.fluid-level-text {
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: 700;
+}
+
+.capture-status {
+	padding: 5px; 
+	border: 3px solid #172d54; 
+	background: #fff; 
+	height: 30px; 
+	width: 90%; 
+	margin: 0 auto;
+	color: #000;
+}
+
+.flotant-container {
+	position: fixed;
+	top: 49px;
+	right: 208px;
+}
+
+.floating-date {
+	margin-top: 14px;
+	position: fixed;
+	top: 49px;
+	right: 80px;
+}
+
+.floating-arrow {
+	position: fixed;
+	top: 49px;
+	right: 0px;
+	padding: 12px;
+	cursor: pointer;
+}
+
+.tile-container {
+	padding: 5px 0px 0px 10px;
+}
+
+.sensors-data {
+	margin-left: 10px; 
+	padding: 2px;
+}
+
+.highlighted-row {
+	background: rgba(0, 0, 255, 0.76);
+    color: #fff !important;
+}
+.highlighted-row-report {
+	background: rgba(95, 206, 81, 0.815);
+    color: #fff !important;
+}
+.highlighted-row-currentreport {
+	background: rgba(95, 206, 81, 0.815);
+	color: #fff !important;
+	font-weight: bold;
+}
+
+
+@media(min-width: 1366px) and (max-width: 1599px) {
+	.fluid-level {
+	    font-size: 25px;
+	}
+
+	.fluid-level-text {
+	    font-size: 13px;
+	    font-family: sans-serif;
+	    font-weight: 700;
+	}
+
+	.table-container {
+		max-height: 107px; 
+	}
+}
+
+@media(max-width: 640px) {
+	.flotant-container {
+		display: none;
+	}
+}
+
+.no-visible {
+	display: none !important;
+}

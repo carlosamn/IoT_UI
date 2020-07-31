@@ -1,0 +1,23 @@
+.parent-flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media(max-width: 720px) {
+	.gmap {
+		width: 100%;
+		height: 500px;
+		border: 2px solid black;
+		border-radius: 	10px !important;
+	}	
+}
+
+@media(min-width: 1024px) {
+	.gmap {
+		width: calc(100% - 100px);
+		height: 500px;
+		border: 2px solid black;
+		border-radius: 	10px !important;
+	}	
+}

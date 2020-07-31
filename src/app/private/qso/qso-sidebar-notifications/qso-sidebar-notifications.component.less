@@ -1,0 +1,179 @@
+// ------------------------------------------------------------ //
+// --  QSO Sidebar Menu Components                             -- //
+// ------------------------------------------------------------ //
+// + Class :: .qsoController
+//
+// ------------------------------------------------------------ //
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- Import Libs & Resources ---------------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  @import (reference) './../lib/styles/_colors.less';
+// ---------------------------------------------------------------------------------- //
+
+.qso-Sidebar-Nofitications{
+
+
+  display: block;
+  padding: 1em 0em;
+
+  .notification{
+
+    display: block;
+    width: ~"calc(100% - 1em)";
+    position: relative;
+    padding: 0em 0.25em;
+    margin: 0.5em;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    &-icon{
+      display: inline-block;
+      width: 2.5em;
+    }
+    &-message{
+      display: inline-block;
+      width: ~"calc(100% - 2.5em)";
+      text-transform: capitalize;
+
+      text-align: left;
+      font-weight: 300;
+      font-size: 1em;
+
+      &-title{
+         font-size: 0.8em;
+          font-weight: 300;
+          padding: 0.25em 0em;
+          padding-bottom: 0em;
+         display: block;
+         .header{
+            font-weight: 900;
+         }
+      }
+      &_location-uid{
+        font-size: 0.75em;
+        font-weight: 300;
+        display: block;
+           .header{
+            font-weight: 900;
+         }
+      }
+      &-timestamp{
+        font-size: 0.7em;
+        font-weight: 300;
+        display: block;
+           .header{
+            font-weight: 900;
+         }
+      }
+
+    }
+
+  }
+
+  .notifications{
+    display:block;
+width: 100%;
+    height: auto;
+    max-height:260px;
+
+
+/**  STYLE 11 */
+&::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0,0,0,0.1);
+  border: 1px solid #ccc;
+}
+
+&::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(to left, #fff, #e4e4e4);
+  border: 1px solid #aaa;
+}
+
+&::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}
+
+&::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(to left, #22ADD4, #1E98BA);
+}
+
+&::-webkit-scrollbar-thumb {
+    background-color: #0ae;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+}
+
+  }
+
+
+  .isComlink-All-Ok{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    h5{
+      font-weight: 900 !important;
+    }
+    font-size: 1.2em;
+  }
+
+  .isComlink-Error{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    font-size: 1.1em;
+    h5{
+      font-weight: 900 !important;
+    }
+  }
+
+
+  .isAlarm-Error{
+
+
+
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    font-size: 1.2em;
+    h5{
+      font-weight: 900 !important;
+    }
+  }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+

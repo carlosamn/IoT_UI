@@ -1,0 +1,72 @@
+.qso-fracview{
+
+
+  display: block;
+  width: 100%;
+  height: auto;
+background-color: white;
+
+
+display: -ms-flexbox;
+display: -webkit-flex;
+display: flex;
+-webkit-flex-direction: row;
+-ms-flex-direction: row;
+flex-direction: row;
+-webkit-flex-wrap: nowrap;
+-ms-flex-wrap: nowrap;
+flex-wrap: nowrap;
+-webkit-justify-content: flex-start;
+-ms-flex-pack: start;
+justify-content: flex-start;
+-webkit-align-content: stretch;
+-ms-flex-line-pack: stretch;
+align-content: stretch;
+-webkit-align-items: flex-start;
+-ms-flex-align: start;
+align-items: flex-start;
+
+}
+
+.qso-containers{
+  width: 22em;
+  padding: 1em;
+  display: inline-block;
+
+  border-left: 1px solid gray;
+  color: black;
+
+  display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+.qso-containers label{ color: black;    padding: 0.5EM;
+  margin: 1em;
+  margin-bottom: 0em;}
+.qso-containers select{
+  width: calc(100% - 3em);
+  padding: 0.5em;
+  margin: 1em;
+  color: black;
+}
+
+
+.qso-chart{
+  display: inline-block;
+  width: calc(100% - 23em);
+}

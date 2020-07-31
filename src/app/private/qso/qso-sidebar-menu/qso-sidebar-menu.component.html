@@ -1,0 +1,47 @@
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!--   qso-Sidebar-Menu                                                                -->
+<!--   Author :                                                                                   -->
+<!--   Update :                                                                                   -->
+<!--                                                                                              -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------- -->
+<div class="qso-Sidebar-Menu" *ngIf="UI.visibility">
+
+  <h2 class="label-select-stage">Select an Stage : </h2>
+  <select name="options-stages" (change)="onStageSelect($event.target.value)" class="options-stages">
+    <option *ngFor="let stage of UI.stages; let kStage = index" [value]="kStage"> {{stage}} </option>
+  </select>
+
+  <div class="row">
+    <br>
+    <div class="alarm-header">
+
+      <label class="switch">
+        <input type="checkbox" name="alarmAudibleButtonName" value="audible" (change)="onToogleAlarmAudible()">
+        <span class="slider round"></span>
+      </label>
+
+      <img src="../../../../assets/img/qso/alarm-sound-on.png" *ngIf="UI.isEnableAudibleAlarm">
+      <img src="../../../../assets/img/qso/alarm-sound-off.png" *ngIf="!UI.isEnableAudibleAlarm">
+
+    </div>
+
+    <h4>Audible</h4>
+
+    <!-- <button class="btn alarm no-alarm">Alarm</button> -->
+
+  </div>
+
+  <div class="row">
+    <!--
+    <audio controls #audioPlayer style="width: 100%;">
+      <source src="../../../../assets/audio/comstatus_alarm.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  -->
+  </div>
+
+
+</div>
+<!-- --------------------------------------------------------------------------------------------- -->

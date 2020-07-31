@@ -1,0 +1,11 @@
+.tile.quick-stats .data #tubingpressureefm  {
+    font-weight: 800; width: auto;font-size: 30px;
+}
+
+.tile.quick-stats .data #tubingpressureefm span{
+    font-size:20px;color: lightgray;
+}
+
+.tile.quick-stats .data #tubingpressureefm h5{
+    font-size:15px;float:left;font-style:unset;margin-top:1px;
+}

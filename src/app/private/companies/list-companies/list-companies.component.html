@@ -1,0 +1,69 @@
+<div class="etd-panel-header">
+    <div class="etd-panel-title font-20">COMAPNIES</div>
+        <div class="etd-panel-content">
+
+          <table id="locations-table-list" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover tile">
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let company of companyList; let i = index">
+                
+
+                  <td>
+                    <span *ngIf="activeIndex != i">{{ company.name }}</span>
+                    <input type="text" class="form-control input-sm" [(ngModel)]="company.name" *ngIf="activeIndex == i">
+                </td>
+
+                <td class="table-actions">
+                  <a href="javascript:void(0)" (click)="deleteCompany(company.id, i)">
+                      <i class="far fa-trash-alt"></i>
+                  </a>
+                 
+                  <a href="javascript:void(0)" (click)="activateIndex(i)" *ngIf= "activeIndex!=i">
+                      <i class="fas fa-pencil-alt"></i>
+                  </a>
+                  <a href="javascript:void(0)" (click)="updateCompany(company)" *ngIf= "activeIndex== i">
+                      <i class="far fa-save fa-lg"></i>
+                  </a> 
+              </td>
+              </tr>
+
+            </tbody>
+          </table><br>
+            <!-- PAGE CONTENT ENDS-->
+        <!-- /.span-->
+      <div class="modal fade" id="updateCompany" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content" id="modal-black">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">UPDATE COMPANIES</h4>
+                  </div>
+                  <div class="modal-body">
+                 <div class="form-group">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <label class="control-label bold">Name</label>
+                                  <div class="controls">
+                                      <input class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" placeholder="Project Name" type="text" [(ngModel)]="companyList.id">
+                                  </div>
+                              </div>
+                          </div>
+                          </div></div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-sm" (click)="updateCompany(companyList.id)">Save changes</button>
+                              <button type="button" class="btn btn-sm" data-dismiss="modal">Close</button>
+                          </div></div></div></div>
+
+      <!-- /.row-fluid-->
+    <!-- /.page-content-->
+  </div>
+</div>
+
+<div class="col-md-6">
+    <a class="btn btn-default m-r-5" [routerLink]="['../add']" >Add new client </a>
+</div>

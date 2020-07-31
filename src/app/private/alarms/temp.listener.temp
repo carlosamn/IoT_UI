@@ -1,0 +1,96 @@
+      if(event.data.type != "remove"){
+        try{
+      let alarms = this.STORAGE.alarmsList.getValue();
+      let stream_packet = JSON.parse(event.data);
+      let alarm_id,_alarms;
+
+          if(stream_packet.data.type == "ALARM_NEW"){
+
+            let x = stream_packet.data.eventData;
+            alarm_id = x.alarmId;
+            _alarms = alarms.filter( alarm => { return alarm.alarmId == alarm_id});
+
+            if(_alarms.length == 0){
+
+              // New Alarms to Array
+              var obj = {
+                alarmId: x.alarmId,
+                alarmType: x.alarmType,
+                uid: x.uid,
+                location : x.location,
+                packetTime: x.packetTime,
+                projectId: stream_packet.data.projectId,
+                alarmInfo: {
+                  uid: x.uid,
+                  sensorName: x["sensorName"],
+                  sensorType: x["sensorType"],
+                  packetTime: x["packetTime"],
+                  subdomain: x["subdomain"],
+                  alarmMessage: x["alarmMessage"],
+                  sensorUnit: x["sensorUnit"],
+                  sensorValue: x["sensorValue"],
+                  channelId: x["channelId"],
+                  recordId: x["recordId"],
+                  fluidLevel: x["fluidLevel"],
+                  alarmLevel: x["alarmLevel"],
+                  alarmDepth: x["alarmDepth"],
+                  esdAlarmDepth: x["esdAlarmDepth"]
+                }
+              }
+              alarms.push(obj);
+              //console.log(" ** NEW ALARMS")
+              //console.log(alarms.map( alarm => {return alarm.alarmId}))
+              //console.log(alarm_id)
+
+
+            }else{
+
+              // Update Alarmn existing
+              let kAlarm = _alarms.findIndex( alarm => { return alarm.alarmId == alarm_id});
+              alarms[kAlarm] = {
+                alarmId: x.alarmId,
+                alarmType: x.alarmType,
+                location : x.location,
+                uid: x.uid,
+                packetTime: x.packetTime,
+                projectId: stream_packet.data.projectId,
+                alarmInfo: {
+                  uid: x.uid,
+                  sensorName: x["sensorName"],
+                  sensorType: x["sensorType"],
+                  packetTime: x["packetTime"],
+                  subdomain: x["subdomain"],
+                  alarmMessage: x["alarmMessage"],
+                  sensorUnit: x["sensorUnit"],
+                  sensorValue: x["sensorValue"],
+                  channelId: x["channelId"],
+                  recordId: x["recordId"],
+                  fluidLevel: x["fluidLeve"],
+                  alarmLevel: x["alarmLevel"],
+                  alarmDepth: x["alarmDepth"],
+                  esdAlarmDepth: x["esdAlarmDepth"]
+              }
+              }
+              //console.log(" ** UPDATE ALARMS")
+            }
+
+              this.STORAGE.alarmsList.next(alarms)
+
+              //console.log(this.STORAGE.alarmsList)
+          }
+          if(stream_packet.data.type == "ALARM_CLEAR"){
+            //console.log("** CLEAR ALARMS");
+            alarm_id = stream_packet.data.eventData.alarmId;
+            _alarms = alarms.filter( alarm => { return alarm.alarmId != alarm_id});
+            this.STORAGE.alarmsList.next(_alarms)
+          }
+        }catch(e){
+          //console.error(event.data)
+        }
+      }else{
+        //console.log(" ")
+        //console.log(" ")
+        //console.log(" ** An Alarm/WebEvent has been removed from this planet.")
+        //console.log(" ")
+        //console.log(" ")
+      }

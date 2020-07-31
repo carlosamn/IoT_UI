@@ -1,0 +1,44 @@
+<!-- ------------------------------------------------------- -->
+<!--  QSO Main Dashboard                                     -->
+<!-- ------------------------------------------------------- -->
+
+
+<!-- QSO Main Dashboard -->
+<div class="qso-maindashboard">
+
+  <div class="qso-loader" *ngIf="!UX.LOADED">
+    <img src="assets/img/spinner.gif">
+  </div>
+
+  <div class="qso-content" *ngIf="UX.LOADED">
+
+    <div class="wrapper" dragula="DRAG_CONTAINERS" [(dragulaModel)]="UI.CONTAINERS">
+      <div *ngFor="let container of UI.CONTAINERS;let kContainer = index" class="col">
+
+        <div class="container-title">
+          <div class="kContainer" style="display: none">{{kContainer}}</div>
+          <i class="fas fa-bars"></i>
+          <input type="text" [(ngModel)]="container.name" (blur)="onBlurStageInput()">
+        </div>
+
+        <ul dragula="DRAG_CONTROLLERS" [(dragulaModel)]="container.items">
+          <li *ngFor="let device of container.items;let kItem = index" class="row">
+
+            <div *ngIf="device.device">
+              <div class="kContainer" style="display: none">{{kContainer}}</div>
+              <div class="kItem" style="display: none">{{kItem}}</div>
+              <div class="kLocationId" style="display: none">{{device.device.location.id}}</div>
+              <app-qso-maindashboard-controller [sensor]="device.device" [kContainer]="kContainer" [kItem]="kItem">
+              </app-qso-maindashboard-controller>
+            </div>
+
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <!-- / Main Dashboard  --------------------- -->
+
+</div>
+<!-- ------------------------------------------------------- -->

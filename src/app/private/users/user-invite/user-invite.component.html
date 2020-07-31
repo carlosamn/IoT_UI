@@ -1,0 +1,94 @@
+<div class="etd-panel-header">
+    <div class="etd-panel-title font-20">USERS</div>
+        <div class="etd-panel-content">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover tile">
+              <thead>
+                <tr>
+                  <th>UserName</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Client</th>
+                  <th>Company</th>
+                  <th>UserType</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody >
+                <tr *ngFor="let user of users; let i = index">
+                    <td>
+                        <span *ngIf="activeIndex != i">{{ user.username }}</span>
+                        <input type="text" class="form-control input-sm" [(ngModel)]="user.username" *ngIf="activeIndex == i">
+                    </td>
+                    <td>
+                        <span *ngIf="activeIndex != i">{{ user.fName }}</span>
+                        <input type="text" class="form-control input-sm" [(ngModel)]="user.fName" *ngIf="activeIndex == i">
+                    </td>
+                    <td>
+                        <span *ngIf="activeIndex != i">{{ user.lName }}</span>
+                        <input type="text" class="form-control input-sm" [(ngModel)]="user.lName" *ngIf="activeIndex == i">
+                    </td>
+                    <td>
+                        <span *ngIf="activeIndex != i">{{ user.email }}</span>
+                        <input type="text" class="form-control input-sm" [(ngModel)]="user.email" *ngIf="activeIndex == i">
+                    </td>
+                    <td>
+                        <span>{{ user.clientId }}</span>
+                    </td>
+                    <td>
+                        <span *ngIf="activeIndex != i">{{ user.companyIds && user.companyIds.length ? user.companyIds.join(', '): '' }}</span>
+                        <ng-select labelForId="id" [hideSelected]="true" class="custom" [multiple]="true" [closeOnSelect]="false" placeholder="Select Companies" [items]="companies" bindLabel="id" bindValue="id" [maxSelectedItems]="companies.length" [virtualScroll]="true" [(ngModel)]="user.companyIds" *ngIf="activeIndex == i">
+                        </ng-select>
+                    </td>
+                    <td>
+                        <span *ngIf="activeIndex != i">{{ user.userType}}</span>
+                        <ng-select *ngIf="activeIndex == i" [hideSelected]="true" class="custom" [closeOnSelect]="true" placeholder="Select" [(ngModel)]="user.userType">
+                            <ng-option [value]="'admin'">Admin</ng-option>
+                            <ng-option [value]="'technician'">Technician</ng-option>
+                            <ng-option [value]="'operator'">Operator</ng-option>
+                            <ng-option [value]="'readonly'">Read Only</ng-option>
+                        </ng-select>
+                    </td>
+                    <td>
+                      <a (click)="activateIndex(i)" *ngIf="activeIndex != i">
+                        <i class="fas fa-pencil-alt pointer"></i>
+                       </a>
+                       <a  href="javascript:void(0)" *ngIf="activeIndex != i" (click)="sendInvitation(user)">
+                        <i class="fas fa-envelope"></i>
+                      </a>
+                      <a href="javascript:void(0)" (click)="deleteUser(user.id, i)" >
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                      <!-- For modal
+                      <a (click)="Users = user" data-toggle="modal" href="#updateUser">
+                          <i class="fas fa-pencil-alt"></i>
+                      </a> -->
+                      <a href="javascript:void(0)" *ngIf="activeIndex == i" (click)="updateUser(user)">
+                        <i class="far fa-save fa-lg pointer"></i>
+                      </a>
+                      <a  href="javascript:void(0)" [routerLink]="['../edit/invite', user.id]">
+                        <i class="fas fa-cog pointer"></i>
+                      </a>
+                    </td>
+                </tr>
+
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <br/>
+    <div class="panel-buttons">
+        <div class="col-md-6">
+            <a href="javascrip:void(0)" class="btn btn-default" [routerLink]="['../create/invite']">Add new User</a>
+        </div>
+    </div>
+    <hr class="whiter m-t-10">
+    <div class="modal fade" id="sendInvitation" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+      <div class="modal-dialog">
+        <div class="modal-content" id="modal-blur" style="background-color: black;">
+          <div class="modal-body">
+            <h4 class="text-center"><strong>E-mail Invitation Sent!</strong></h4>
+          </div>
+        </div>
+      </div>
+    </div>

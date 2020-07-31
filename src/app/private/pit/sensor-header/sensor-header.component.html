@@ -1,0 +1,25 @@
+
+
+<hr class="whiter" />
+<div *ngIf="url">
+<div class="col-md-3 col-xs-6"  *ngFor="let item of Sensors">
+
+  <!-- for web events <div *ngIf="item.enable">-->
+    <div *ngIf="item.enable">
+    <div class="tile quick-stats">
+        <div id="Div4" class="pull-left"></div>
+        <div class="data">
+               <!-- for web events <span id="tubingpressureefm" style="font-weight: 800; width: auto;font-size: 30px;">{{item.packet8 ? item.packet8: 'N/A'}}<span style="font-size:20px;color: lightgray;">{{item.unit}}</span><br><h5 style="font-size:15px;float:left;font-style:unset;margin-top:1px;">{{item.name}}</h5></span> -->
+               <span id="tubingpressureefm" >{{item.value ? item.value: 'N/A'}}
+               <span >{{item.unit ? item.unit: 'Unit'}}</span><br>
+               <h5 >{{item.name ? item.name: 'Name'}}</h5></span> 
+        </div>
+    </div>
+</div>
+</div>
+<!-- for web events <div *ngIf="lastUpdate!=''" style="float:left;margin-top:7%;">-->
+  <div>
+        <span >Last Update: {{ timeStamp }}</span>
+        <!--<span >Last Update: {{ packetTimestamp | date: 'yyyy-MM-dd hh:mm:ss' }}</span>-->
+  </div>
+</div>

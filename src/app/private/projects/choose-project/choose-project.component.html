@@ -1,0 +1,175 @@
+<div>
+
+    <!-- LOGOUT  --->
+    <div class="partial-header">
+        <a href="javascript:void(0)" (click)="logout();">
+            <i class="fas fa-sign-out-alt fa-4x"></i>
+        </a>
+    </div>
+
+
+     <!-- CHOOSE-PROJECT PANEL --->
+    <div class=" choose-project">
+        <div class="partial-content">
+
+
+           <!-- CLIENT/AMS LOGO -->
+            <div class="subpage-logo">
+                <img src="{{logo}}">
+            </div>
+
+            <!-- PROJECTS PANEL ON MOBILE -->
+            <div class="onMobile projects">
+
+                <div class="project" *ngFor="let item of projects">
+
+                  <!-- ROW TOP :: NAME AND DATE-->
+                  <div class="row top">
+                    <div class="col">
+                      <div class="name">
+                        <label> NAME :</label>
+                        <span> {{ item.id }} </span>
+                      </div>
+                    </div>
+                    <div class="col">
+                        <div class="date" *ngIf="item.startDate">
+                            <label>DATE:</label>
+                            <span> {{ item.startDate | date: 'dd-MM-yyyy' }} </span>
+                        </div>
+                        <div class="client">
+                            <label>CLIENT:</label>
+                            <span>{{ item.clientId }}</span>
+                        </div>
+                    </div>
+                  </div>
+
+                  <!-- ROW MIDDLE :: DESCRIPTION AND CLIENT CODE-->
+                  <div class="row middle">
+                    <div class="col">
+                        <div class="description">
+                            <span>{{ item.description }}</span>
+                        </div>
+                    </div>
+
+                  </div>
+
+                  <!-- ROW BOTTOM :: STATUS AND SELECT -->
+                  <div class="row bottom">
+                      <div class="col">
+                          <div class="status notifications">
+
+                            <div class="alarm success" *ngIf="item.alarms?.length == 0">
+                              <img src="./../../assets/img/checked.png">
+                              <span> Alarms </span>
+                            </div>
+
+                            <div class="alarm warning" *ngIf="item.alarms?.length > 0">
+                                <div class="notification-bubble">
+                                  {{item.alarms.length}}
+                                </div>
+                                <span> Alarms </span>
+                            </div>
+
+                          </div>
+                      </div>
+                      <div class="col">
+                          <div class="status comlink">
+
+                              <div *ngIf="item.notifications === 0; else elseBlock">
+                                  <img src="./../../assets/img/checked.png">
+                              </div>
+
+                              <ng-template #elseBlock>
+                                <span class="badge" >
+                                  {{ item.notifications }}
+                                </span>
+                              </ng-template>
+
+                              <span>COMLINK Status</span>
+
+                          </div>
+                      </div>
+                      <div class="col">
+                          <div class="select" (click)="setDefaultSelectedLocation(item)" href="javascript:void(0);">
+                              <div class="button">SELECT</div>
+                          </div>
+                      </div>
+                  </div>
+
+                </div>
+
+
+            </div>
+
+             <!-- PROJECTS PANEL ON DESKTOP  -->
+            <div class="onDesktop">
+            <table  class="table table-responsive tile choose-project-table">
+                <thead  >
+                    <tr >
+
+                        <th  style="text-align: left">SELECT</th>
+                        <th  style="text-align: left">NAME</th>
+                        <th  style="text-align: left">DESCRIPTION</th>
+                        <th  style="text-align: left">START DATE</th>
+                        <th  style="text-align: left">CLIENT</th>
+                        <th  style="text-align: center">NOTIFICATIONS</th>
+                        <th  style="text-align: center">COM STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+
+
+
+                  </tr>
+                    <tr *ngFor="let item of projects">
+                        <td >
+                            <a id="select"  (click)="setDefaultSelectedLocation(item)" href="javascript:void(0);">
+                                <i class="fas fa-arrow-circle-right fa-2x"></i>
+                            </a>
+                        </td>
+                        <td style="text-align: left">{{ item.id }}</td>
+                        <td style="text-align: left">{{ item.description }}</td>
+                        <td style="text-align: left">{{ item.startDate | date: 'dd-MM-yyyy' }}</td>
+                        <td style="text-align: left">{{ item.clientId }}</td>
+                        <td style="text-align: left">
+
+                          <div align="center">
+
+                            <div class="alarm success" *ngIf="item.alarms?.length == 0">
+                              <img src="./../../assets/img/checked.png">
+                            </div>
+
+                            <div class="alarm warning" *ngIf="item.alarms?.length > 0">
+                              <img src="./../../assets/img/warning.png">
+                                  <div class="notification-bubble">
+                                      {{item.alarms.length}}
+                                  </div>
+                            </div>
+
+                          </div>
+
+                        </td>
+                        <td style=" float:left;" style="text-align: left">
+                          <div  align="center">
+
+                            <div  style="text-align: center;" *ngIf="true; else elseBlock">
+                              <img  src="./../../assets/img/checked.png">
+                            </div>
+
+                            <ng-template #elseBlock>
+                              <span class="badge" style="margin: 7px; background-color: #f44242; color: white; font-size: 12px;">
+                                {{ item.notifications }}
+                              </span>
+                            </ng-template>
+
+                          </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+
+        </div>
+    </div>
+</div>

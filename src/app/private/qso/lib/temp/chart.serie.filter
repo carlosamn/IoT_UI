@@ -1,0 +1,154 @@
+
+
+  onStageSelect(stage) {
+    this.UI.CURRENT_STAGE = stage;
+    this.UI.CONTROLLERS = this.DATA.sensors.filter( sensor => {
+      if ( sensor.layout.containerIndex == this.UI.CURRENT_STAGE) {
+        return sensor;
+      }
+    });
+  }
+
+  sensorsToSeries(sensors) {
+    return []
+  }
+
+
+
+
+
+
+
+        const sensors_timestamp = sensors.map( sensor => sensor.timestamp);
+        if (sensors_timestamp.every( x => x)) {
+
+          // -- ------------------------ -- //
+          // -- -- Loop over Each Serie  -- //
+          // -- ------------------------ -- //
+          this.qsoFracViewChart.series.map( serie => {
+            const serieId = serie['userOptions'].id;
+
+            sensors.map( sensor => {
+              sensor.channels.map(  channel => {
+
+                const _locationId = sensor.location.id;
+                const _channelId = channel.id;
+                const _targetId = _locationId + ':' + _channelId;
+
+                if (serieId === _targetId) {
+
+                  const serie_array = [
+                    parseFloat(sensor.channels[0].value),
+                    parseFloat(sensor.channels[1].value),
+                    parseFloat(sensor.channels[2].value)
+                  ];
+
+                  serie.setData(serie_array);
+
+                }
+
+              });
+            });
+          });
+          // -- ------------------------ -- //
+
+
+          // -- ------------------------ -- //
+          this.qsoFracViewChart.redraw();
+          // -- ------------------------ -- //
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    this.SUBS.stream = this.qsoService.syncSensorStream().subscribe( stream => {
+
+      if (stream['location'] && stream['timestamp'] &&  false) {
+        stream['channels'].map( channel => {
+
+          const stream_location_description = stream['location'].description;
+          const stream_channel = channel.id;
+          const stream_serie_name = `${stream_location_description} : ${stream_channel}`;
+
+          const stream_timestamp = (new Date(stream['timestamp'])).getTime();
+          const stream_value = parseFloat(channel.value);
+
+          this.qsoFracViewChart.series[stream_channel].addPoint([ (new Date()).getTime() , stream_value ], true, true);
+
+        });
+      }
+
+    });
+
+    this.SUBS.sensors = this.qsoService.syncSensorStore().subscribe( sensors => {
+      const DATA_SENSORS = sensors;
+      const UI_CONTROLLERS = DATA_SENSORS.filter( sensor => {
+        if ( sensor.layout.containerIndex == this.UI.CURRENT_STAGE ) {
+          return sensor;
+        }
+      });
+
+      this.DATA.sensors = DATA_SENSORS;
+      this.UI.CONTROLLERS = UI_CONTROLLERS;
+    });
+    */

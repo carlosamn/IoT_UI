@@ -1,0 +1,50 @@
+<div class="etd-panel-header">
+    <div class="etd-panel-title font-20">CLIENTS</div>
+        <div class="etd-panel-content">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover tile">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>CODE</th>
+                        <th>DEFAULT PAGE</th>
+                        <th>SUBDOMAIN</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let client of clients; let i = index">
+                        <td>{{ client.id }}</td>
+                        <td>
+                            <span *ngIf="activeIndex != i">{{ client.companyCode }}</span>
+                            <input type="text" class="form-control input-sm" [(ngModel)]="client.companyCode" *ngIf="activeIndex == i">
+                        </td>
+                        <td>
+                            <span *ngIf="activeIndex != i">{{ client.defaultDashboard }}</span>
+                            <input type="text" class="form-control input-sm" [(ngModel)]="client.defaultDashboard" *ngIf="activeIndex == i">
+                        </td>
+                        <td>
+                            <span *ngIf="activeIndex != i">{{ client.subDomainName }}</span>
+                            <input type="text" class="form-control input-sm" [(ngModel)]="client.subDomainName" *ngIf="activeIndex == i">
+                        </td>
+                        <td>                    
+                            <a href="javascript:void(0)" (click)="deleteClient(client.id, i)" >
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            
+                            <a href="javascript:void(0)" [routerLink]="['../edit', client.id]" *ngIf="activeIndex != i">
+                                <i class="fas fa-pencil-alt fa-lg"></i>
+                            </a>
+                                               
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+<br/>
+<div class="panel-buttons">
+    <div class="col-md-6">
+        <a class="btn btn-alt m-r-5" [routerLink]="['../add']">Add new Client</a>
+    </div>
+</div>
+<hr class="whiter m-t-10">

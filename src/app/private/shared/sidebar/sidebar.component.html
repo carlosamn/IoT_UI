@@ -1,0 +1,144 @@
+<!-- ------------------------------------------------------------ -->
+<!-- ---- SIDEBAR ----------------------------------------------- -->
+<!-- ------------------------------------------------------------ -->
+<aside id="sidebar">
+
+
+
+  <!-- Sidbar Widgets -->
+  <div class="side-widgets overflow">
+
+
+    <!-- Profile Menu -->
+    <div class="text-center s-widget dropdown m-b-25" id="profile-menu">
+      <a href="javascript:void(0);">
+        <img class="" src="{{logo}}" alt="">
+      </a>
+      <ul class="dropdown-menu profile-menu">
+
+        <li>
+          <a href="javascript:void(0)" [routerLink]="['./../users/edit/master', userId]"
+            [queryParams]="{ profileEdit: true }">My Profile</a>
+
+          <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+
+        <li><a href="javascript:void(0)" [routerLink]="['./../projects/choose']">Change Project</a> <i
+            class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+        <li><a href="javascript:void(0);" (click)="logout()">Sign Out</a> <i class="icon left">&#61903;</i><i
+            class="icon right">&#61815;</i></li>
+
+        <li>
+          <a data-toggle="modal" href="#selectController" class="btn btn-default mainlist">
+            Main List
+          </a>
+        </li>
+      </ul>
+      <a href="" data-toggle="dropdown">
+        <h4 class="m-0" style="margin-top: 0.25em !important; margin-bottom: 0.25em !important">{{ user.fName }}
+          {{ user.lName }}
+          <i class="fa fa-fw fa-sort"></i>
+        </h4>
+      </a>
+
+
+      <app-qso-sidebar-notifications></app-qso-sidebar-notifications>
+
+      <!--   <h5>{{ user.email }}</h5> -->
+
+      <!--  <span class="user-role role-{{user.userType}}">{{ user.userType | uppercase }}</span> -->
+    </div>
+
+    <!-- Calendar -->
+    <div class="s-widget m-b-25">
+    </div>
+
+    <!-- Main List  (Select Devices Button) -->
+    <div style="margin-top: 10px;" class="s-widget m-b-25 flex-center">
+      <a data-toggle="modal" href="#selectController" class="btn btn-default">
+        Main List
+      </a>
+      <div class="notifications" *ngIf="alarms?.length>0">
+        {{alarms?.length}}
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <!-- ------------------------------------------------------------
+
+-->
+    <app-fl3-options></app-fl3-options>
+    <app-qso-sidebar-menu></app-qso-sidebar-menu>
+
+
+
+  </div>
+
+
+
+  <!-- Side Menu -->
+  <ul class="list-unstyled side-menu">
+    <li>
+      <a class="sa-side-dashboard" href="javascript:void(0);" [routerLink]="['../etd_dashboard']">
+
+        <span class="menu-item">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a class="sa-side-device" href="javascript:void(0);" [routerLink]="['../devices','map']">
+        <span class="menu-item">Device map</span>
+      </a>
+    </li>
+    <li>
+      <a class="sa-side-data-log" href="javascript:void(0);" [routerLink]="['../logs','data']">
+        <span class="menu-item">Reports</span>
+      </a>
+    </li>
+    <li>
+      <a class="sa-side-camera" href="javascript:void(0);" [routerLink]="['../videos','video-log']">
+        <span class="menu-item">Camera Setup</span>
+      </a>
+    </li>
+    <li
+      *ngIf="user.userType=='webmaster' || user.userType=='sysadmin' || user.userType == 'admin' || user.userType == 'technician'"
+      class="dropdown">
+      <a class="sa-side-ui" href="javascript:void(0);" [routerLink]="['../devices','device-setup']">
+        <span class="menu-item">Device Setup</span>
+      </a>
+    </li>
+
+    <li *ngIf="user.userType=='webmaster' || user.userType=='sysadmin' || user.userType == 'admin'" class="dropdown">
+      <a class="sa-side-admin-panel" href="javascript:void(0);">
+        <span class="menu-item">Admin Panel</span>
+      </a>
+      <ul class="list-unstyled menu-item">
+        <li><a href="javascript:void(0)" [routerLink]="['../projects']">Projects</a></li>
+        <li><a href="javascript:void(0)" [routerLink]="['../locations']">Locations</a></li>
+        <li><a href="javascript:void(0)" [routerLink]="['../companies', 'list']">Customer Companies</a></li>
+        <li><a href="javascript:void(0)" [routerLink]="['../users','invite']">User</a></li>
+      </ul>
+    </li>
+    <li *ngIf="user.userType=='webmaster'" class="dropdown">
+      <a class="sa-side-webmaster" href="javascript:void(0);">
+        <span class="menu-item">Webmaster</span>
+      </a>
+      <ul class="list-unstyled menu-item">
+        <li><a [routerLink]="['../users','admin']">Admin Users</a></li>
+        <li><a [routerLink]="['../users','master']">Master Users</a></li>
+        <li><a [routerLink]="['../clients']">Clients</a></li>
+      </ul>
+    </li>
+  </ul>
+
+
+
+
+</aside>
+<!-- ------------------------------------------------------------ -->
+
+
+
+
+<app-main-list [project]="project" [defaultLocationIndex]="defaultLocationIndex"
+  (onApplyChanges)="ngApplyChanges($event)" (onSelectLocations)="ngSelectLocations($event)">
+</app-main-list>

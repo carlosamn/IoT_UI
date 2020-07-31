@@ -1,0 +1,32 @@
+<header  id="header" class="media">
+    <a href="" id="menu-toggle"></a>
+    <a class="logo pull-left" href="index.html" style="font-size: 1em">{{ STATE.currentProject?.id | uppercase }}</a>
+    <div class="media-body">
+        <div class="flex">
+            <div class="flex-25 text-center header-items">{{ STATE.currentCompany?.id | uppercase }}</div>
+            <div class="flex-25 text-center header-items">{{ STATE.currentLocation?.uid | uppercase }}</div>
+            <div class="flex-25 text-center header-items">{{ STATE.currentLocation?.description | uppercase }}</div>
+
+            <div style="margin-right: -15%;" >
+
+              <ol class="breadcrumb hidden-xs">
+                    <li style="margin-top: 5%; ">
+                      <a  class="flex-25 text-center header-items" href="javascript:void(0)">
+
+                      </a>
+                    </li>
+                </ol>
+          </div>
+            <div class="flex-25 text-right">
+                <div id="time" class="pull-right">
+                    <span id="hours">{{ hours }}</span>
+                    :
+                    <span id="min">{{ minutes }}</span>
+                    :
+                    <span id="sec">{{ seconds }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="clearfix"></div>

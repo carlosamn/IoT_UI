@@ -1,0 +1,78 @@
+<div class="tile p-15 ">
+    <div class="form-group">
+        <div class="page-header position-relative">
+            <h3>New Project</h3>
+        </div>
+		<div class="row">
+            <div class="col-md-4">
+                <label class="control-label bold">Project</label>
+                <div class="controls">
+                    <input class="form-control input-sm m-b-10" placeholder="Project Name" type="text" [(ngModel)]="project.id">
+                </div>
+            </div>
+        </div>
+		<div class="row">
+            <div class="col-md-4">
+                <label class="control-label bold">Description</label>
+                <div class="controls">
+                    <input class="form-control input-sm m-b-10" placeholder="Project description" type="text" [(ngModel)]="project.description">
+                </div>
+            </div>
+        </div>
+		<div class="row">
+            <div class="col-md-4">
+                <label class="control-label bold">Start Date</label>
+                <div class="controls">
+                    <input class="datepicker form-control input-sm m-b-10" placeholder="Project start date" type="text" [(ngModel)]="project.startDate">
+                </div>
+            </div>
+        </div>
+		<div class="row">
+            <div class="col-md-4">
+                <label class="control-label bold">Company</label>
+                <select name="" id="" class="form-control" [(ngModel)]="project.companyId">
+					<option *ngFor="let company of companies" [ngValue]="company.id">{{ company.id }}</option>
+                </select>
+            </div>
+        </div>
+        <br/>
+		<div class="row">
+            <div class="col-md-4">
+                <label class="control-label bold">Active</label>
+				<select name="" id="" class="form-control" [(ngModel)]="project.isActive">
+					<option value="true">YES</option>
+					<option value="false">NO</option>
+				</select>
+            </div>
+        </div>
+        <br/>
+		<div class="row">
+            <div class="col-md-4">
+                <label class="control-label bold">UTC Offset (+/-hh)</label>
+                <div class="controls">
+                    <input class="form-control input-sm m-b-10" placeholder="UTCOffset" type="text" [(ngModel)]="project.utcOffset">
+                </div>
+            </div>
+        </div>
+		<div class="row">
+			<div class="col-md-4">
+				<input type="checkbox" [(ngModel)]="project.daylightSaving">
+                <span>Daylight Savings (Check for Summer) </span>
+            </div>			
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-4">
+				<button class="btn btn-info" (click)="addProject()">
+					<i class="fas fa-check"></i>
+					Submit
+				</button>
+
+				<button class="btn btn-info" (click)="resetProjectData()">
+					<i class="fas fa-sync-alt"></i>
+					Reset
+				</button>
+			</div>
+		</div>                                      
+    </div>
+</div>

@@ -1,0 +1,108 @@
+<app-sensor-header></app-sensor-header>
+<div  class="block-area">
+    
+  <div class="row" >
+      <div class="col-md-8" >
+          <!-- Main Chart -->
+          <!-- Activity -->
+         
+
+       
+          <div  class="tile">
+              <form id="savefile" class="form-horizontal" method="post"  >
+               
+                  <div class="table-responsive overflow">
+                      <table class="table tile">
+                      <thead>
+                          <tr>
+                              <th><a (click)="downloadView()" id="link" class="btn btn-lg m-r-5" >Save File</a>
+                              </th>
+                          </tr>
+                      </thead>
+                      </table>
+                    <div [ngClass]="(notesPit.length > 5) ? 'table-wrapper':''">
+                      <table class="table row-border hover tile">
+                          <tbody>
+                             
+                              <tr *ngFor="let note of notesPit; let i=index">
+                                  <td>
+                                      <input type="checkbox" (click)="download(note.noteText, note.noteNumber+'_'+note.packetTimestamp+'.txt', 'text/plain', i)" id="checkFile" name="fileCheck"  >
+                                      <span>Download File</span>
+                                      <br />
+                                      <span  class="block-title">SETTINGS NOTE {{note.packetTimestamp}}<br> ON TIME {{note.packetTimestamp}}</span>
+                                    </td>
+                                   
+                                      
+                              </tr>
+                            
+                          </tbody>
+                      </table>
+                    </div>
+                  </div>
+     
+                  
+              </form>
+              <button class="btn btn-md m-r-3" type="button"  (click)="update('3')">
+                <i class="icon-ok bigger-110"></i>
+                Update
+            </button>
+          </div>
+      </div>
+      <div class="col-md-4">   
+              <div class="breadcrumbs" id="breadcrumbs">
+  <script type="text/javascript">
+      try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+  </script>      
+  <!--.breadcrumb-->
+</div>
+
+          
+      </div>
+  </div>
+  <div class="backdrop" [ngStyle]="{'display':display}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title"></h2>
+        </div>
+        <div class="modal-body">
+          <h3>Select the Files you wish Download!</h3>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeModal()">OK</button>
+
+        </div>
+        
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+    <div class="modal fade" id="pollFiles" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="modal-blur" style="background-color: black;">
+                        <div class="modal-body">
+                            <h4 class="text-center"><strong>Polling new Files..!</strong>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="deviceBusy" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+              <div class="modal-dialog">
+                  <div class="modal-content" id="modal-blur" style="background-color: black;">
+                      <div class="modal-body">
+                          <h4 class="text-center"><strong>Controller busy, Please wait an moment!</strong>
+                          </h4>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+  
+
+  

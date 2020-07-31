@@ -1,0 +1,208 @@
+<!-- ----------------------------------------------------------------- -->
+<!-- ---- Main List :: Select Device from List ----------------------- -->
+<!-- ----------------------------------------------------------------- -->
+
+
+<!-- ----------------------------------------------------------------- -->
+<!--  MODAL                                                            -->
+<!-- ----------------------------------------------------------------- -->
+
+<div class="modal fade" id="selectController" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modal-blur">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">SELECT CONTROLLER</h4>
+
+      </div>
+
+
+
+      <div class="modal-body modal-mobile">
+        <ul class="locations-list">
+
+          <li class="location-card" *ngFor="let location of currentLocations; let i = index">
+
+            <div class="card-header">
+
+              <div class="title">
+                <strong>LOCATION : </strong>{{ location?.description}} <br>
+                <strong>UID : </strong>{{ location?.uid}} <br>
+              </div>
+
+
+              <div class="status">
+                <span>COMLINK</span>
+                <img src="./../../../../../assets/img/checked.png"
+                  *ngIf="getComlinksByLocationId(location).length == 0">
+                <img src="./../../../../../assets/img/error.png" *ngIf="getComlinksByLocationId(location).length > 0">
+              </div>
+
+
+            </div>
+            <div class="card-body">
+
+              <div class="card-alarm-sensor"
+                *ngFor="let alarmSensor of getAlarmsByLocationId(location); let kSensorAlarm = index">
+                <!-- <div class="card-alarm-sensor"> -->
+                <h5 class="sensor-channel">Channel {{ alarmSensor?.channel.id }}</h5>
+                <div class="card-row">
+                  <h1 class="sensor-value">{{ alarmSensor?.channel.value }}</h1>
+                  <h3 class="sensor-units">{{ alarmSensor?.channel.units  }}</h3>
+                </div>
+                <div class="card-row">
+                  <h2 class="sensor-message">{{ alarmSensor?.message }}</h2>
+                </div>
+                <div class="card-row">
+                  <h4 class="sensor-timestamp">
+                    {{ alarmSensor?.timestamp.replace("T"," ").replace("Z"," ").split(".")[0] }}</h4>
+                </div>
+                <div *ngIf="getAlarmsByLocationId(location).length > 1">
+                  <hr>
+                </div>
+              </div>
+
+
+              <div class="card-row">
+                <button type="button" class="btn btn-default" style="margin: 0.7em 0em;"
+                  (click)="selectLocation(location, index); applyChanges();">SELECT</button>
+              </div>
+            </div>
+
+          </li>
+
+        </ul>
+      </div>
+
+      <!--
+        <div class="modal-body modal-mobile">
+
+        <ul class="locations-list">
+
+
+          <li class="device-list-item active" [class.active]="getAlarmsByLocationId(item.location.id).length > 0 "
+            *ngFor="let item of currentLocations; let i = index">
+            <div class="row header">
+              <div class="device-name">
+                {{ item.location.id }}</div>
+              <div class="device-uid">
+                <strong> UID </strong> : {{ item.uid}}</div>
+            </div>
+
+            <hr>
+
+            <div class="row content">
+
+              <div class="device-alarm-icon">
+                <app-notification-icon [notificationAlarms]="getAlarmsByLocationId(item)"></app-notification-icon>
+                <span class="label-desktop">ALARMS</span>
+              </div>
+
+              <div class="device-comlink-icon">
+              </div>
+              <button type="button" class="btn btn-default"
+                (click)="selectLocation(item, index); applyChanges();">SELECT</button>
+            </div>
+          </li>
+
+
+        </ul>
+
+      </div>
+    -->
+
+
+      <div class="modal-body modal-desktop">
+
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="text-align: center;">Select</th>
+              <th style="text-align: center;">Location</th>
+              <th style="text-align: center;">Alarm</th>
+              <th style="text-align: center;">COM Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+
+            <tr *ngFor="let item of currentLocations; let i = index">
+
+
+              <!--------------------------------------------->
+              <!-- ----- Select Location Radiobutton  ---- -->
+              <!--------------------------------------------->
+              <td style="text-align: center;">
+
+                <input type="radio" name="locations" [value]="item?.locationId" [checked]="i == defaultLocationIndex"
+                  (click)="selectLocation(item, i)">
+
+              </td>
+              <!--------------------------------------------->
+
+
+
+              <!--------------------------------------------->
+              <!-- ----- Location Description  ----------- -->
+              <!--------------------------------------------->
+              <td>{{ item.description }}</td>
+              <!--------------------------------------------->
+
+
+
+              <!--------------------------------------------->
+              <!-- ----- Sensor Alarms Icon  ------------- -->
+              <!--------------------------------------------->
+              <td style="text-align: center;">
+                <div align="center">
+
+                  <app-notification-icon [notificationAlarms]="getAlarmsByLocationId(item)"></app-notification-icon>
+
+                  <!--
+                  {{ getAlarmsByLocationId(item) | json}}
+
+                  <app-notification-icon [notificationAlarms]="getAlarmsByLocationId(item)"></app-notification-icon>
+-->
+                </div>
+              </td>
+              <!--------------------------------------------->
+
+
+              <!--------------------------------------------->
+              <!-- ----- Comlinks Alarms Icon  ----------- -->
+              <!--------------------------------------------->
+              <td style="text-align: center;">
+                <div align="center">
+
+                  <img src="./../../../../../assets/img/checked.png" style="border:
+                        solid 0px; border-color:#0f2d55; background-color:
+                        transparent" *ngIf="getComlinksByLocationId(item).length == 0">
+                  <img src="./../../../../../assets/img/error.png" style="border:
+                        solid 0px; border-color:#0f2d55; background-color:
+                        transparent;position: relative;left: 0em;cursor: pointer;"
+                    *ngIf="getComlinksByLocationId(item).length > 0">
+
+
+                </div>
+              </td>
+              <!--------------------------------------------->
+
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="applyChanges()">Apply changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- ----------------------------------------------------------------- -->

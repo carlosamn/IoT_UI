@@ -1,0 +1,212 @@
+// ---------------------------------------------------------- //
+// -- QSO Color Code / Styles ------------------------------- //
+// ---------------------------------------------------------- //
+
+// ---------------------------------------------------------- //
+
+
+
+
+
+// ---------------------------------------------------------- //
+// -- Paramas & Const  -------------------------------------- //
+// ---------------------------------------------------------- //
+
+@colors-n : 10;
+@color-no-1: #783100;
+@color-no-2: #352c97;
+@color-no-3: #306d06;
+@color-no-4: #9c2f00;
+@color-no-5: #006574;
+@color-no-6: #272728;
+@color-no-7: #CDCF26;
+@color-no-8: #E02A26;
+@color-no-9: #2693E4;
+@color-no-10: #E4CE84;
+@colors : @color-no-1, @color-no-2,@color-no-3,@color-no-4,@color-no-5,@color-no-6,@color-no-7,@color-no-8,@color-no-9,@color-no-10;
+// ---------------------------------------------------------- //
+
+
+
+
+
+// ---------------------------------------------------------- //
+// -- Methods & Functions  ---------------------------------- //
+// ---------------------------------------------------------- //
+.setQSO-Color-Texts(@i) when (@i > 0) {
+
+  @kColor : extract(@colors, @i);
+
+  &:nth-child(@{i}) {
+
+    .qso-color-text{
+      color: @kColor !important;
+
+    }
+  }
+
+  .setQSO-Color-Texts(@i - 1);
+
+}
+
+// ---------------------------------------------------------- //
+
+
+
+
+// ---------------------------------------------------------- //
+// -- Class :: qso-color  ----------------------------------- //
+// ---------------------------------------------------------- //
+
+// ---------------------------------------------------------- //
+
+
+
+
+
+
+.qsoTagColor-container0-item0{
+  color: @color-no-1 !important;
+}
+.qsoTagColor-container0-item1{
+  color: @color-no-2 !important;
+}
+.qsoTagColor-container0-item2{
+  color: @color-no-3 !important;
+}
+.qsoTagColor-container0-item3{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container0-item4{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container0-item5{
+  color: @color-no-5 !important;
+}
+.qsoTagColor-container0-item6{
+  color: @color-no-6 !important;
+}
+.qsoTagColor-container0-item7{
+  color: @color-no-7 !important;
+}
+.qsoTagColor-container0-item8{
+  color: @color-no-8 !important;
+}
+.qsoTagColor-container0-item9{
+  color: @color-no-9 !important;
+}
+.qsoTagColor-container0-item10{
+  color: @color-no-10 !important;
+}
+
+
+.qsoTagColor-container1-item0{
+  color: @color-no-1 !important;
+}
+.qsoTagColor-container1-item1{
+  color: @color-no-2 !important;
+}
+.qsoTagColor-container1-item2{
+  color: @color-no-3 !important;
+}
+.qsoTagColor-container1-item3{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container1-item4{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container1-item5{
+  color: @color-no-5 !important;
+}
+.qsoTagColor-container1-item6{
+  color: @color-no-6 !important;
+}
+.qsoTagColor-container1-item7{
+  color: @color-no-7 !important;
+}
+.qsoTagColor-container1-item8{
+  color: @color-no-8 !important;
+}
+.qsoTagColor-container1-item9{
+  color: @color-no-9 !important;
+}
+.qsoTagColor-container1-item10{
+  color: @color-no-10 !important;
+}
+
+
+
+
+
+.qsoTagColor-container2-item0{
+  color: @color-no-1 !important;
+}
+.qsoTagColor-container2-item1{
+  color: @color-no-2 !important;
+}
+.qsoTagColor-container2-item2{
+  color: @color-no-3 !important;
+}
+.qsoTagColor-container2-item3{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container2-item4{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container2-item5{
+  color: @color-no-5 !important;
+}
+.qsoTagColor-container2-item6{
+  color: @color-no-6 !important;
+}
+.qsoTagColor-container2-item7{
+  color: @color-no-7 !important;
+}
+.qsoTagColor-container2-item8{
+  color: @color-no-8 !important;
+}
+.qsoTagColor-container2-item9{
+  color: @color-no-9 !important;
+}
+.qsoTagColor-container2-item10{
+  color: @color-no-10 !important;
+}
+
+
+
+
+
+
+.qsoTagColor-container3-item0{
+  color: @color-no-1 !important;
+}
+.qsoTagColor-container3-item1{
+  color: @color-no-2 !important;
+}
+.qsoTagColor-container3-item2{
+  color: @color-no-3 !important;
+}
+.qsoTagColor-container3-item3{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container3-item4{
+  color: @color-no-4 !important;
+}
+.qsoTagColor-container3-item5{
+  color: @color-no-5 !important;
+}
+.qsoTagColor-container3-item6{
+  color: @color-no-6 !important;
+}
+.qsoTagColor-container3-item7{
+  color: @color-no-7 !important;
+}
+.qsoTagColor-container3-item8{
+  color: @color-no-8 !important;
+}
+.qsoTagColor-container3-item9{
+  color: @color-no-9 !important;
+}
+.qsoTagColor-container3-item10{
+  color: @color-no-10 !important;
+}

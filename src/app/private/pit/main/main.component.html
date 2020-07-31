@@ -1,0 +1,145 @@
+<app-sensor-header></app-sensor-header>
+
+<div class="modal fade" id="deviceBusy" tabindex="-1" role="dialog" aria-hidden="true" style="margin-top: 20px;">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modal-blur" style="background-color: black;">
+                <div class="modal-body">
+                    <h4 class="text-center"><strong>Ops! Controller is busy</strong>
+                    </h4>
+                </div>
+            </div>
+        </div>
+      </div>
+
+<hr class="whiter" />
+
+<table  class="table table-bordered tile"  >
+  <thead>
+      <tr id="tr1" >
+          <th id="th1" >
+Current Mode
+          </th>
+          <th > <div class="capture-status" >{{displayMode ? displayMode:''}}<br> {{ DATA.currentModeTime | secondsToTime }}</div></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td id="td2" >
+              On Time  
+          </td>
+          <td id="td3" >
+                <div ><span >{{DATA.onTime | secondsToTime}}</span> </div>
+          </td>
+      </tr>
+      <tr>
+          <td id="td2" >
+             Off Time
+          </td>
+          <td id="td3" >
+                <div ><span >{{DATA.offTime | secondsToTime}}</span> </div>
+          </td>
+      </tr>
+      <tr>
+          <td id="td2" >
+            Afterflow Time
+          </td>
+          <td id="td3" >
+                <div ><span >{{DATA.afterFlowTime | secondsToTime}}</span> </div> 
+          </td>
+      </tr>
+          <tr>
+          <td id="td2" >
+             Recovery Time
+          </td>
+          <td id="td3" >
+                <div ><span >{{DATA.recTime | secondsToTime}}</span> </div> 
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+<table id="Table1" class="table table-bordered tile"  >
+<thead>
+  <tr>
+      <th id="th1"></th>
+      <th></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+      <td id="td2" >
+          Hrs flowing pr day 
+      </td>
+      <td id="td3" >
+            <div ><span >{{DATA.hoursFlowingPerDay | secondsToTime}}</span> </div> 
+      </td>
+  </tr>
+  <tr>
+      <td id="td2">
+         Run time avg(Plunger)
+      </td>
+      <td id="td3" >
+            <div ><span >{{DATA.runTimeAverage | secondsToTime}}</span> </div> 
+      </td>
+  </tr>
+  <tr>
+      <td id="td4" >
+        Last update
+      </td>
+      <td id="td5" >
+        {{DATA.packetTimestamp2}}
+      </td>
+  </tr>
+      
+</tbody>
+</table>
+
+<table id="Table2" class="table2" >
+    <thead>
+        <tr id="tr2"  >
+            <th >
+                <button class="btn btn-info" id="AnalogS" type="button" (click)="update('1')" >
+                    <i class="icon-ok bigger-110"></i>
+                   Update
+                </button>  
+            </th>
+            
+
+            <th id="th2" >
+                    <div >
+                        <button class="btn btn-info" id="AnalogS" type="button " (click)="update('10')">
+                         <i class="icon-ok bigger-110"></i>
+                         Menu 9
+                         </button>  
+                    </div>
+            </th>
+        </tr>
+    </thead>
+</table>
+<div  id="buttons">
+<table id="tableButtons">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th id="pause">
+                    <button class="pushPause--flat" (click)="update('9')"></button><br><span>Pause</span>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="start">
+                    <button class="pushStart--flat" (click)="update('7')"></button><br><span >ON</span>  
+            </td>
+            <td>
+            </td>
+            <td id="push">
+                    <button class="push--flat" (click)="update('8')"></button><br><span >OFF</span>  
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>

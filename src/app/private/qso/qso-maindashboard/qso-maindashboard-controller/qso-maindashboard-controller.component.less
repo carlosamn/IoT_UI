@@ -1,0 +1,163 @@
+// -----------------------------------------//
+// -- Import Styles Files
+// -----------------------------------------//
+@import "../../lib/styles/_mixins.less";
+@import "../../lib/styles/_layout.less";
+@import "../../lib/styles/ui/_switch.less";
+@import "../../lib/styles/_colors.less";
+
+// -----------------------------------------//
+//
+
+//
+
+//
+
+// -----------------------------------------//
+// QSO Main Dashboard - Controller
+// -----------------------------------------//
+.qso-controller {
+  .row,
+  .col {
+    margin: 0px;
+    padding: 0px;
+  }
+  .row {
+  }
+  .col {
+    display: inline-block;
+    width: fit-content;
+  }
+}
+.qso-controller {
+  width: 100%;
+  height: auto;
+
+  display: block;
+  box-sizing: border-box;
+
+  padding: 0.5em;
+
+  color: black;
+  border: 1px solid rgba(0,0,0,0) !important;
+
+  &:first-child {
+    padding-left: 0em;
+  }
+  &:last-child {
+    padding-right: 0em;
+  }
+
+  .wrapper {
+    width: 100%;
+    height: auto;
+
+    display: block;
+    box-sizing: border-box;
+
+    background-color: white;
+
+    padding: 0em;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 0.25em;
+  }
+}
+.qso-controller .header {
+  display: block;
+
+  width: 100%;
+  cursor: pointer;
+
+  border-bottom: 1px solid #80808033;
+  .display-row-left-center();
+
+  .wrapper {
+    display: inline-block;
+    width: fit-content;
+
+    &:last-child {
+      margin-left: auto;
+    }
+
+    .collapse-arrow {
+      display: inline-block;
+      width: fit-content;
+      padding-right: 1em;
+    }
+  }
+}
+
+.qso-controller {
+  .fa-angle-up {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+  }
+}
+.qso-controller.collapse {
+  .fa-angle-up {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+  }
+}
+
+.qso-controller .lsd {
+  display: inline-block;
+  width: fit-content;
+  font-weight: 900;
+  font-family: "open-sans-bold", sans-serif;
+}
+.qso-controller .company {
+  display: inline-block;
+  width: fit-content;
+}
+.qso-controller .sensors {
+  width: 100%;
+  display: block;
+
+  .display-row-between-center();
+  .align-items(flex-start);
+
+  .col {
+    width: 33%;
+  }
+
+  .sensor {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    font-size: 0.9em;
+    .arrow{
+      font-size: 0.8em;
+    }
+    .value {
+      font-family: "open-sans-bold", sans-serif;
+      color: black;
+      font-size: 1.20em;
+      letter-spacing: 100%;
+      .units{
+        font-size: 0.75em;
+        display: inline;
+      }
+      .upper {
+        color: red;
+      }
+      .lower {
+        color: green;
+      }
+    }
+  }
+}
+.qso-controller .timestamp {
+  font-size: 0.8em;
+}
+
+.qso-controller .company {
+  font-size: 0.85em;
+}

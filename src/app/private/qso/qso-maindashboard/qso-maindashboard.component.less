@@ -1,0 +1,77 @@
+// -----------------------------------------//
+// -- Import Styles Files
+// -----------------------------------------//
+@import "../lib/styles/_mixins.less";
+@import "../lib/styles/_layout.less";
+@import "../lib/styles/_colors.less";
+@import "../lib/styles/ui/_switch.less";
+@import "../lib/styles/ui/_dragula.less";
+@import "../lib/styles/_dashboard.less";
+// -----------------------------------------//
+//
+//
+//
+
+html,
+body {
+  overflow: hidden !important;
+  touch-action: pan-y !important;
+}
+
+ul {
+  padding-left: 0em;
+}
+.row {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+  min-height: 60px;
+}
+.col {
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+}
+
+.wrapper {
+  .col {
+    width: 25%;
+    box-sizing: border-box;
+    padding: 1em;
+    margin-left: 0em;
+  }
+}
+.col {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+  padding: 0px;
+  ul {
+    min-height: 200px;
+  }
+}
+.qso-maindashboard {
+  ul {
+    margin-left: -0px;
+    margin-right: -0px;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    display: block;
+    margin: 0 auto;
+    .col {
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  ul {
+    margin: 0px;
+    padding: 0px;
+  }
+}

@@ -1,0 +1,142 @@
+<div class="analog-input-card" [className]="UI.isEnable ? 'analog-input-card default' : 'analog-input-card disabled'">
+
+  <div class="wrapper">
+
+
+    <div class="card-edit-showcase">
+
+      <div class="card-left-side">
+        <div class="card-uid"> <span>CH : {{analog.channelId}}</span></div>
+
+        <div class="card-analog-enable">
+
+          <span class="enable-span" *ngIf="UI.isEnable">ENABLED</span>
+          <span class="enable-span" *ngIf="!UI.isEnable">DISABLED</span>
+
+          <div class="toggle-group">
+            <input [(ngModel)]="UI.isEnable" [ngModelOptions]="{standalone: true}" type="checkbox" name="on-off-switch"
+              [id]="'on-off-switch-' + analog.id" checked="" tabindex="1">
+            <label [for]="'on-off-switch-' + analog.id">
+              <span class="aural"></span>
+            </label>
+            <div class="onoffswitch pull-right" aria-hidden="true">
+              <div class="onoffswitch-label">
+                <div class="onoffswitch-inner"></div>
+                <div class="onoffswitch-switch"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="card-right-side">
+
+        <div class="card-location">
+          <h2 *ngIf="!UI.isEditName" (click)="setEditName()">{{DATA.name}}</h2>
+          <input *ngIf="UI.isEditName" type="text" [(ngModel)]="DATA.name" (blur)="resetEditName()">
+        </div>
+
+        <div class="card-icons">
+
+          <div class="card-icon alarm" (click)="toogleCard('alarms')">
+            <i class="fas fa-bell" *ngIf="!!(DATA.alarms.high.enable || DATA.alarms.low.enable)"></i>
+            <i class="far fa-bell-slash" *ngIf="!(DATA.alarms.high.enable || DATA.alarms.low.enable)"
+              style="color: lightgray;"></i>
+            <i class="fas fa-angle-down"></i>
+          </div>
+
+          <div class="card-icon trend" (click)="toogleCard('trend')">
+
+            <i *ngIf="DATA.trend.enable" class="fas fa-exchange-alt"></i>
+            <i *ngIf="!DATA.trend.enable" class="fas fa-exchange-alt" style="color: lightgray;"></i>
+            <i class="fas fa-angle-down"></i>
+          </div>
+
+          <div class="card-icon map" (click)="toogleCard('unit')">
+            <span *ngIf="true"> </span>
+            <span *ngIf="false"> N/A </span>
+            <i class="fas fa-angle-down"></i>
+          </div>
+
+          <div class="card-icon units" (click)="toogleCard('map')">
+            <i class="fas fa-globe-africa" *ngIf="DATA.map.enable"></i>
+            <i class="fas fa-globe-africa" *ngIf="!DATA.map.enable" style="color: lightgray;"></i>
+            <i class="fas fa-angle-down"></i>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+
+
+    <div class="card-edit-component" *ngIf="UI.isOpen === true">
+
+
+      <div class="card-edit-alarms" *ngIf="UI.tab === 'alarms'">
+
+        <div class="card-edit-title">
+          <i class="fas fa-bell"></i>
+          <h4>ALARM SETUP </h4>
+        </div>
+
+        <div class="">
+          []
+          LOW ALARM _______ kpi
+          Message : ______________________
+        </div>
+
+        <div class="">
+          []
+          HIHG ALARM _______ kpi
+          Message : ______________________
+        </div>
+
+
+      </div>
+      <div class="card-edit-trend" *ngIf="UI.tab === 'trend'">
+        <div class="card-edit-title">
+          <i class="fas fa-bell"></i>
+          <h4>TREND SETUP </h4>
+        </div>
+
+        <div class="">
+          []
+          TREND TIME ________ min
+          TREND VALUE _______ kpi
+        </div>
+
+      </div>
+      <div class="card-edit-map" *ngIf="UI.tab === 'map'">
+        <div class="card-edit-title">
+          <i class="fas fa-bell"></i>
+          <h4>MAP SETUP </h4>
+        </div>
+
+        <div class="">
+          []
+        </div>
+
+      </div>
+      <div class="card-edit-units" *ngIf="UI.tab === 'unit'">
+        <div class="card-edit-title">
+          <i class="fas fa-bell"></i>
+          <h4>UNITS SETUP </h4>
+        </div>
+
+        <div class="">
+          UNITS _____
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

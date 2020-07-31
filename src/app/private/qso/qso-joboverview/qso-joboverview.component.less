@@ -1,0 +1,153 @@
+// ------------------------------------------------------------ //
+// --  QSO FracView Styles                                   -- //
+// ------------------------------------------------------------ //
+// + Class :: .qsoController
+//
+// ------------------------------------------------------------ //
+
+
+// ---------------------------------------------------------------------------------- //
+// -- Import Libs & Resources ---------------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+@import  '../lib/styles/_colors.less';
+// ---------------------------------------------------------------------------------- //
+
+
+
+// ---------------------------------------------------------------------------------- //
+// -- Variables & Params --------------------------------------------------------- -- //
+// ---------------------------------------------------------------------------------- //
+  @qso-chart-sensors-width : ~"30em";
+// ---------------------------------------------------------------------------------- //
+
+
+
+
+.qso-fracview{
+
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: white;
+
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+
+}
+
+.qso-containers{
+  width: @qso-chart-sensors-width;
+  height: calc(100vh - 15em);
+  overflow-y: scroll;
+  padding: 1em;
+  display: inline-block;
+
+  border-left: 1px solid gray;
+  color: black;
+
+  display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: flex-start;
+    justify-content: flex-start;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: flex-start;
+    align-content:flex-start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+.qso-containers label{
+  color: black;
+  padding: 0em;
+  margin: 0em;
+}
+.qso-containers select{
+  width: calc(100% - 3em);
+  padding: 0.125em;
+  margin: 0.25em;
+  margin-left: 0em;
+  padding-left: 0em;
+  color: black;
+}
+.qso-chart{
+  display: inline-block;
+  width: calc(100% - 30em);
+}
+.qso-controller{
+  border: 1px solid rgb(77, 74, 74);
+  display: block;
+  width: 100%;
+}
+.qso-controllers-containers{
+  display: block;
+  width: 100%;
+}
+
+
+
+
+
+
+
+.black-wall{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1000000;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(50,50,50,0.5);
+  display: block;
+}
+
+
+
+
+.qso-overview-buttons{
+  display: block;
+  width: 100%;
+  .qso-overview-button{
+    color: black;
+    padding: 0.5em;
+    background-color: rgb(212, 212, 212);
+    margin: 0.5em;
+  border-radius: 0.25em;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    &.active{
+      color: black;
+      font-weight: 900;
+      background-color:  rgb(180, 180, 180);
+    }
+    &:hover{
+      color: black;
+      font-weight: 900;
+      background-color:  rgb(222, 222, 222);
+    }
+  }
+}

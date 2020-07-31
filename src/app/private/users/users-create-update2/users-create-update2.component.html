@@ -1,0 +1,184 @@
+<div class="block-area" id="basic">
+    <h3 class="block-title">User Details</h3>
+    <div class="tile p-15" style="min-height: 700px;">
+        <div class="form-group" >
+            <div class="page-header position-relative">
+                <h1>User Details</h1>
+            </div>
+            <div class="form-horizontal"  >
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userName">User Name</label>
+                        <div  class="controls">
+                            <input #username="ngModel" name="username" required type="text" class="form-control input-sm m-b-10" [(ngModel)]="user.username" placeholder="Username here"/>
+                            <div *ngIf=" username.invalid" class="controls">
+                                <div style="color:darkred;font-weight:bold" *ngIf="username.errors.required && username.touched" class="controls">Username is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userPassword">User Password</label>
+                        <div  class="controls">
+                            <input #pass="ngModel" name="pass" required type="password" class="form-control input-sm m-b-10" [(ngModel)]="user.password" placeholder="******"/>
+                            <div *ngIf=" pass.invalid && isUpdate==false" class="controls">
+                                    <div style="color:darkred;font-weight:bold" *ngIf="pass.errors.required && pass.touched" class="controls">Password is required
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userPassword">First Name</label>
+                        <div  class="controls">
+                            <input type="text" class="form-control input-sm m-b-10" #fName="ngModel" name="fName" required   [(ngModel)]="user.fName" placeholder="First name here"/>
+                            <div *ngIf=" fName.invalid" class="controls">
+                                <div style="color:darkred;font-weight:bold" *ngIf="fName.errors.required && fName.touched" class="controls">First Name is required
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userLastName">User Last Name</label>
+                        <div  class="controls">
+                            <input #lName="ngModel" name="lName" required type="text" class="form-control input-sm m-b-10" [(ngModel)]="user.lName" placeholder="Last name here"/>
+                            <div *ngIf=" lName.invalid" class="controls">
+                                <div style="color:darkred;font-weight:bold" *ngIf="lName.errors.required && lName.touched" class="controls">Last Name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userEmail">User Email</label>
+                        <div  class="controls">
+                            <input #email="ngModel" name="email" required type="email" class="form-control input-sm m-b-10" [(ngModel)]="user.email" placeholder="Email here"/>
+                            <div *ngIf=" email.invalid && isUpdate==false" class="controls">
+                                <div style="color:darkred;font-weight:bold" *ngIf="email.errors.required && email.touched" class="controls">Email is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userPhone">User Phone</label>
+                        <div  class="controls">
+                            <input type="text" class="form-control input-sm m-b-10" [(ngModel)]="user.mPhone" placeholder="Phone"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="type === 'invite'">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userPhone">User Role</label>
+                        <ng-select [hideSelected]="false" class="custom" [closeOnSelect]="true" placeholder="Select" [(ngModel)]="user.userType">
+                            <ng-option [value]="'admin'">Admin</ng-option>
+                            <ng-option [value]="'technician'">Technician</ng-option>
+                            <ng-option [value]="'operator'">Operator</ng-option>
+                            <ng-option [value]="'readonly'">Read Only</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="row" *ngIf="type === 'invite'">
+                    <div class="col-md-6">
+                        <label for="userCompany" class="control-label">Company</label>
+                        <ng-select labelForId="id"  class="custom" [multiple]="true" [closeOnSelect]="true" placeholder="Select Companies" [items]="companies" bindLabel="id" bindValue="id"  [virtualScroll]="true" [(ngModel)]="user.companyIds">
+                        </ng-select>
+                    </div>
+                </div>
+
+
+
+                <div *ngFor="let item of projectsArray; let $index = index">
+                    <div class="row" *ngIf="type === 'invite'">
+
+                        <div class="col-md-3">
+                            <label for="userProject" class="control-label">Project</label>
+                            <ng-select labelForId="id"   class="custom" [selectableGroup]="true"
+                                       [closeOnSelect]="true" placeholder="Select"
+                                       (change)="selectedProject2($event, $index)" [(ngModel)]="item.projectId">
+                                <ng-option value="all">All</ng-option>
+                                <ng-option *ngFor="let project of projects" [value]="project.id">{{ project.id }}</ng-option>
+                            </ng-select>
+                        </div>|
+
+                        <div class="col-md-3">
+                            <label for="userLocation" class="control-label">Locations</label>
+                            <ng-select  labelForId="description" [hideSelected]="false" class="custom"
+                                        [multiple]="true" [closeOnSelect]="false" (change)="selectedLocation($event,$index)"
+                                        placeholder="Select" [items]="item.locations"
+                                        bindLabel="description"
+                                        [selectableGroup]="true"  [(ngModel)]="item.locationId">
+                            </ng-select>
+
+                        </div>
+
+                        <div class="col-md-2 m-t-28" *ngIf="!allProjectSelected">
+                            <i class="glyphicon glyphicon-plus pointer" (click)="addProject()" *ngIf="$index === 0 || projectsArray.length > 1"></i>
+                            <span *ngIf="$index === 0">You can add up to {{ projects.length }} project({{ projects.length == 1 ? '': 's' }})</span>
+                            <i class="glyphicon glyphicon-minus pointer" (click)="deleteProject($index)" *ngIf="$index !== 0"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="userAddress">Address</label>
+                        <div  class="controls">
+                            <textarea type="text" class="form-control input-sm m-b-10" [(ngModel)]="user.address" placeholder="Address"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="checkbox" [(ngModel)]="user.isActive">
+                        <span>Active User?</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="checkbox" [(ngModel)]="user.getAlarmOnEmail">
+                        <span>Receive mail on alarm situation.</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="checkbox" [(ngModel)]="user.getCommAlertOnEmail">
+                        <span>Receive emails for communication status alarms</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="checkbox" [(ngModel)]="user.getAlarmOnPhone">
+                        <span>Receive text message for alarm situation</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="checkbox" [(ngModel)]="user.getCommAlertOnPhone">
+                        <span>Receive text message for communication status alarms</span>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-10">
+                        <button class="btn btn-info" (click)="createOrUpdate()">
+                            <i class="fas fa-check"></i> {{ isUpdate == true ? 'Modify User': 'Create User' }}
+                        </button>
+                        <button class="btn btn-sm" type="reset">
+                            <i class="icon-undo bigger-110"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<swal #errors [options]="swalOptions"></swal>

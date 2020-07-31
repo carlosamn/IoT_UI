@@ -1,0 +1,117 @@
+
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <div class="tile" style="margin-top: 15px; height: 204px;">
+        <div class="tile" style="font-size: 17px; vertical-align: middle; padding-left: 10px; text-align: left; margin-bottom: 0px; text-transform: uppercase; padding: 5px;">
+          Controller Health Sensor
+        </div>
+        <div style="height: 180px; overflow: auto;">
+          <table class="table">
+
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="tile" style="margin-top: 15px; height: 204px;">
+        <div class="tile" style="font-size: 17px; vertical-align: middle; padding-left: 10px; text-align: left; margin-bottom: 0px; text-transform: uppercase; padding: 5px;">
+          Notifications
+        </div>
+        <div style="height: 180px; overflow: auto;">
+          <table class="table">
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="tile" style="padding: 10px;">
+    Last Update: {{ sensors[0]?.timestamp ? sensors[0]?.timestamp: datamessage }}
+  </div>
+
+  <div class="row" style="margin-top: -5px;">
+
+
+
+    <div class="col-md-6 col-xs-12" *ngFor="let sensor of sensors">
+      <div *ngIf="sensor.enable">
+        <div class="tile" style="margin-top: 5px;">
+          <div class="tile" style="font-size: 20px; vertical-align: middle; padding-left: 10px; text-align: left; text-transform: uppercase; padding: 10px;">
+            {{ sensor?.name }}
+          </div>
+          <div style="overflow: auto; padding: 0px 25px 25px 25px;">
+            <p style="font-size: 30px; font-weight: bold;">{{ sensor?.value }} {{ sensor?.unit }}</p>
+            <div class="row">
+              <div class="col-md-10">
+                <p style="font-size: 14px; margin:5px;">High Alarm:
+                  <input type="number" style="margin-right: 5px;" [value]="sensor?.alarm_h">
+                  <input type="checkbox" [checked]="sensor?.enable_alarm_h"> Enable Alarm
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <p style="font-size: 14px; margin:5px;">Low Alarm:
+                  <input type="number" style="margin-right: 5px;" [value]="sensor?.alarm_l">
+                  <input type="checkbox" [checked]="sensor?.enable_alarm_l"> Enable Alarm
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col-xs-6 col-md-2">
+      <button class="btn btn-inverse" (click)="getSensors(currentController)">Poll Sensors</button>
+    </div>
+    <div class="col-xs-6 col-md-2">
+      <button class="btn btn-inverse" (click)="updateSensor()">Save</button>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="background: rgb(255, 255, 255);">
+        <div class="modal-body">
+          <table class="table" style="border: solid 1px; border-color: #1B74B7;">
+            <thead style="background-color: #1B74B7;">
+              <th></th>
+              <th style="text-align: center;">Controllers</th>
+              <th style="text-align: center;">Alarms</th>
+              <th style="text-align: center;">Status</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let controller of controllers; let i = index">
+                  <td style="text-align: center;">
+                    <input type="radio" [disabled]="!controller.available" name="controller" [value]="controller.uid" (change)="controllerSelected(controller)" [checked]="i === 0">
+                  </td>
+                  <td style="color: black; text-align: center;">{{ controller.uid }} - {{ controller.name }}</td>
+                  <td style="color: black; text-align: center;">!</td>
+                  <td style="color: black; text-align: center; font-weight: bold; font-size: 12px;" [ngStyle]="{'color':controller.available === true ? 'green' : 'red' }">{{ controller.available === true ? 'Available': 'Unavailable' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div align="center">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>

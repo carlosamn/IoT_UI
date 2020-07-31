@@ -1,0 +1,37 @@
+<!-- <button (click)="add()">Add Point!</button>
+    <div [chart]="chart"></div> -->
+<div class="flex">
+	<div class="flex-50">
+		<label>
+			<input type="radio" value="{{ yRangeLimits }}" name="range" (click)="scaleOptions(yRangeLimits)">
+			<span>Full Scale</span>
+		</label>
+		<label>
+			<input type="radio" value="{{ yRangeLimits * 0.75 }}" name="range" (click)="scaleOptions(yRangeLimits * 0.75)">
+			<span>75%</span>
+		</label>
+		<label>
+			<input type="radio" value="{{ yRangeLimits * 0.50  }}" name="range" (click)="scaleOptions(yRangeLimits * 0.50)">
+			<span>50%</span>
+		</label>
+		<label>
+			<input type="radio" value="{{ yRangeLimits * 0.25 }}" name="range" (click)="scaleOptions(yRangeLimits * 0.25)">
+			<span>25%</span>
+		</label>
+	</div>
+	<div class="flex-50 text-right">
+		<label>
+			<input type="radio" value="1" name="dragConfig" (click)="dragConfig('zero')" [checked]="dragOptions == 'zero'">
+			<span>Drag Zero</span>
+		</label>
+		<label>
+			<input type="radio" value="2" name="dragConfig" (click)="dragConfig('peak')" [checked]="dragOptions == 'peak'">
+			<span>Drag Kick</span>
+		</label>
+		<label>
+			<input type="radio" value="3" name="dragConfig" (click)="dragConfig('lock')" [checked]="dragOptions == 'lock'">
+			<span>Lock Cursors</span>
+		</label>
+	</div>
+</div>
+<div #container></div>

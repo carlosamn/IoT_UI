@@ -1,0 +1,108 @@
+
+<div class="etd-panel-header">
+    <div class="etd-panel-title font-20">PROJECTS</div>
+        <div class="etd-panel-content">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover tile">
+                <thead>
+                    <tr>
+                        <th>PROJECT</th>
+                        <th>DESCRIPTION</th>
+                        <th>COMPANY</th>
+                        <th>USER</th>
+                        <th>START DATE</th>
+                        <th>ACTIVE</th>
+                        <th>UTC OFFSET</th>
+                        <th>DAYLIGHT SAVING</th>
+                        <th>STATUS</th>
+                        <th>PROJECT STATUS</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let project of projects; let i = index">
+                        <td>{{ project.id }}</td>
+                        <td>
+                            <span *ngIf="activeIndex != i">{{ project.description }}</span>
+                            <input type="text" class="form-control input-sm" [(ngModel)]="project.description" *ngIf="activeIndex == i">
+                        </td>
+                    <td>
+                        <span *ngIf="activeIndex != i">{{ project.companyId }}</span>
+                        
+                       
+                            <div *ngIf="activeIndex == i" class="row">
+                                <div class="col-md-12">
+                                    <div  class="controls">
+                                        <select [(ngModel)]="project.companyId" *ngIf="activeIndex == i" class="form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" >
+                                            <option value="project.companyId">{{project.companyId}}</option><option *ngFor="let company of companiesList">{{company.id}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                    </td>
+                        <td>?</td>
+                        <td>
+                        <span *ngIf="activeIndex != i">{{ project.startDate}}</span>
+                                <div *ngIf="activeIndex == i" class="row">
+                                        <div class="col-md-12">
+                                            <div class="controls">
+                                                <input *ngIf="activeIndex == i" class="datepicker form-control input-sm m-b-10 ng-pristine ng-valid ng-touched" type="date" [(ngModel)]="project.startDate" >
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </td>
+                      
+                        <td>
+                            <span *ngIf="activeIndex != i"> {{ project.isActive }}</span>
+                            <input type="checkbox" class="form-control input-sm" [(ngModel)]="project.startDate" *ngIf="activeIndex == i">
+                        </td>
+                        <td>
+                            <span *ngIf="activeIndex != i">{{ project.utcOffset }}</span>
+                            <input type="text" class="form-control input-sm" [(ngModel)]="project.utcOffset" *ngIf="activeIndex == i">
+                        </td>
+                        <td><span *ngIf="activeIndex != i">{{ project.daylightSaving }}</span>
+                                <input type="checkbox" class="form-control input-sm" [(ngModel)]="project.daylightSaving" *ngIf="activeIndex == i">
+                        </td>
+                        <td>Pending</td>
+
+                        <td>
+                        <select [disabled]="activeIndex != i" name="" id="" class="form-control" [(ngModel)]="project.environment">
+                                <option value="Testing">Setup (No alarms)</option>
+                                <option value="Setup" >In Prodution (Alarms active)</option>
+                                <option value="Complete">Completed (No alarms)</option>
+                                <option value="OnHoldNoAlarm">On Hold (No alarms)</option>
+                                <option value="OnHoldAlarm">On Hold (Alarms active)</option>
+
+                        </select>
+                        </td>
+                        
+                        <td>                    
+                            <a href="javascript:void(0)" (click)="deleteProject(project.id, i)" >
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                            <a href="javascript:void(0)" (click)="activateIndex(i)" *ngIf="activeIndex != i">
+                                <i class="fas fa-pencil-alt fa-lg"></i>
+                            </a>
+                            <a href="javascript:void(0)" (click)="updateProject(project)" *ngIf="activeIndex == i">
+                                <i class="far fa-save fa-lg"></i>
+                            </a>                    
+                        </td>
+                       
+                    </tr>
+                    
+                </tbody>
+               
+            </table>
+            
+        </div>
+</div>
+<br/>
+<div class="panel-buttons">
+    <div class="col-md-6">
+        <a class="btn btn-alt m-r-5" [routerLink]="['../add']">Add new Project</a>
+    </div>
+    <div class="col-md-6 align-right">
+        <button class="btn btn-alt m-r-5">Archive Old Project</button>
+    </div>
+</div>
+<hr class="whiter m-t-10">

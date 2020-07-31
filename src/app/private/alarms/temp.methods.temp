@@ -1,0 +1,43 @@
+
+  getAlarms() {
+    return this.STORAGE.alarms;
+  }
+
+updateAlarms(){
+  var url = `${this.path.base}/${this.path.model}/`;
+  this.http
+    .get(url)
+    .map((data: any) => {return data})
+    .toPromise()
+    .then( x => {
+      this.STORAGE.alarms.next(x)
+      this.STORAGE.alarmsList.next(x);
+    })
+    .catch( x => {
+      //console.log(" ALARMS :: Error on Network")
+    });
+}
+
+  async getAlarmsData() {
+    var url = `${this.path.base}/${this.path.model}/`;
+    this.http
+      .get(url)
+      .map((data: any) => {
+        return data;
+      })
+      .toPromise().then().catch();
+  }
+
+
+
+  getAlarmsByProject(options?) {
+    let filter = "";
+    if (options) {
+      filter = filterQuery(options);
+    }
+    const url = `${this.path.base}/${this.path.model}${filter}`;
+
+    return this.http.get(url).map((data: any) => {
+      return data;
+    });
+  }

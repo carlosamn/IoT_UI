@@ -1,0 +1,27 @@
+<div class="skin-blur-ocean">
+    <app-private-header></app-private-header>
+    <section id="main" class="p-relative skin-blur-main" role="main">
+        <!-- Sidebar -->
+        <app-private-sidebar></app-private-sidebar>
+    
+        <!-- Content -->
+        <section id="content" class="container">
+            
+            <!-- Breadcrumb -->
+           <!-- <ol class="breadcrumb hidden-xs">
+                <li><a href="#">Ams</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+            
+            <h4 class="page-title">DASHBOARD</h4> -->
+                            
+            <!-- Shortcuts -->
+            <app-private-shortcut></app-private-shortcut>                            
+            <!-- Main Widgets -->
+            <div class="block-area">
+                <router-outlet></router-outlet>
+            </div>
+        </section>
+    </section>
+</div>
+<app-loading></app-loading>

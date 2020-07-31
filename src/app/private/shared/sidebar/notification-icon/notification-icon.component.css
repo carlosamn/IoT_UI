@@ -1,0 +1,149 @@
+.wrapper{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+
+.notifications{
+
+  padding: 0.25em;
+  width: 2em;
+  height: 2em;
+  background-color: crimson;
+  color: white;
+  border-radius: 1em;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: 900;
+  position: relative;
+  top: -1em;
+  left: -1em;
+
+}
+
+
+.notifications-icons{
+  position: relative;
+}
+.notifications-icons .notifications{
+  top: -1em;
+  left: -0.5em;
+  background-color: white;
+  color: crimson;
+}
+
+
+
+
+
+
+.mobile-alarm-info-table{
+  display: inline-block;
+}
+
+.mobile-alarm-info-item{
+  width: calc(100% - 1em);
+  display: block;
+
+  padding-left: 0px;
+
+  margin-left:1em;
+  margin-bottom: 1em;
+
+  padding-bottom: 1em;
+
+  border-radius: 0.5em;
+
+  background-color: #0b4d79
+}
+
+
+.mobile-alarm-info-item h2{
+  font-size: 1.1em;
+  margin: 0px;
+  padding: 5px;
+
+  margin-bottom: 10px;
+
+  text-align: left;
+  background-color: #032f4c;
+
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+
+
+
+
+
+.mobile-alarm-info-item ul {
+  list-style: none;
+  margin:0px;
+  padding: 0px;
+  text-align: left;
+}
+.mobile-alarm-info-item ul li{
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding-left: 1em;
+}
+
+
+.mobile-alarm-info-icon,.mobile-alarm-info-table{
+  display: inline-block;
+}
+.mobile-alarm-info-icon{
+  width: 5em;
+}
+.mobile-alarm-info-table{
+  width: calc(100% - 5em);
+}
+
+
+
+.notifications-icons{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+.label-mobile{
+  display: block;
+}
+
+
+
+@media (min-width: 700px) {
+  .mobile-alarm-info-table{
+    display: none;
+  }
+  .notifications-icons{
+    display: block;
+  }
+  .label-mobile{
+    display:none;
+  }
+
+
+}
+

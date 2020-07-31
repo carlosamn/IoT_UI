@@ -1,0 +1,7 @@
+<!-- Shortcuts -->
+<div class="block-area shortcut-area">
+    <a href="javascript:void(0);" *ngFor="let item of shortcutMenu" (click)="navigate(item.route)" [ngClass]="item.isActive ? 'shortcut tile shortcut-active': 'shortcut tile'">
+        <img src="{{item.url}}" alt="{{item.page}}">
+        <small class="t-overflow">{{item.page}}</small>
+    </a>
+</div>
