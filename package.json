@@ -45,7 +45,7 @@
     "jspdf": "^1.4.1",
     "jszip": "^3.1.5",
     "la-input-mask": "^0.1.1",
-    "moment": "^2.23.0",
+    "moment": "^2.29.2",
     "ng-event-source": "^1.0.14",
     "ng2-dnd": "^5.0.2",
     "ng2-dragula": "^2.0.2",
