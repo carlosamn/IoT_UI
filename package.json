@@ -42,7 +42,7 @@
     "highcharts-custom-events": "^2.1.4",
     "html2canvas": "^1.0.0-alpha.12",
     "js-md5": "^0.7.3",
-    "jspdf": "^1.4.1",
+    "jspdf": "^2.5.1",
     "jszip": "^3.1.5",
     "la-input-mask": "^0.1.1",
     "moment": "^2.23.0",
